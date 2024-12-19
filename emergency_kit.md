@@ -68,7 +68,15 @@ In addition, the backing email for your vault should be regarded as precious. No
 * Your email password
 * Your email 2FA recovery code
 
-If you are using TOTP (the authenticator app) for your Bitwarden 2FA, you may have a further dependency. Some people don't like to store any information about their TOTP app inside their vault. Well, OK. But if you do that, you need to have EVERYTHING necessary to regain access to that datastore elsewhere. For instance, if you are still using Authy (yuck!), you might need:
+If you are using TOTP (the authenticator app) for your Bitwarden 2FA, you may have a further dependency. Some people don't like to store any information about their TOTP app inside their vault. Well, OK. But if you do that, you need to have EVERYTHING necessary to regain access to that datastore elsewhere. 
+
+For instance, if you are using Ente Auth, you should save
+
+* The Ente username
+* The Ente password
+* The Ente recovery key
+
+If you are still using Authy (yuck!), you might need:
 
 * The registered phone number for Authy
 * The "equipment freeze" PIN from your mobile provider to regain access to your mobile phone number
@@ -94,9 +102,27 @@ But in any event, this is what backups are about. A good backup should do everyt
 * An export of the datastore of your TOTP app
 * All the 2FA recovery codes for ALL of your websites
 
-A backup is much more involved than an emergency kit. It's definitely not for a beginner, but I encourage everyone to eventually start making backups. [Here](https://www.reddit.com/r/Bitwarden/comments/1f995wl/making_bitwarden_backups_version_20/) is one I wrote recently.
+A backup is much more involved than an emergency kit. It's definitely not for a beginner, but I encourage everyone to eventually start making backups. [Here](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) is one I wrote recently.
 
 # How do I make an emergency kit?
+
+Put most simply, _write all this on a piece of paper_.  What have I suggested so far?
+
+* Your Bitwarden server URL (https://vault.bitwarden.com versus https://vault.bitwarden.eu)
+* You Bitwarden login username
+* Your Bitwarden master password
+* Your Bitwarden 2FA "recovery code" -- note that this _does not_ replace the master password
+* The email address that Bitwarden sends notifications to
+* The password for that email address
+* The 2FA recovery code for that email address
+* The PIN for your FIDO2 hardware security token
+* The email address for your Ente Auth account
+* The password for your Ente Auth account
+* The Ente Auth "recovery key"
+
+Write legibly! And preferably  make a second copy of this paper and have a trusted friend or associate store it offsite, in case of fire or other disaster.
+
+# Final thoughts
 
 Passwordbits has a [great article](https://passwordbits.com/password-manager-emergency-sheet/) on making and storing an emergency kit. It's not Bitwarden specific, but the article is completely relevant.
 

@@ -119,6 +119,10 @@ Put most simply, _write all this on a piece of paper_.  What have I suggested so
 * The email address for your Ente Auth account
 * The password for your Ente Auth account
 * The Ente Auth "recovery key"
+* If you "pepper" your passwords, a complete description of the peppering algorithm once you open your vault.
+
+Is there more than this? It depends on your exact circumstance. Remember, one day _someone else_ is going to have to
+read this sheet and use it to settle your last affairs after you die.
 
 Write legibly! And preferably  make a second copy of this paper and have a trusted friend or associate store it offsite, in case of fire or other disaster.
 

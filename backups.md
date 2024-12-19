@@ -5,17 +5,18 @@ to look at it, I decided it would be better if I just started over. Here's my up
 # Introduction
 
 For new users of Bitwarden, we recommend creating 
-[an emergency sheet](https://passwordbits.com/password-manager-emergency-sheet/). An emergency sheet is a disaster
+[an emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). An emergency sheet is a disaster
 recovery mitigation. It ensures that if you forget your master password, lose access to your TOTP datastore, or
 otherwise get disconnected from the Bitwarden servers, that you can regain access.
 
-A backup goes one step beyond that. It ensures that if the Bitwarden servers 
-[get swallowed up](https://en.wikipedia.org/wiki/Cascadia_subduction_zone) that a recent copy of your data is
-still recoverable.
+A backup goes one step beyond that. It ensures that if the Bitwarden servers disappear or corrupt your datastore, a recent copy of your data is  still recoverable. 
 
 # What's in a backup?
 
 A backup needs the following pieces:
+
+* *Emergency Sheet* -- to my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). There should be a single concise file 
+
 
 * *Bitwarden vault export* -- this needs to be a [JSON export](https://bitwarden.com/help/export-your-data/). The
 "CSV" format is useful but not necessary unless you want to leave the Bitwarden ecosystem. The CSV format is also
@@ -37,22 +38,13 @@ is definitely best to have these available  for disaster recovery.
 [exported separately](https://bitwarden.com/help/export-your-data/#export-an-organization-vault). Again, use the 
 "password protected" version of the JSON export.
 
-
 * *File attachments* -- Vaults with a premium subscription can have arbitrary files attached to vault entries. These
 must be downloaded, by hand, one at a time. In addition, you need to make a text file that explains which file 
 attachments belong to which vault entry.
 
 
-A good Bitwarden backup should also have a top-level `README.txt` for each backup:
-
-* The password you used when you created the Bitwarden vault exports
-* The Bitwarden URL (https://vault.bitwarden.com or https://vault.bitwarden.eu) that holds the vault data
-* The Bitwarden master password
-* The Bitwarden 2FA recovery code
+A good Bitwarden backup should also have a top-level `README.txt` for each backup. This should be your emergency sheet.
 * TOTP datastore recovery information: this may include a username, password, or other account recovery information
-
-Something that is probably quite common is you may end up also managing backups for family members. In this case, 
-I recommend multiple folders, with one folder per family member.
 
 This is complicated! In order to reduce the work and errors, I recommend building this file structure once and then
 updating it on a periodic basis. Remember, you should update your backup at least once a year.
@@ -68,11 +60,82 @@ However, I think that with a certain amount of aggravation, you can get away wit
 [7-Zip](https://www.7-zip.org/) or [Picocrypt](https://github.com/Picocrypt/Picocrypt). The devil will be in how to 
 create a new archive without allowing decrypted secrets to ever be written to your hard disk. If you care.
 
-# Top Level Organization
+# Backup Organization
 
-At a level higher than any single backup, you need an AAAREADME that has more information about the backup itself. 
+_Top Level_
+
+*AAAREADME.txt* -- At a level higher than any single backup, you need a file that has more information about the backup itself. 
 You want to explain how this is a VeraCrypt backup and include installers for the app (like VeraCrypt). 
-The AAAREADME has no secrets in it. That is for the README inside the encrypted archive.
+The AAAREADME has no secrets in it. It is a 4-1-1 for the contents of the backup. In particular, if you keep
+backups for multiple family members, this might be 
+
+*VeraCrypt* (or equivalent) -- if you use VeraCrypt, 7zip, or another archive app, you should have a top-level
+unencrypted set of installers that will allow you or someone else to use the archival software to unpack the archive.
+
+_For each vault or Organization collection_
+
+*README.txt* -- a full emergency sheet for that vault
+
+*bitwarden_export.json* (or similar obvious name) -- the export of your personal vault
+
+*recovery_codes.txt* -- When you enable strong 2FA, good websites give you a recovery workflow in case you lose
+your Yubikey or TOTP app. I know, with everything else you're doing here, this should not be important. But when
+it comes to backups, redundancy is a very good thing. [Google](https://support.google.com/accounts/answer/1187538?hl=en&co=GENIE.Platform%3DDesktop), [Microsoft](https://support.microsoft.com/en-us/account-billing/microsoft-account-recovery-code-2acc2f88-e37b-4b44-99d4-b4419f610013), 
+[Bitwarden](https://bitwarden.com/help/two-step-recovery-code/), and others typically use a one-time code or set of
+one-time codes.
+
+There is little point storing these recovery codes in your vault. If you have your Yubikey and your Ente Auth login, the vault storage is not needed. Some
+will aven argue that having the recovery codes inside your vault is like storing
+your TOTP codes in the vault, which to them is anathema.
+
+So what to do? I recommend that this full backup is the right place for this. Make
+a text file that properly names each site and gives the list of recovery codes
+for each one. For instance,
+
+```text
+Hotmail https://outlook.live.com/owa/
+
+recovery code: 1234-5678-9012-3456-7890
+
+-----
+Best Buy https://www.bestbuy.com
+
+1234 5678
+2345 6789
+3456 7890
+4567 8901
+5678 9012
+
+-----
+Docker Hub https://hub.docker.com/
+
+Recovery code: 1234567890abc
+```
+
+_attachments.txt_ -- File attachments in Bitwarden barely work. Sorry, there; I said it. You have to hunt down
+each file attachment, one at a time and directly download it to put into your backup. But then...which vault
+entry did this file attachment come from?
+
+You will need to make a dictionary that maps each file attachment to which vault entry it belongs to. This file
+will look something like,
+
+```text
+Cat microchip registration.jpg -- Poko
+
+Cigna front.jpg -- Cigna
+Cigna back.jpg -- Cigna
+Jason ODL.jpg -- Jason ODL
+Jason Voter Registration.jpg -- Jason Voter Registration
+```
+
+(In case it's not clear, the first part is the name of the file, and the second part is the vault item, referred
+to by its _Name_ field.)
+
+`attachments/`
+
+I recommend storing each one of these file attachments in a subfolder.
+
+_Summary_
 
 What you will end up with is something like this:
 
@@ -118,7 +181,7 @@ for less than $20.
 *Offline Storage*
 
 I recommend storing the archive file itself air gapped offline old school: multiple USB thumb drives, in multiple
-locations. You want the thumb drives to be in a climate controlled location (not in the glovebox of your car). You
+locations. You want the thumb drives to be in a climate controlled location (not in the glove box of your car). You
 don't want them to be tossed around or vibrated, like on your keychain. You want to find a quiet calm corner of
 your house.
 

@@ -87,7 +87,7 @@ it comes to backups, redundancy is a very good thing. [Google](https://support.g
 one-time codes.
 
 There is little point storing these recovery codes in your vault. If you have your Yubikey and your Ente Auth login, the vault storage is not needed. Some
-will aven argue that having the recovery codes inside your vault is like storing
+will even argue that having the recovery codes inside your vault is like storing
 your TOTP codes in the vault, which to them is anathema.
 
 So what to do? I recommend that this full backup is the right place for this. Make
@@ -117,6 +117,9 @@ Recovery code: 1234567890abc
 _attachments.txt_ -- File attachments in Bitwarden barely work. Sorry, there; I said it. You have to hunt down
 each file attachment, one at a time and directly download it to put into your backup. But then...which vault
 entry did this file attachment come from?
+
+(Pro tip: typing in the string `>attachments:*` in the search dialog of a desktop instance of Bitwarden or a
+browser extension will list all the entries that have attachments. )
 
 You will need to make a dictionary that maps each file attachment to which vault entry it belongs to. This file
 will look something like,

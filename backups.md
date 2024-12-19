@@ -77,7 +77,8 @@ _For each vault or Organization collection_
 
 *README.txt* -- a full emergency sheet for that vault
 
-*bitwarden_export.json* (or similar obvious name) -- the export of your personal vault
+*bitwarden_export.json* (or similar obvious name) -- the export of your personal vault. Be sure to add the
+password you chose when you created the export to the `README.txt`.
 
 *recovery_codes.txt* -- When you enable strong 2FA, good websites give you a recovery workflow in case you lose
 your Yubikey or TOTP app. I know, with everything else you're doing here, this should not be important. But when

@@ -15,7 +15,8 @@ A backup goes one step beyond that. It ensures that if the Bitwarden servers dis
 
 A backup needs the following pieces:
 
-* *Emergency Sheet* -- to my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). There should be a single concise file 
+* *Emergency Sheet* -- to my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). There should be a single concise file with the
+contents of your emergency sheet.
 
 
 * *Bitwarden vault export* -- this needs to be a [JSON export](https://bitwarden.com/help/export-your-data/). The

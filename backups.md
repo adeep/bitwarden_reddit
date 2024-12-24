@@ -67,8 +67,7 @@ _Top Level_
 
 *AAAREADME.txt* -- At a level higher than any single backup, you need a file that has more information about the backup itself. 
 You want to explain how this is a VeraCrypt backup and include installers for the app (like VeraCrypt). 
-The AAAREADME has no secrets in it. It is a 4-1-1 for the contents of the backup. In particular, if you keep
-backups for multiple family members, this might be 
+The AAAREADME has no secrets in it. It is a 4-1-1 for the contents of the backup.
 
 *VeraCrypt* (or equivalent) -- if you use VeraCrypt, 7zip, or another archive app, you should have a top-level
 unencrypted set of installers that will allow you or someone else to use the archival software to unpack the archive.
@@ -142,12 +141,19 @@ I recommend storing each one of these file attachments in a subfolder.
 
 _Summary_
 
-What you will end up with is something like this:
+What you will end up with is something at the outer layer like,
 
+```text
     AAAREADME.txt
     VeraCrypt/
       VeraCrypt Setup 1.26.15.exe
       VeraCrypt_1.26.14.dmg
+    backup.hc
+```
+
+where `backup.hc` is the VeraCrypt container file.  Once you have opened (decrypted) the VeraCrypt container,
+what you will see is,
+
     mom/
       README.txt
       vault.json

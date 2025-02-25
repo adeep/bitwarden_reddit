@@ -124,12 +124,16 @@ Put most simply, _write all this on a piece of paper_.  What have I suggested so
 Is there more than this? It depends on your exact circumstance. Remember, one day _someone else_ is going to have to
 read this sheet and use it to settle your last affairs after you die.
 
-Write legibly! And preferably  make a second copy of this paper and have a trusted friend or associate store it offsite, in case of fire or other disaster.
+Write legibly! And preferably  make a second copy of this paper and have a trusted friend or associate store it 
+offsite, in case of fire or other disaster.
 
 # Final thoughts
 
-Passwordbits has a [great article](https://passwordbits.com/password-manager-emergency-sheet/) on making and storing an emergency kit. It's not Bitwarden specific, but the article is completely relevant.
+Passwordbits has a [great article](https://passwordbits.com/password-manager-emergency-sheet/) on making and storing an emergency kit. It's not Bitwarden specific, but the 
+article is completely relevant.
 
 [Here](https://community.bitwarden.com/t/i-created-a-bitwarden-emergency-kit/69523) is a second take from the Community pages that might be interesting.
 
-Passwordbits also has some good suggestions on how to store it when you are done. One thing I do not think they emphasize enough is that *you want more than one copy*. If there is a fire or flood -- if you are moving your house and a box goes missing -- you want a backup of your backup.
+Passwordbits also has some good suggestions on how to store it when you are done. One thing I do not think they 
+emphasize enough is that *you want more than one copy*. If there is a fire or flood -- if you are moving your 
+house and a box goes missing -- you want a backup of your backup.

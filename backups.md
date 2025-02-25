@@ -15,36 +15,41 @@ A backup goes one step beyond that. It ensures that if the Bitwarden servers dis
 
 A backup needs the following pieces:
 
-* *Emergency Sheet* -- to my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). There should be a single concise file with the
-contents of your emergency sheet.
+## The Emergency Sheet
+To my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). It is a single concise file that will
+allow you to regain access to your Bitwarden vault as well as your TOTP datastore.
 
+## Bitwarden Vault Export
 
-* *Bitwarden vault export* -- this needs to be a [JSON export](https://bitwarden.com/help/export-your-data/). The
+This needs to be a [JSON export](https://bitwarden.com/help/export-your-data/). The
 "CSV" format is useful but not necessary unless you want to leave the Bitwarden ecosystem. The CSV format is also
 an incomplete representation of your vault. For technical reasons, you should create the "password protected" version
 of the JSON export. DO NOT USE the "account restricted" export format.
 
 
-* *TOTP datastore* -- Your "authenticator app" generates those six-digit numerals via the current time of day plus
+## TOTP datastore 
+
+Your "authenticator app" generates those six-digit numerals via the current time of day plus
 a secret that you share with the server. You are best served by keeping an export of that app's secrets as well.
 
-
-* *Recovery Codes* -- Just like Bitwarden has a 
-[2FA recovery code](https://bitwarden.com/help/two-step-recovery-code/), most websites that support strong 
+## Recovery Codes 
+Just like Bitwarden has a [2FA recovery code](https://bitwarden.com/help/two-step-recovery-code/), most websites that support strong 
 authentication also have a recovery workflow. For best security, you don't want to save these in your vault, but it 
 is definitely best to have these available  for disaster recovery.
 
 
-* *Bitwarden Organization export* -- the data in shared Collections must be 
-[exported separately](https://bitwarden.com/help/export-your-data/#export-an-organization-vault). Again, use the 
+## Bitwarden Organization exports 
+The data in shared Collections must be [exported separately](https://bitwarden.com/help/export-your-data/#export-an-organization-vault). Again, use the 
 "password protected" version of the JSON export.
 
-* *File attachments* -- Vaults with a premium subscription can have arbitrary files attached to vault entries. These
+## File attachments 
+Vaults with a premium subscription can have arbitrary files attached to vault entries. These
 must be downloaded, by hand, one at a time. In addition, you need to make a text file that explains which file 
-attachments belong to which vault entry.
+attachments belong to which vault entry. (More on that last point later.)
 
+_Pro tip_: On a desktop or web browser, the query `>attachments:*` will return a list of vault entries that have attachments.
 
-A good Bitwarden backup should also have a top-level `README.txt` for each backup. This should be your emergency sheet.
+A good Bitwarden backup should also have a top-level `emergency_sheet.txt` for each backup. This is exactly your emergency sheet.
 * TOTP datastore recovery information: this may include a username, password, or other account recovery information
 
 This is complicated! In order to reduce the work and errors, I recommend building this file structure once and then
@@ -57,31 +62,52 @@ and maintain the backup. I had painfully detailed instructions on how to use it.
 encrypted zip archive that you can dynamically read and update. You can set it up so that a decrypted version of your
 files is never written to your disk.
 
-However, I think that with a certain amount of aggravation, you can get away with something like 
-[7-Zip](https://www.7-zip.org/) or [Picocrypt](https://github.com/Picocrypt/Picocrypt). The devil will be in how to 
-create a new archive without allowing decrypted secrets to ever be written to your hard disk. If you care.
+However, I think that with a certain amount of aggravation, you can get away with something like
+[7-Zip](https://www.7-zip.org/) or [Picocrypt](https://github.com/Picocrypt/Picocrypt). The devil will be in how to
+create a new archive without allowing decrypted secrets to ever be written to your hard disk. If you care. But
+for the remainder of this guide, I will assume you are using VeraCrypt.
 
 # Backup Organization
 
-_Top Level_
+In this section I outline a very general format. It allows you to perform backups for yourself as well as other
+family members.
 
-*AAAREADME.txt* -- At a level higher than any single backup, you need a file that has more information about the backup itself. 
-You want to explain how this is a VeraCrypt backup and include installers for the app (like VeraCrypt). 
-The AAAREADME has no secrets in it. It is a 4-1-1 for the contents of the backup.
+## Top Level
 
-*VeraCrypt* (or equivalent) -- if you use VeraCrypt, 7zip, or another archive app, you should have a top-level
-unencrypted set of installers that will allow you or someone else to use the archival software to unpack the archive.
+The overall image on your USB drive will contain an outermost `AAAREADME.txt` and then the encrypted archive.
+The archive might reasonably be called `backup.hc`. You will also save some installers for VeraCrypt.
 
-_For each vault or Organization collection_
+`AAAREADME.txt` has more information about the backup itself.
+You want to explain how this is a VeraCrypt backup and include installers for the app (like VeraCrypt).
+`AAAREADME.txt` has no secrets in it. It is a 4-1-1 for the contents of the backup. Its contents should be simple,
+like:
 
-*README.txt* -- a full emergency sheet for that vault
+```
+This is a Bitwarden backup for my family. The backup is encrypted via VeraCrypt. (Hopefully) compatible
+installers are enclosed.
 
-*bitwarden_export.json* (or similar obvious name) -- the export of your personal vault. Be sure to add the
-password you chose when you created the export to the `README.txt`.
+You should already have the encryption key to open this backup.
+```
 
-*recovery_codes.txt* -- When you enable strong 2FA, good websites give you a recovery workflow in case you lose
+`installers/` should be a folder that has the appropriate installation apps for VeraCrypt, on the architectures you
+are likely to need.
+
+## Inside `backup.hc`
+
+For each vault or Organization collection, create a folder. Inside each folder:
+
+### `emergency_sheet.txt`
+This is a full emergency sheet for that vault, or a guide for an Organization collection
+
+### `bitwarden_export.json` (or similar obvious name) 
+This is the export of the vault or organization Collection. Be sure to add the
+password you chose when you created the export to `emergency_sheet.txt`.
+
+### `recovery_codes.txt` 
+
+When you enable strong 2FA, good websites give you a recovery workflow in case you lose
 your Yubikey or TOTP app. I know, with everything else you're doing here, this should not be important. But when
-it comes to backups, redundancy is a very good thing. [Google](https://support.google.com/accounts/answer/1187538?hl=en&co=GENIE.Platform%3DDesktop), [Microsoft](https://support.microsoft.com/en-us/account-billing/microsoft-account-recovery-code-2acc2f88-e37b-4b44-99d4-b4419f610013), 
+it comes to backups, redundancy is a very good thing. [Google](https://support.google.com/accounts/answer/1187538?hl=en&co=GENIE.Platform%3DDesktop), [Microsoft](https://support.microsoft.com/en-us/account-billing/microsoft-account-recovery-code-2acc2f88-e37b-4b44-99d4-b4419f610013),
 [Bitwarden](https://bitwarden.com/help/two-step-recovery-code/), and others typically use a one-time code or set of
 one-time codes.
 
@@ -113,12 +139,13 @@ Docker Hub https://hub.docker.com/
 Recovery code: 1234567890abc
 ```
 
-_attachments.txt_ -- File attachments in Bitwarden barely work. Sorry, there; I said it. You have to hunt down
+### `attachments.txt` 
+File attachments in Bitwarden barely work. Sorry, there; I said it. You have to hunt down
 each file attachment, one at a time and directly download it to put into your backup. But then...which vault
 entry did this file attachment come from?
 
-(Pro tip: typing in the string `>attachments:*` in the search dialog of a desktop instance of Bitwarden or a
-browser extension will list all the entries that have attachments. )
+_Pro tip: typing in the string `>attachments:*` in the search dialog of a desktop instance of Bitwarden or a
+browser extension will list all the entries that have attachments._
 
 You will need to make a dictionary that maps each file attachment to which vault entry it belongs to. This file
 will look something like,
@@ -135,13 +162,13 @@ Jason Voter Registration.jpg -- Jason Voter Registration
 (In case it's not clear, the first part is the name of the file, and the second part is the vault item, referred
 to by its _Name_ field.)
 
-`attachments/`
+### `attachments/` folder
 
 I recommend storing each one of these file attachments in a subfolder.
 
-_Summary_
+# Backup Organization
 
-What you will end up with is something at the outer layer like,
+At the outermost level of your USB, you should see something like,
 
 ```text
     AAAREADME.txt
@@ -151,31 +178,32 @@ What you will end up with is something at the outer layer like,
     backup.hc
 ```
 
-where `backup.hc` is the VeraCrypt container file.  Once you have opened (decrypted) the VeraCrypt container,
-what you will see is,
+When you open the encrypted archive, you will see something like,
 
     mom/
-      README.txt
+      emergency_sheet.txt
       vault.json
-      2FAS.json
+      ente_auth.json
       recovery_codes.txt
       attachments.txt
       attachments/
         passport.jpg
         drivers_license.jpg
     dad/
-      README.txt
+      emergency_sheet.txt
       vault.json
       ente_auth.json
       recovery_codes.txt
     family_collections/
+      emergency_sheet.txt
       mom_dad.json
       mom_dad_teenager.json
+
 
 # Storing Your Backup
 
 There are two parts to your backup: the archive file itself, and the encryption password 
-(the VeraCrypt "volume password", if that is the app you are using). The security of your backup comes from ensuring 
+(the VeraCrypt "volume password"). The security of your backup comes from ensuring 
 that only authorized parties have access to both parts.
 
 *What about online backups?*

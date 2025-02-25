@@ -26,13 +26,28 @@ If you're concerned about the security of online password generators, then start
 
 [Register your Bitwarden account](https://bitwarden.com/help/create-bitwarden-account/) either on the [bitwarden.com server](https://vault.bitwarden.com) or on the [bitwarden.eu](https://vault.bitwarden.eu) server. Use a fake name if you wish, and leave the Password Hint blank for now.
 
+Note that Bitwarden will require that you confirm your email address as part of the registration process.
+
  At this point consider [upgrading your subscription](https://bitwarden.com/go/start-premium/) to Premium if you wish to use Premium features.
 
 # TWO-FACTOR AUTHENTICATION AND ENCRYPTION
 
 Still in the Web Vault app, go to the ["Two-Step Login" section](https://vault.bitwarden.com/#/settings/security/two-factor) of Security settings, and enable a 2FA method for your Bitwarden account. 
 
+## Hardware Security Key (FIDO2)
+
 The best choice is a hardware security key such as a [Yubikey Security Key NFC)[https://www.yubico.com/product/security-key-nfc-by-yubico-black/.  To set this up in Bitwarden, click "Manage" for the Passkey provider, and register your Yubikeys there (not under "Yubico OTP Security Key"). Personally, I have three security keys; I keep one on my person, one at home, and one safely stored at a relative's house.
+
+## TOTP (The "Authenticator app")
+
+If you aren't willing or ready to use a hardware security key, enable TOTP now:
+
+* Download [Ente Auth](https://ente.io/auth/).
+* Create an account. Like the email for Bitwarden, consider using an email address. Write it on your emergency sheet.
+* Click [this link](https://passhelp.github.io/generator/#phrase:4) once, and copy down the displayed phrase on your piece of paper as your Ente Auth password.
+* Still in the "Two-Step Login" section on the Bitwarden web page, enable follow the instructions to enable 2FA on your Bitwarden account.
+
+## Clean-Up
 
 *IMPORTANT: Before leaving the "Two-Step Login" section, click the "View recovery code" link. Accurately transcribe this code onto your "Emergency Sheet"* 
 
@@ -65,15 +80,15 @@ Configure the settings in each. I recommend setting the _Vault Timeout Action_ t
 
 Optionally, make the following changes to the browser extension settings:
 
-       (a) Enable the Account Security option "Unlock with PIN" (but _do not disable_ "Lock with master password on browser restart"), defining the PIN to be a short passphrase or password that is easier to type than your master password.
+(a) Enable the Account Security option "Unlock with PIN" (but _do not disable_ "Lock with master password on browser restart"), defining the PIN to be a short passphrase or password that is easier to type than your master password.
 
-       (b) Turn off the Auto-Fill option to "Show auto-fill menu on form fields" (there are five other ways to auto-fill, the best of which is the Ctrl+Shift+L keyboard shortcut — or Cmd+Shift+L on macOS).
+(b) Turn off the Auto-Fill option to "Show auto-fill menu on form fields" (there are five other ways to auto-fill, the best of which is the Ctrl+Shift+L keyboard shortcut — or Cmd+Shift+L on macOS).
 
-       (c) Disable the Notification options "Ask to add login" and "Ask to update existing login" (it is better to add logins by first creating the account credentials directly in the browser extension, and the using auto-fill to transfer the credentials into the account registration form).
+(c) Disable the Notification options "Ask to add login" and "Ask to update existing login" (it is better to add logins by first creating the account credentials directly in the browser extension, and the using auto-fill to transfer the credentials into the account registration form).
 
-       (d) Disable the Notification option "Ask to save and use passkeys" unless you are sure that you want to store passkeys in your Bitwarden vault (passkeys are a "bleeding-edge" technology that may need some additional time to mature before the user experience is optimized).
+(d) Disable the Notification option "Ask to save and use passkeys" unless you are sure that you want to store passkeys in your Bitwarden vault (passkeys are a "bleeding-edge" technology that may need some additional time to mature before the user experience is optimized).
 
-       (e) If privacy concerns are important to you and don't mind the slightly degraded UI visuals, disable the Appearance option "Show website icons".
+(e) If privacy concerns are important to you and don't mind the slightly degraded UI visuals, disable the Appearance option "Show website icons".
 
 # FINAL THOUGHTS
 

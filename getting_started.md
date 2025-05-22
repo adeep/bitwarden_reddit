@@ -63,6 +63,8 @@ Download and install the Bitwarden client apps ([browser](https://bitwarden.com/
 
 Configure the settings in each. I recommend setting the _Vault Timeout Action_ to "Lock" instead of "Log out", and you should use a relatively short _Timeout Period_. Also enable the option that clears the system clipboard after a short delay.
 
+In the Windows desktop app (if you are using it), go to Settings and check the setting "Disable screenshots".
+
 
 # SOME CLEANUP
 

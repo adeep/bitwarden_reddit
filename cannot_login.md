@@ -41,8 +41,8 @@ _stay logged in there_ (!), _disconnect_ the device from the internet, and try t
 ASAP - with the export function, or manually if necessary. – If something goes wrong in the following, 
 with an export, you are able to restore your data, hopefully.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> 
-When you use the export function (only possible if you still have access to that function in at least one of the Bitwarden apps):
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> When 
+you use the export function (only possible if you still have access to that function in at least one of the Bitwarden apps):
 
 * Be aware that exports do not contain Sends and items in the trash.
 
@@ -75,8 +75,8 @@ least one Bitwarden app, otherwise you are at an impasse here…)
   2FA. There may also be a [new-device-verification-code](https://bitwarden.com/help/new-device-verification/). 
   You may also have access via a [passkey](https://bitwarden.com/help/login-with-passkeys/).
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-We focus on login problems in this post! (Unlocking problems are a separate issue.)
+<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> We 
+focus on login problems in this post! (Unlocking problems are a separate issue.)
 
 * Make sure whether you are being asked for your _master password_ (possible for either unlocking or logging in) 
 or for your _PIN_ (only applicable when unlocking). These are not interchangeable; the PIN won’t work when 
@@ -101,16 +101,16 @@ you neglected to enable 2FA on your account.
 * Try to login via other [Bitwarden app(s)](https://bitwarden.com/download/).
 * Try to log in via _other devices and other networks_ (that is, WiFi versus cellular).
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-This way you can check whether it is a _general_ login problem (when you can’t login anywhere)
+<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> This 
+way you can check whether it is a _general_ login problem (when you can’t login anywhere)
 versus a problem with a single app or device.
 
 * _If it’s a general problem_ you should focus on things that have a kind of “general approach” – _and if 
 it’s a problem with one app and/or device_, you probably can focus on more “narrow” measures regarding that 
 app and/or device.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> 
-When trying to login “too often”: the Bitwarden servers 
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> When 
+trying to login “too often”: the Bitwarden servers 
 [will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks) 
 after 9 failed login attempts from an unknown device”, so be careful with your attempts.
 
@@ -192,8 +192,8 @@ typed lower-case letter into an upper-case letter (or vice versa)…
   Make your _keyboard input visible_ if possible. Make sure you input the exact character. Use the _on-screen visible
   keyboard_. If those things don’t help, change your master password in the web vault to one that contains only 
   the 95-character ASCII set, or better yet a 4 word random passphrase without any special characters at all.
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-Again, make an export/backup before changing your master password; see [First Steps](#2-first-steps).
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> Again, 
+  make an export/backup before changing your master password; see [First Steps](#2-first-steps).
   * On iOS: _deactivate smart punctuation_, since that can “auto-correct” characters you type in
 
 * On mobile devices: Try _turning off WiFi temporarily_, i.e. changing to cellular. 
@@ -217,8 +217,8 @@ Make an export before you change the KDF settings!)
 
 * If your Bitwarden app has a crash or other inexplicable behavior,
 
-  * <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> 
-But proceed with caution, make a backup/export if you still can – more info to exports: see [First Steps](#2-first-steps).
+  * <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> But 
+  proceed with caution, make a backup/export if you still can – more info to exports: see [First Steps](#2-first-steps).
 
   * Also, beware: uninstalling the Bitwarden mobile app, desktop app and browser extension make those apps 
   “unknown devices” for Bitwarden again, requiring the email login verification code due to the new device 
@@ -271,8 +271,8 @@ But proceed with caution, make a backup/export if you still can – more info to
 If you have truly lost your password, then – unfortunately – there is no way around that… 
 Bitwarden can neither reset your master password nor “circumvent” it in any way.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-Simplified explanation: the Bitwarden master password does not only “authenticate” you, but is also a
+<img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> Simplified 
+explanation: the Bitwarden master password does not only “authenticate” you, but is also a
    major factor in the encryption of your vault. Without the master password – and Bitwarden doesn’t have your master password due to it’s zero-knowledge-architecture – your vault can’t be decrypted… And that’s also why, as long as your master password isn’t there, it can’t be resetted or changed for another on.
 
    Your only chance that remains would be to remember the master password again – or to “guess it”… 
@@ -311,8 +311,8 @@ the master password and without your 2FA or “new device verification”-OTP co
 Those login-passkeys with encryption depend on PRF, and the browser, the “passkey-wallet” 
 (i.e. where you store that passkey) and the OS must support the creation of those. And currently 
 “login-with-passkey” is still in Beta and only possible for login to the web vault.
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-But, as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those 
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> But, 
+as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those 
 * Bitwarden-login-passkeys don’t replace your master password, as some critical actions still need a 
 * master password confirmation (like changing the master password and exporting the vault). So don’t rely 
 * solely on Bitwarden-login-passkeys (for now).

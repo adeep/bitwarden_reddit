@@ -29,6 +29,8 @@ And some repetitions are intentional, as some important topics - like mentioning
 [6. Lost Password](#6-lost-password)
 <br>
 [7. An Ounce of Prevention...](#7-an-ounce-of-prevention)
+<br>
+[8. Credits](#8-credits)
 
 ## 1. Before You Start
 
@@ -285,7 +287,7 @@ explanation: the Bitwarden master password does not only “authenticate” you,
    If it doesn’t come back to you, then eventually it’s time to delete the account you have lost access to… (see the previous section for details about that).
 
 
-7. An Ounce of Prevention...
+## 7. An Ounce of Prevention...
 
 * Create one (or more) emergency sheet(s) with all login information for your Bitwarden account - 
 and store that in (a) secure location(s)… also make sure to keep the emergency sheet(s) up-to-date when you 

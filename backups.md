@@ -43,17 +43,17 @@ The data in shared Collections must be [exported separately](https://bitwarden.c
 "password protected" version of the JSON export.
 
 ## File attachments 
-Vaults with a premium subscription can have arbitrary files attached to vault entries. These
-must be downloaded, by hand, one at a time. In addition, you need to make a text file that explains which file 
+Vaults with a premium subscription can have arbitrary files attached to vault entries. If you choose the "encrypted ZIP
+format" for your backup, Bitwarden will include these in your export.
+
+If you unwisely choose to eschew the encrypted Zip format, you will need to 
+download these, by hand, one at a time. In addition, you need to make a text file that explains which file 
 attachments belong to which vault entry. (More on that last point later.)
 
-_Pro tip_: On a desktop or web browser, the query `>attachments:*` will return a list of vault entries that have attachments.
+## Emergency Sheet
 
-A good Bitwarden backup should also have a top-level `emergency_sheet.txt` for each backup. This is exactly your emergency sheet.
-* TOTP datastore recovery information: this may include a username, password, or other account recovery information
-
-This is complicated! In order to reduce the work and errors, I recommend building this file structure once and then
-updating it on a periodic basis. Remember, you should update your backup at least once a year.
+A good Bitwarden backup should also have a top-level `emergency_sheet.txt` for each backup. This is exactly 
+your [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
 
 # Creating Your Backup
 
@@ -94,10 +94,12 @@ are likely to need.
 
 ## Inside `backup.hc`
 
+This an encrypted archive (like with VeraCrypt).
+
 For each vault or Organization collection, create a folder. Inside each folder:
 
 ### `emergency_sheet.txt`
-This is a full emergency sheet for that vault, or a guide for an Organization collection
+This is the full emergency sheet for that vault.
 
 ### `bitwarden_export.json` (or similar obvious name) 
 This is the export of the vault or organization Collection. Be sure to add the
@@ -139,33 +141,6 @@ Docker Hub https://hub.docker.com/
 Recovery code: 1234567890abc
 ```
 
-### `attachments.txt` 
-File attachments in Bitwarden barely work. Sorry, there; I said it. You have to hunt down
-each file attachment, one at a time and directly download it to put into your backup. But then...which vault
-entry did this file attachment come from?
-
-_Pro tip: typing in the string `>attachments:*` in the search dialog of a desktop instance of Bitwarden or a
-browser extension will list all the entries that have attachments._
-
-You will need to make a dictionary that maps each file attachment to which vault entry it belongs to. This file
-will look something like,
-
-```text
-Cat microchip registration.jpg -- Poko
-
-Cigna front.jpg -- Cigna
-Cigna back.jpg -- Cigna
-Jason ODL.jpg -- Jason ODL
-Jason Voter Registration.jpg -- Jason Voter Registration
-```
-
-(In case it's not clear, the first part is the name of the file, and the second part is the vault item, referred
-to by its _Name_ field.)
-
-### `attachments/` folder
-
-I recommend storing each one of these file attachments in a subfolder.
-
 # Backup Organization
 
 At the outermost level of your USB, you should see something like,
@@ -185,26 +160,20 @@ When you open the encrypted archive, you will see something like,
       vault.json
       ente_auth.json
       recovery_codes.txt
-      attachments.txt
-      attachments/
-        passport.jpg
-        drivers_license.jpg
     dad/
       emergency_sheet.txt
       vault.json
       ente_auth.json
       recovery_codes.txt
-    family_collections/
-      emergency_sheet.txt
-      mom_dad.json
-      mom_dad_teenager.json
+    family_organization/
+      family_organization.json
 
 
 # Storing Your Backup
 
 There are two parts to your backup: the archive file itself, and the encryption password 
 (the VeraCrypt "volume password"). The security of your backup comes from ensuring 
-that only authorized parties have access to both parts.
+that only authorized parties have access to _both_ parts.
 
 *What about online backups?*
 
@@ -216,6 +185,8 @@ stored outside the cloud.
 Finally, it's not like your backup is going to be very large. My backup, which includes me, my wife, my brother-in-law,
 and a niece, totals to less than 80 megabytes. This is tiny! Amazon will sell you a 10-pack of 1Gb thumb drives
 for less than $20.
+
+Don't bother with online backups.  Invest instead in physical copies, offline, in secure locations.
 
 *Offline Storage*
 

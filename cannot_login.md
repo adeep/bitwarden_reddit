@@ -12,8 +12,8 @@ of various possibilities.
 Go through this list, take your time, and you certainly don’t have to “study” everything in detail. 
 Beware and be careful! If you are having login issues, you may be already in a “danger zone”.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-This post is mainly for individual, families or Teams accounts. Enterprise accounts have some different 
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> This
+post is mainly for individual, families or Teams accounts. Enterprise accounts have some different 
 setups (such as SSO and account recovery) that are not part of this post.
 For Enterprise accounts, contact your Enterprise organization administrator for help.
 
@@ -40,8 +40,8 @@ apply in multiple situations.
 
 ## 1. Before You Start
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-_Depending on what exactly has happened, you may be in danger of losing access to your vault.
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> _Depending
+on what exactly has happened, you may be in danger of losing access to your vault.
 Proceed very carefully with everything you try and do -– including the things that are suggested here.
 
 _If you are still logged in (whether “locked” or “unlocked”) in one or more Bitwarden apps_:
@@ -103,28 +103,30 @@ you’re asked for your master password (and vice versa), and you cannot ever lo
 If you cannot login in via _one_ of the Bitwarden apps,
 
 * _Try to login to the web vault_ ([vault.bitwarden.com](https://vault.bitwarden.com/) for the US server region 
-or [vault.bitwarden.eu](https://vault.bitwarden.eu/) for the EU server region)
+or [vault.bitwarden.eu](https://vault.bitwarden.eu/) for the EU server region).
 
-* If that doesn't work, try to login with _different browsers_. Also try a _private/incognito browser session_.
+* If that doesn't work, try to log in with _different browsers_. Also try a _private/incognito browser session_.
 * Try _deleting the browser cache_.
   <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-Only  delete the cached browser content, _not your browser cookies_. 
+Only  delete the cached browser content. _Do not your browser cookies_. 
 Losing your browser cookies at this point could case Bitwarden to "forget" your device as a "known device", which
-might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) if
-you neglected to enable 2FA on your account.
+might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) or 2FA on your account.
+* Try _uninstalling the Bitwarden client and installing a fresh version_. There seem to be multiple situations where
+an existing Bitwarden client can get confused after an upgrade. If you are currently logged with that client,
+_do not uninstall the client until you have [made an export](#1-before-you-start)_.
 
-* Try to login via other [Bitwarden app(s)](https://bitwarden.com/download/).
+* Try to log in via other [Bitwarden app(s)](https://bitwarden.com/download/).
 * Try to log in via _other devices and other networks_ (that is, WiFi versus cellular).
 
 <img src="https://community.bitwarden.com/images/emoji/twitter/bulb.png?v=14" title=":bulb:" class="emoji" alt=":bulb:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> This 
 can show whether it is a _general_ login problem (when you can’t login anywhere)
 versus a problem with a single app or device.
 
-* _If the problem is across more than one Bitwaden client_ you should focus on things that have a 
+* _If the problem is across more than one Bitwarden client_ you should focus on things that have a 
 kind of “general approach”. 
 * _If 
-it’s a problem with one app and/or device_, you probably can focus on more “narrow” measures regarding that 
-app and/or device.
+it’s a problem with only one app and/or device_, you probably can focus on more “narrow” measures regarding that 
+particular setup.
 
 <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> When 
 trying to login “too often”: the Bitwarden servers 
@@ -138,12 +140,12 @@ after 9 failed login attempts from an unknown device”, so be careful with your
 
 _Checking the Server_
 
-* Check whether _the Bitwarden (US/EU) servers are temporarily down_. This could happen during
-a planned server update; start with the [Bitwarden Status Page](https://status.bitwarden.com/).
+* Are _the Bitwarden (US/EU) servers are temporarily down_? This could happen during
+a planned server update. Look at the [Bitwarden Status Page](https://status.bitwarden.com/).
 [Downdetector](https://downdetector.com/status/bitwarden/) is also a good crosscheck to see if other users
 are also having a problem.
 
-* See if your server is down by trying to load the vault page directly:
+* See if your server is down by trying to load the "web vault" page directly:
 [vault.bitwarden.com](https://vault.bitwarden.com) or [vault.bitwarden.eu](https://status.bitwarden.com/).
 Note these two servers are _not_ interchangeable. You need to know which one has your account.
 
@@ -152,8 +154,9 @@ Note these two servers are _not_ interchangeable. You need to know which one has
 
 * _If you are not sure which server region your account was created on_, try them both.
 
-* If you cannot load this web page, wait until you can before trying anything else 
-(except making an [export function](https://bitwarden.com/help/export-your-data/), if possible).
+* If you cannot load the page for your web vault, wait until you can before trying anything else. 
+You can still go ahead and try to make an [export](https://bitwarden.com/help/export-your-data/) if
+do not already have one.
 
 * _If you’re self-hosting_, verify your own server _is functioning correctly_.  It is possible your
 login problems due to local errors misconfigurations of your self-hosted Bitwarden server.
@@ -166,16 +169,16 @@ _Email and Master Password_
 [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md)! 
 If necessary, consider getting your master password hint, if you have one.
 (Pro tip: many people set 
-the whereabouts of their emergency sheet(s) as their master password hint…)
+the whereabouts of their emergency sheet(s) as their master password hint.)
 
 * Perhaps _you changed your email address and/or master password_? 
-And didn’t update that on your emergency sheet?
+And worse, didn’t update your emergency sheet?
 
-* _Look for any typos in your email address and/or master password_, especially silly mistakes or more obvious 
+* _Look for any typos in your email address and/or master password_, especially silly typos or more obvious 
 ones like _0 (zero) versus O (capital letter “oh”)_, _l (small “L”) versus I (capital letter “i”)_, 
 or _| (special character “vertical bar”)_.
 * _Look for added or missing spaces_: trailing spaces, leading spaces or double spaces within your master 
-password. The discrepancy could either when you were typing it in or when you created the
+password. The discrepancy could be either when you were typing it in or when you created the
 master password.
 
 > For the email address, Bitwarden doesn't care whether you use lower case letters or upper-case letters, 
@@ -187,13 +190,40 @@ _Special Characters_
 Do you have _problematic special characters_ in your master password? 
 Non-ASCII / Unicode characters may work on one system, but not on other systems.
 
-We recommend only to use the 95-character ASCII set (or “less”) for master passwords to stay on the safe side, 
-or rather to guarantee “cross-system-wide” compatibility:
+You should only use (at most) the 95-character 
+[printable ASCII character set](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg)
+for master passwords. Extended character sets
+(UTF-8, emojis, and the like) can cause problems on different systems--or even on your current system after a
+system upgrade. These are the capital letters A-Z, small letters a-z, the numerals 0-9, and the following special
+characters:
 
-* A-Z
-* a-z
-* 0-9
-* The following special characters: `!"#$%&'()*+,-./:;<=>?@\`[~]^_{}|` and the "space" character
+* the space character
+* ! (exclamation point)
+* " (double quote)
+* \# (octathorpe, a.k.a. "pound" or "sharp")
+* $ (dollar-sign)
+* % (percent)
+* & (ampersand)
+* ' (apostrophe)
+* ( (left parenthesis)
+* ) (right parenthesis)
+* \* (asterisk, a.k.a "star" or "splat")
+* \+ (plus)
+* , (comma)
+* \- (dash)
+* . (period, or "dot")
+* / (slash)
+* : (colon)
+* ; (semicolon)
+* < ("less than")
+* = (equal)
+* \> ("greater than")
+* ? (question mark)
+* @ (at-sign)
+* ^ (carat)
+* _ (underscore)
+* \` (back tick)
+* ~ (tilde)
 
 If you can log in to your web vault, but not to another one of the Bitwarden apps - you
 may have a problematic special character in your master password. Consider changing your master password
@@ -202,25 +232,33 @@ to one that only has 95-character ASCII characters just described.
 Start by exporting your vault 
 before you change your master password! – see [First Steps](#1]2-first-steps).
 
-* While you're changing your master password, consider using a 4-word passphrase, generated by Bitwarden itself, for
-your master password.  For instance, `polka-fame-curled-either-passover`.
+* Even better, if you change your master password, consider using a 4-word passphrase, generated by Bitwarden itself, 
+such as `polka-fame-curled-either-passover` or `WinnerPlasmaKabobSinous`.
 
 _Autocorrect Issues_
 
-Beware of autocorrections by your keyboard(s)/app/device – you may not even notice it, especially 
+Beware of autocorrections by your keyboard(s)/app/device – you may not notice it, especially 
 since password input may be obscured! Even if you stick to the 95-character ASCII set, as recommended above, 
-some characters may get auto-corrected by your keyboard/app/device):
+some characters may get autocorrected by your keyboard/app/device):
 
-* For example, replacing straight-quotes with curly-quotes (i.e., “smart-quotes”), or inserting a . 
-(period/full stop) and/or invisible spaces after pressing the “space-bar”,  or automatically changing a 
-typed lower-case letter into an upper-case letter (or vice versa)…
+* For example, replacing straight-quotes with curly-quotes (i.e., “smart-quotes”, such as "&ldquo;", "&rdquo;", 
+"&lsquo;" and "&rsquo;"). Other gotchas include  inserting a . 
+(period/full stop) and/or invisible spaces after pressing the “space-bar”  or automatically changing a 
+typed lower-case letter into an upper-case letter or vice versa…
 
 * In general, all kinds of apostrophes and quotation marks (', ", `, ´, ‘, ’, ‛, “, ”, ‟) may be 
 autocorrected into a different form preferred by the device you are typing on.
 
-* _turn off autocorrect_ if possible. Try to _change your (virtual or physical) keyboard_. 
-  Make your _keyboard input visible_ if possible. Make sure you input the exact character. Use the _on-screen visible
-  keyboard_. If those things don’t help, change your master password in the web vault to one that contains only 
+* _Turn off autocorrect_ if possible. Try to _change your (virtual or physical) keyboard_. 
+* Make your _keyboard input visible_ if possible. 
+* Make sure you input the exact character. 
+* Use the _on-screen visible
+  keyboard_ ("Character Map" in Windows). 
+* Consider composing the password in a text edit such as `Notepad` or `TextEdit` and then pasting it into your
+login form. 
+
+
+If those things don’t help, change your master password in the web vault to one that contains only 
   the 95-character ASCII set, or better yet a 4 word random passphrase without any special characters at all.
 <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> Again, 
   make an export/backup before changing your master password; see [First Steps](#2-first-steps).
@@ -228,18 +266,18 @@ autocorrected into a different form preferred by the device you are typing on.
 
 _Other Login Issues_
 
-* On mobile devices: Try _turning off WiFi temporarily_, i.e. changing to cellular. 
-(–> this might “solve” some network and/or IP address problems)
+* On mobile devices: Try _turning off WiFi temporarily_, i.e. changing to cellular. Or vice versa.
+This might “solve” some network and/or IP address problems.
 
 * For all devices in your local network: restart the router. 
-(–> this might also “solve” some network and/or IP address problems)
+This might resolve some network addressing issues.
 
-* If you use a VPN: turn it off (or on). (at least temporarily…)
+* If you use a VPN: turn it off (or on). (at least temporarily)
 
-* Have you changed your KDF settings from the default? If so, do you use default settings for Argon2 or PBKDF2? 
-If not, maybe try to set your KDF settings to the default values.
+* Did you change your KDF settings from the default? If so, do you use default settings for Argon2 or PBKDF2? 
+Consider temporarily switching your KDF settings back to the default.
 (<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-Make an export before you change the KDF settings!)
+Make an export before you change the KDF settings!
 
 > Especially on iOS, the Argon2 settings can be “too high” → change them to the default values (at least for 
 > “memory”) 
@@ -247,21 +285,21 @@ Make an export before you change the KDF settings!)
 > make an export before you change the KDF settings!)
  According to Bitwarden: “iOS limits app memory for autofill. Increasing memory from the default 64 MB may result in errors while unlocking the vault with autofill.”
 
-* If your Bitwarden app has a crash or other inexplicable behavior,
+If your Bitwarden app has a crash or other inexplicable behavior,
 
-  * <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> But 
-  proceed with caution, make a backup/export if you still can – more info to exports: see [First Steps](#2-first-steps).
+* <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> Proceed
+with caution. Start by making  a backup/export if you still can – more info to exports: see [First Steps](#2-first-steps).
 
-  * Also, beware: uninstalling the Bitwarden mobile app, desktop app and browser extension make those apps 
-  “unknown devices” for Bitwarden again, requiring the email login verification code due to the new device 
-  verification / login protection. This is critical if you have failed to enable 2FA on your
-  vault – make sure you have access to your email account, where you might get the email verification codes.
+* Beware that uninstalling the Bitwarden mobile app, desktop app and browser extension will make those apps 
+“unknown devices” for Bitwarden again, requiring the email login verification code due to the new device 
+verification / login protection. This is critical if you have failed to enable 2FA on your
+vault – make sure you have access to your email account, where you might get the email verification codes.
 
-  * Uninstall the app, (Do not worry if you cannot "log out" before doing the uninstall.)
-  * delete the local storage of the app,
-  * reboot your device,
-  * reinstall the app,
-  *  try to log in again.
+* Uninstall the app, (Do not worry if you cannot "log out" before doing the uninstall.)
+* delete the local storage of the app,
+* reboot your device,
+* reinstall the app,
+*  try to log in again.
   
 
 ## 5. Getting Desperate...
@@ -275,17 +313,17 @@ Make an export before you change the KDF settings!)
 
    And you can always contact Bitwarden support.
 
-   If you believe you have found a bug -- you have “other” or “weird” error messages -- you can also report it on 
+   If you believe you have found a bug--you have “other” or “weird” error messages--you can also report it on 
    GitHub ([here](https://github.com/bitwarden/clients/issues) for the browser extension, desktop app, 
    web vault and CLI, [here](https://github.com/bitwarden/android/issues) for the Android mobile app and
    Android Authenticator app, and [here](https://github.com/bitwarden/ios/issues) for the iOS mobile app and 
    iOS Authenticator app…)
 
-   Another consideration: Did you also get "login-" or “attempted-login” emails from Bitwarden 
-   you can’t explain? If yes - and it wasn’t you yourself who logged in or tried to login - … 
-   in combination with login problems - and when nothing else resolves those - 
-   you should take into consideration, your account may be compromised. But first make sure those mails 
-   aren’t “fake Bitwarden” or even phishing mails – and still, most login problems are probably not due to 
+   Another consideration: did you also get "login-" or “attempted-login” emails from Bitwarden 
+   you can’t explain? If yes--and it wasn’t you yourself who logged in or tried to login--in 
+   combination with login problems (and when nothing else resolves those)
+   it is possible your account may be compromised. But first make sure those mails 
+   aren’t “fake Bitwarden” or even phishing mails. Most login problems are not due to a
    compromise.
 
    _If you have truly lost your Bitwarden account_,

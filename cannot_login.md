@@ -121,7 +121,7 @@ _For the rest of this guide, we assume that you have made a backup, if you can.
 If you are merely "locked", you need to unlock your current Bitwarden client. This is not a server problem. There
 are three common possibilities here:
 
-*   ([Unlock with PIN](https://bitwarden.com/help/unlock-with-pin/) -- you must have set this up in advance;
+*   [Unlock with PIN](https://bitwarden.com/help/unlock-with-pin/) -- you must have set this up in advance;
 *   [Unlock with Biometrics](https://bitwarden.com/help/biometrics/) -- you must have set this up in advance;
 *   Unlock with your master password -- this is always allowed.
 *   You may also have access via a [passkey](https://bitwarden.com/help/login-with-passkeys/).
@@ -187,7 +187,7 @@ Again, make sure you have a backup (if you can) before you proceed.
 
 * _Try to log in to the web vault_ ([vault.bitwarden.com](https://vault.bitwarden.com/) for the US server region
   or [vault.bitwarden.eu](https://vault.bitwarden.eu/) for the EU server region).
-* 
+
 * If you aren't certain which one you created your account on, try them both!
 
 * Try to log in with _different browsers_. 
@@ -416,8 +416,8 @@ If you think, there may be a chance of remembering or “guessing” it, then ta
 Even a few days--maybe you will remember it. Sometimes it is good to sit down and focus on it, and sometimes
 it is good to stop thinking about it for a few days…
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-When you try to log in “too often”: Be aware, that the Bitwarden servers e.g. “[…] will require CAPTCHA verification after 9 failed login attempts from an unknown device”, so be careful (and as “accurately” as possible") with your attempts, before getting “slowed down”…
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">When
+you try to log in “too often”: Be aware, that the Bitwarden servers e.g. “[…] will require CAPTCHA verification after 9 failed login attempts from an unknown device”, so be careful (and as “accurately” as possible") with your attempts, before getting “slowed down”…
 
 If it doesn’t come back to you, then eventually it’s time to delete the account you have lost access to… (see the previous section for details about that).
 
@@ -425,8 +425,8 @@ _If you have truly lost your Bitwarden account_,
 [you can delete your Bitwarden account](https://bitwarden.com/help/forgot-master-password/) as long as
 you have access to the email address you used.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-Make sure you exported your data beforehand, if possible;
+<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">Make 
+sure you exported your data beforehand, if possible;
 account deletion is not reversible. Your next step will be to create a new account and hopefully 
 import/restore your most recent backup/export. Again, see if you can export your data;
 see [First Steps](#2-first-steps).

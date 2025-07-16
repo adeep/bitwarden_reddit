@@ -7,7 +7,7 @@ TBD
 This guide is based on https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188/4.
 
 That version is in turn based on
-[_another older post_](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282).
+[another older post](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282).
 
 Thanks to [@grb](https://community.bitwarden.com/u/grb), [@DenBesten](https://community.bitwarden.com/u/denbesten),
 [@Neuron5569](https://community.bitwarden.com/u/neuron5569) and [@dh024](https://community.bitwarden.com/u/dh024),
@@ -26,7 +26,7 @@ First, the bad news: you are going to have to run some experiments to find out w
 Even worse, there is a chance that you have entirely lost the contents of your vault. If you have not made
 preparations in advance, you may be forced to 
 [delete your vault](https://bitwarden.com/help/forgot-master-password/) and 
-[start over](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
+[start over](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md).
 
 If you are reading this, and you still have access, please create an
 [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
@@ -37,6 +37,10 @@ That is more work; if you are overwhelmed, please do at least create the emergen
 ## Where is your backup?
 
 > Where are we going, and why I am I in this handbasket?
+
+Responsible use of your credential datastore should include an emergency sheet and a full backup.
+To avoid repetition, take heed: most of the experiments in this guide should be done after you have protected
+your data by creating an emergency sheet and a full backup.
 
 An [Emergency Sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md)
 is your rescue in a number of simple situations:
@@ -74,30 +78,31 @@ Bitwarden has an
 [export function](https://bitwarden.com/help/export-your-data/).
 There are some things you should be cognizant about exports in general:
 
-* Exports require that you are still logged into Bitwarden in at least one client.
+* A Bitwarden export requires that you are still logged into Bitwarden in at least one client.
 
-* Exporting your vault requires the master password. 
-  If your login problems include
-  an issue with your master password, you won’t be able to use the export function. Again, you
-  need to export everything manually. 
+* A Bitwarden export requires that you know the master password. 
+If your login problems include
+an issue with your master password, you won’t be able to use the export function. Again, you
+need to export everything manually. 
 
-* Exports do not contain [Sends](https://bitwarden.com/products/send/) or any items in the trash.
+* A Bitwarden export does not contain [Sends](https://bitwarden.com/products/send/) or any items in the trash.
 
 Bitwarden exports are either in CSV or JSON format.
 
-* CSV exports do not contain file attachments, cards, identities and passkeys.
+* CSV exports do not contain file attachments, cards, identities and passkeys. They are best for if/when
+you choose to leave the Bitwarden ecosystem. They are not as complete as a JSON export.
 
-* JSON exports are best.
+* JSON exports are the most complete.
   If possible, use the encrypted password-protected ones. _Do not use the
   "restricted" export format._
-  However, unencrypted JSON exports are acceptable in this situation, since you are already in disaster recovery.
+  "Unencrypted JSON" exports are acceptable in this situation, since you are already in disaster recovery.
 
-* If you have an organization/collections, you have to export those separately via the
+* If you use an organization and have Collections, you have to export those separately via the
   [admin console](https://bitwarden.com/help/export-your-data/#export-an-organization-vault) in the web vault.
 
 If you cannot use the Bitwarden export function, _but you still have access to an unlocked Bitwarden client_:
 
-* Unplug that device from the network. 
+* _Unplug that device from the network_. 
   If it is a mobile device, put it in "Airplane Mode".
   If it is a desktop, unplug your Ethernet cable or otherwise disconnect it from the rest of the world.
   The risk is that a Bitwarden client may act strangely when it talks to the server and log you out.
@@ -110,16 +115,16 @@ If you cannot use the Bitwarden export function, _but you still have access to a
 * Take your time! Double-check your work.
 
 
-* If your exports have missed an item, do whatever it takes to manually copy the data to another place.
+Before you do anything else, be sure your exported copy is complete.
 
-_For the rest of this guide, we assume that you have made a backup, if you can.
+For the rest of this guide, we assume that you have made a backup, if you can.
 
 ## Are you "locked"? "logged out"? Something else?
 
 ([What’s the difference between locking/unlocking and logging in?](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in))
 
 If you are merely "locked", you need to unlock your current Bitwarden client. This is not a server problem. There
-are three common possibilities here:
+are four common possibilities here:
 
 *   [Unlock with PIN](https://bitwarden.com/help/unlock-with-pin/) -- you must have set this up in advance;
 *   [Unlock with Biometrics](https://bitwarden.com/help/biometrics/) -- you must have set this up in advance;
@@ -140,13 +145,12 @@ common, but possible), or (horror of horrors!) you have forgotten your master pa
 
 Not specifically on topic, here are some additional thoughts to try to prevent this from happening again.
 
-* Schedule the backups of your vault.
+* Perform regular backups of your vault.
   These won’t prevent a “lockout scenario” _per se_, but if you ever
   have a login problem or a “lockout” from your Bitwarden account, then you will still have most or all of your
   important data, and be able to restore that data to a new vault.
 
-* Set a timer/task/reminder for every three, six, or even twelve months to make an export of the vault.
-  More info to exports: see [First Steps](#2-first-steps).
+* Set a timer/task/reminder for every three, six, or even twelve months to make backups of your vault.
 
 _Set up Two Factor Authentication now_
 
@@ -171,8 +175,7 @@ These login-passkeys with encryption depend on a PRF capable browser, the “pas
 (i.e. where you store that passkey) and the OS must support their creation.
 Currently “login-with-passkey” is still in Beta and only possible for login to the web vault.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> But, 
-as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those 
+⚠️ But, as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those 
 Bitwarden-login-passkeys don’t replace your master password. Some critical actions still need a 
 master password confirmation (like changing the master password and exporting the vault). Do not rely 
 solely on Bitwarden-login-passkeys (for now).
@@ -193,8 +196,7 @@ Again, make sure you have a backup (if you can) before you proceed.
 * Try to log in with _different browsers_. 
 * Try using a _private/incognito browser session_.
 * Try _deleting the browser cache_.
-  <img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">
-  Only  delete the cached browser content. 
+️️️⚠️ Only  delete the cached browser content. 
   _Do not delete your browser cookies_.
   Losing your browser cookies at this point could case Bitwarden to "forget" your device as a "known device", which
   might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) or 2FA on your account.
@@ -216,7 +218,7 @@ Again, make sure you have a backup (if you can) before you proceed.
 These experiments will tell you, at a high level, whether the problem is with a single Bitwarden client or
 a single one of your devices.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;"> When 
+️⚠️ When 
 trying to login “too often”: the Bitwarden servers 
 [will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks) 
 after 9 failed login attempts from an unknown device”, so be careful with your attempts.
@@ -241,7 +243,7 @@ after 9 failed login attempts from an unknown device”, so be careful with your
   If you are not sure, try them both!
 
 * If you cannot load the page for your web vault, wait until you can before trying anything else.
-  In this situation, you should consider making an [export](https://bitwarden.com/help/export-your-data/) if
+  In this situation, if you do not have an [export](https://bitwarden.com/help/export-your-data/), you could still consider trying making one if you
   do not already have one.
 
 * _If you’re self-hosting_, verify your own server _is functioning correctly_.  It is possible your
@@ -251,18 +253,18 @@ after 9 failed login attempts from an unknown device”, so be careful with your
 
 ## Email and/or Master Password
 
-At this point, you believe that the Bitwarden servers are functioning, but you still cannot log in,
+At this point of this guide, your experience is that the Bitwarden servers are functioning, but you still cannot log in,
 especially via the web vault.
 What's next?
 
 * _Verify your email address and master password_.
   Look at your
   [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
-* Did you set a "master password hint"? If so, it's time to request it.
+* Did you set a "master password hint"? If so, it's time to [request it](https://vault.bitwarden.com/#/hint).
 
 > Pro tip: many people use the master password hint to remind them where they stored their emergency sheet.
 
-* Perhaps _you changed your email address and/or master password_?
+* Perhaps _you recently changed your email address and/or master password_?
   And worse, didn’t update your emergency sheet?
   Step back, relax, take a walk, get a cup of coffee.
   Perhaps it will come back to you in a moment.
@@ -282,12 +284,13 @@ _Special Characters_
 
 Do you have _problematic special characters_ in your master password?
 Non-ASCII, Unicode, or Emoji characters may work on one system but not on other systems.
-You should only use (at most) the 95-character
+You should only use (at most) the "safe" 95-character
 [printable ASCII character set](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg)
-for master passwords. Other characters can even fail on your current system after a
-system upgrade.
+for master passwords. 
+Even if your master password used to work, other characters can even cause a login failure on your current system 
+after a system upgrade.
 
-The safe character set consists of:
+This "safe" character set is:
 
 * capital letters A-Z
 * small letterts a-z
@@ -323,10 +326,10 @@ The safe character set consists of:
 > Note that although these characters are acceptable in a Bitwarden master password, be aware
 > that other websites may have trouble with some of the above characters.
 
-If you can log in to your web vault, but not to another one of the Bitwarden apps, you
+If you can log in to your web vault, but not via one of the other Bitwarden clients, you
 may have a problematic special character in your master password.
 Consider changing your master password
-to one that only has the 95-character ASCII characters just described.
+to one that only has the safe characters.
 
 If you change your master password, consider using a 4-word passphrase, generated by Bitwarden itself,
 such as `polka-fame-curled-either-passover` or `WinnerPlasmaKabobSinuous`. If you want extra security, have
@@ -337,17 +340,17 @@ and harder to type.
 _Autocorrect Issues_
 
 Beware of autocorrections by your keyboard(s)/app/device. You may not easily spot this, especially
-since password input may be obscured. Even if you stick to the 95-character ASCII set, as recommended above,
-some characters may get autocorrected by your keyboard/app/device:
+since password input may be obscured. Even if you stick to the safe character set, as recommended above,
+some characters may get autocorrected by your keyboard, app, or device:
 
 * Some systems will replace straight-quotes with curly-quotes (i.e., “smart-quotes”, such as "&ldquo;", "&rdquo;",
   "&lsquo;" and "&rsquo;"). MacOS is especially notorious for this.
 * You may have inserted a "." (period/full stop) and/or invisible spaces after pressing the “space-bar”.
 * Some systems will automatically change a
-  typed lower-case letter into an upper-case letter or vice versa.
+  input lower-case letter into an upper-case letter or vice versa.
 * On iOS: _deactivate smart punctuation_, since that can “autocorrect” characters you type in
 * In general, all kinds of apostrophes and quotation marks (', ", `, ´, ‘, ’, ‛, “, ”, ‟) may be
-  autocorrected into a different form preferred by the device you are typing on.
+  autocorrected into a different form preferred by the device or app you are using.
 
 * _Turn off autocorrect_, if possible. Try to _change your (virtual or physical) keyboard_.
 * Make your _keyboard input is visible_ if possible.
@@ -390,14 +393,13 @@ You can create a new post to get further help. Try to describe the problem as de
 what exact error message you get (ideally with a screenshot, but make sure to blur any personal and
 sensitive data), maybe what you already tried (and didn’t work) etc.
 
-And you can always contact [Bitwarden support](https://bitwarden.com/contact/).
+You can always contact [Bitwarden support](https://bitwarden.com/contact/).
 
 If you believe you have found a bug--you have “other” or “weird” error messages--you can also report it on
 GitHub ([here](https://github.com/bitwarden/clients/issues) for the browser extension, desktop app,
 web vault and CLI, [here](https://github.com/bitwarden/android/issues) for the Android mobile app and
 Android Authenticator app, and [here](https://github.com/bitwarden/ios/issues) for the iOS mobile app and
 iOS Authenticator app…)
-
 
 ## Lost Password or Lost 2FA
 
@@ -406,9 +408,12 @@ to get back into your vault.
 Bitwarden can neither reset your master password nor “circumvent” it in any way.
 
 Simplified explanation: the Bitwarden master password does not only “authenticate” you; it is also a
-major factor in the encryption of your vault. Without the master 
-password--and Bitwarden doesn’t have your master password due to its zero-knowledge-architecture--your vault 
-cannot be decrypted. This is also why, as long as your master password isn’t available, it 
+major factor in the encryption of your vault.
+_Your master password is a necessary input to decrypt your vault, and
+your master password never leaves your device._
+
+This is for your protection. It means that even if the Bitwarden server is seized by malefactors, they will not
+have the necessary secret to decrypt your vault. This is also why, as long as your master password isn’t available, it 
 cannot be reset or changed by anyone else.
 
 Your only remaining hope is if you can remember the master password or even “guess it”.
@@ -416,16 +421,17 @@ If you think, there may be a chance of remembering or “guessing” it, then ta
 Even a few days--maybe you will remember it. Sometimes it is good to sit down and focus on it, and sometimes
 it is good to stop thinking about it for a few days…
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">When
-you try to log in “too often”: Be aware, that the Bitwarden servers e.g. “[…] will require CAPTCHA verification after 9 failed login attempts from an unknown device”, so be careful (and as “accurately” as possible") with your attempts, before getting “slowed down”…
+⚠️ When  you try to log in “too often”: Be aware, that the Bitwarden servers e.g. 
+“[…] will require CAPTCHA verification after 9 failed login attempts from an unknown device”, so be careful 
+(and as “accurately” as possible") with your attempts, before getting “slowed down”…
 
-If it doesn’t come back to you, then eventually it’s time to delete the account you have lost access to… (see the previous section for details about that).
+If it doesn’t come back to you, then eventually it’s time to delete the account you have lost access to. 
 
 _If you have truly lost your Bitwarden account_,
 [you can delete your Bitwarden account](https://bitwarden.com/help/forgot-master-password/) as long as
 you have access to the email address you used.
 
-<img src="https://community.bitwarden.com/images/emoji/twitter/warning.png?v=14" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20" style="aspect-ratio: 20 / 20;">Make 
+⚠️Make 
 sure you exported your data beforehand, if possible;
 account deletion is not reversible. Your next step will be to create a new account and hopefully 
 import/restore your most recent backup/export. Again, see if you can export your data;
@@ -453,10 +459,11 @@ If an attacker wanted to plunder your bank accounts and other assets, they would
 possible to discover the breach. They want as much time as possible. Modifying the login for your password
 manager is close to the bottom of the list of things they would do.
 
-They might co-opt your Amazon account, for instance, to deliver merchandise to a drop location or initiate
-a "brushing scam".
+Of course, there are exceptions. A bad actor might co-opt your Amazon account, for instance, to deliver merchandise 
+to a drop location or initiate a [brushing scam](https://www.uspis.gov/news/scam-article/brushing-scam).
 
-They might modify the login to a social media account in order to publish illegal content (and avoid you removing it quickly).
+They might modify the login to a social media account in order to publish illegal content (and avoid you 
+removing it quickly).
 
 The one exception to this might be a spiteful ex-spouse who is looking to cause you grief _by denying your
 access to your own secrets_. Outside a real corner case like this, an attacker modifying your vault is not a

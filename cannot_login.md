@@ -1,23 +1,10 @@
-## Contents
+_The most recent version of this document is 
+[on GitHub](https://github.com/djasonpenney/bitwarden_reddit/blob/main/cannot_login.md)._
+# Contents
 
 TBD
 
-## Foreword
-
-This guide is based on https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188/4.
-
-That version is in turn based on
-[another older post](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282).
-
-Thanks to [@grb](https://community.bitwarden.com/u/grb), [@DenBesten](https://community.bitwarden.com/u/denbesten),
-[@Neuron5569](https://community.bitwarden.com/u/neuron5569) and [@dh024](https://community.bitwarden.com/u/dh024),
-whose contributions on the
-[Community Forum](https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188)
-have served as inspirations for this post!
-
-Kudos to [Nail1684](https://community.bitwarden.com/u/Nail1684/summary); any mistakes are doubtless mine, not his.
-
-## Introduction
+# Introduction
 
 Oh no! You can't log into your vault. What could be the problem?
 
@@ -35,13 +22,12 @@ You can go further and actually create a
 [full backup](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md).
 That is more work; if you are overwhelmed, please do at least create the emergency sheet.
 
-## Do you have a backup!
+# Make A Backup!
 
 > Where are we going, and why I am I in this handbasket?
 
-Responsible use of your credential datastore should include an emergency sheet and a full backup.
-To avoid repetition, take heed: most of the experiments in this guide should be done after you have protected
-your data by creating an emergency sheet and a full backup.
+Some of the things you are going to try are potentially destructive. For this reason--if at all possible--you
+should have a backup before you do anything.
 
 An [Emergency Sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md)
 is your rescue in a number of simple situations:
@@ -102,6 +88,8 @@ you choose to leave the Bitwarden ecosystem. They are not as complete as a JSON 
 * If you use an organization and have Collections, you have to export those separately via the
   [admin console](https://bitwarden.com/help/export-your-data/#export-an-organization-vault) in the web vault.
 
+## Doing it the Hard Way
+
 If you cannot use the Bitwarden export function, _but you still have access to an unlocked Bitwarden client_:
 
 * _Unplug that device from the network_. 
@@ -116,17 +104,29 @@ If you cannot use the Bitwarden export function, _but you still have access to a
   "5" (five), and "S" (capital ess) and so forth.
 * Take your time! Double-check your work.
 
-
 Before you do anything else, be sure your exported copy is complete.
 
 For the rest of this guide, we assume that you have made a backup, if you can.
 
-## Are you "locked"? "logged out"? Something else?
+# A Primer: Logged Out, Logged In, and Locked
 
-([What’s the difference between locking/unlocking and logging in?](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in))
+Your Bitwarden vault is always in one of _three_ status:
 
-If you are merely "locked", you need to unlock your current Bitwarden client. This is not a server problem. There
-are four common possibilities here:
+* _Logged Out_ -- no access. 
+  From here, all you can do is try to log in. This requires your username,
+  master password, and your 2FA. It may also require passing a
+  [new device verification](https://bitwarden.com/help/new-device-verification/).
+* _Logged In_ -- your vault is open. From here your can explicitly log out. It is also possible to "lock"
+  the vault, usually due to a timeout. The details are contralled by the options in your Bitwarden client.
+* _Locked_ -- your vault has passed authentication by the Bitwarden server, but there is no local access.
+  Unlocking your vault entails a PIN, biometrics, or possibly even re-entering the master password.
+  These options are controlled by the options in your Bitwarden client.
+* 
+More on all this ([here](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in)).
+
+If you are merely "locked", you need to unlock your current Bitwarden client.
+The server is not involved; it is a local problem with your Bitwarden client..
+There are four common possibilities here:
 
 *   [Unlock with PIN](https://bitwarden.com/help/unlock-with-pin/) -- you must have set this up in advance;
 *   [Unlock with Biometrics](https://bitwarden.com/help/biometrics/) -- you must have set this up in advance;
@@ -141,75 +141,45 @@ you’re asked for your master password (and vice versa), and you cannot _ever_ 
 If unlocking with your master password does not work, either your Bitwarden client has gone sideways (not
 common, but possible), or (horror of horrors!) you have forgotten your master password.
 
-## An Ounce of Prevention
+# First Steps: Test the "web vault"
 
-> Barn door? Needs to be closed?
+⚠️ Have you made a [backup](#make-a-backup)?
 
-Not specifically on topic, here are some additional thoughts to try to prevent this from happening again.
+So what's going on here? Let's start from the top: eliminate your Bitwarden client entirely.
+Inside your browser, navigate to the vault web page
+(either [the US server](https://vault.bitwarden.com) or the [EU server](https://vault.bitwaden.eu)).
 
-* Perform regular backups of your vault.
-  These won’t prevent a “lockout scenario” _per se_, but if you ever
-  have a login problem or a “lockout” from your Bitwarden account, then you will still have most or all of your
-  important data, and be able to restore that data to a new vault.
+If the web page _does not load_, you either have a networking problem on your computer, or there is a server error.
 
-* Set a timer/task/reminder for every three, six, or even twelve months to make backups of your vault.
-
-_Set up Two-Factor Authentication now_
-
-In addition to being a smart cybersecurity measure, if you set up 2FA it will bypass potential problems with
-the Bitwarden "new device verification", which can cause a "circular lockout" problem. Just make sure to
-include your 2FA recovery information in your full backup.
-
-_Emergency Access_
-
-Bitwarden [Emergency Access](https://bitwarden.com/help/emergency-access/) may also help.
-Note this requires
-a paying Bitwarden subscription, and there is a mandatory waiting period before someone will have access
-to your vault.
-
-_Login With Passkey_
-
-You can add a backup login method for the Bitwarden account via
-“login-with-passkey”-passkeys, ideally “with encryption.
-This makes it possible to login without entering
-the master password and without your 2FA or “new device verification” code.
-These login-passkeys with encryption depend on a PRF capable browser, the “passkey-wallet”
-(i.e. where you store that passkey) and the OS must support their creation.
-Currently “login-with-passkey” is still in Beta and only possible for login to the web vault.
-
-⚠️ But, as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those 
-Bitwarden-login-passkeys don’t replace your master password. Some critical actions still need a 
-master password confirmation (like changing the master password and exporting the vault). Do not rely 
-solely on Bitwarden-login-passkeys (for now).
-
-## Is your Bitwarden client the problem?
-
-> It's not me, honey, it's you.
-
-If you cannot log in via your Bitwarden client, the question remains whether this is just on one device or
-widespread. 
-Again, make sure you have a backup (if you can) before you proceed.
-
-* _Try to log in to the web vault_ ([vault.bitwarden.com](https://vault.bitwarden.com/) for the US server region
-  or [vault.bitwarden.eu](https://vault.bitwarden.eu/) for the EU server region).
-
-* If you aren't certain which one you created your account on, try them both!
-
-* Try to log in with _different browsers_. 
+* If you aren't sure which server your account is on, try both. The servers are _not interchangeable_.
+* Try to log in with _different browsers_.
 * Try using a _private/incognito browser session_.
 * Try _deleting the browser cache_.
-️️️⚠️ Only  delete the cached browser content. 
+
+️️️⚠️ Only  delete the cached browser content.
   _Do not delete your browser cookies_.
   Losing your browser cookies at this point could case Bitwarden to "forget" your device as a "known device", which
-  might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) or 2FA on your account.
-* Try _uninstalling the Bitwarden client and installing a fresh version_. There seem to be multiple situations where
-  an existing Bitwarden client can get confused after an upgrade. If you are currently logged with that client,
-  _do not uninstall the client until you have [made an export](#1-before-you-start)_.
+  might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) 
+  or 2FA on your account.
 
-* Try to log in via [other Bitwarden clients](https://bitwarden.com/download/).
+️⚠️ When trying to log in “too often”: the Bitwarden servers
+[will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
+after 9 failed login attempts from an unknown device, so be careful with your attempts.
+
+If at least one of these experiments succeeds, you know that it isn't a server problem, and you can focus
+on the functioning of your Bitwarden client(s).
+
+# Cannot Connect to the Bitwarden server
+
+⚠️ Have you made a [backup](#make-a-backup)?
+
+Did you try [connecting to the web vault](#first-steps-test-the-web-vault) and had issues?
+Itt could be the server itself or your connection:
+
 * Try to log in via _other devices and other networks_ (that is, Wi-Fi versus cellular).
 
-* On mobile devices: Try _turning off Wi-Fi temporarily_, i.e. changing to cellular. Or vice versa.
+* On mobile devices: Try _turning off Wi-Fi temporarily_, i.e. changing to cellular. 
+  Or vice versa.
   This might “solve” some network and/or IP address problems.
 
 * For all devices in your local network: restart the router.
@@ -217,52 +187,116 @@ Again, make sure you have a backup (if you can) before you proceed.
 
 * If you use a VPN: turn it off (or on), (at least temporarily).
 
-These experiments will tell you, at a high level, whether the problem is with a single Bitwarden client or
-a single one of your devices.
-
-️⚠️ When trying to login “too often”: the Bitwarden servers 
-[will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks) 
-after 9 failed login attempts from an unknown device, so be careful with your attempts.
-
-* _If the problem is across more than one Bitwarden client_ you should focus on things that have a
-  kind of “general approach”.
-* _If
-  it’s a problem with only one app and/or device_, you probably can focus on more “narrow” measures regarding that
-  particular setup.
-
-## Is it the Bitwarden server?
+If you cannot seem to connect to the Bitwarden server (but other sites seem to connect correctly):
 
 * Start by looking at the [Bitwarden status page](https://status.bitwarden.com.
   Perhaps this is a known issue or a planned outage.
-* Are _the Bitwarden (US/EU) servers are temporarily down_? 
+* Are _the Bitwarden (US/EU) servers are temporarily down_?
   [Downdetector](https://downdetector.com/status/bitwarden/) is a good crosscheck to see if other users
   are also having a problem.
 
-* See if your server is down by trying to load the "web vault" page directly:
-  [vault.bitwarden.com](https://vault.bitwarden.com) or [vault.bitwarden.eu](https://status.bitwarden.com/).
-  If you cannot load this web page in your browser, you have evidence there is a server problem.
-  Note these two servers are _not_ interchangeable.
-  You need to know which one has your account.
-  If you are not sure, try them both!
+* _If you’re self-hosting_, verify your own server _is functioning correctly_.  It is possible your
+login problems due to local errors misconfigurations of your self-hosted Bitwarden server.
+These issues are out of the scope of this guide). But please do verify you have the _latest server version_
+installed. (“New” client versions and “old” server versions do get incompatible eventually!)
 
-* If you cannot load the page for your web vault, wait until you can before trying anything else.
-  In this situation, if you do not have an [export](https://bitwarden.com/help/export-your-data/), you could still consider trying making one if you
-  do not already have one.
+If your Bitwarden server is down, there is not much more for you to do -- except again, to make a
+backup if you haven't already.
 
-_If you’re self-hosting_, verify your own server _is functioning correctly_.  It is possible your
-  login problems due to local errors misconfigurations of your self-hosted Bitwarden server.
-  These issues are out of the scope of this guide). But please do verify you have the _latest server version_
-  installed. (“New” client versions and “old” server versions do get incompatible eventually!)
+If you can log in via the web vault, but not using your local Bitwarden client (or browser extension), you
+have a Bitwarden client problem.
+
+If you cannot log in via the web vault, you may have a username/password problem.
+
+# Bitwarden Client Problems
+
+If you have access via the web vault but
+cannot log in via your Bitwarden client, the question remains whether this is just on one device or
+widespread. 
+
+⚠️ Have you made a [backup](#make-a-backup)?
+
+* Try _uninstalling the Bitwarden client and installing a fresh version_. 
+  There seem to be multiple situations where
+  an existing Bitwarden client can get confused after an upgrade. If you are currently logged with that client,
+  _do not uninstall the client until you have [made a backup](#make-a-backup)_.
+
+* Try to log in via [other Bitwarden clients](https://bitwarden.com/download/).
+
+* Try to use a Bitwarden client on a different device.
+  This may indicate whether there is an OS problem,
+conflicting browser extension, or other environmental factors.
+
+## KDF Issues
+
+⚠️ Have you made a [backup](#make-a-backup)?
+
+Bitwarden now recommends that you modify your
+[KDF settings](https://bitwarden.com/help/kdf-algorithms/) to be different from
+the default settings you got when you first created your
+vault.
+It is possible some Bitwarden clients will behave badly when you make this change. 
+If you can log in via the web vault, but one
+or more Bitwarden clients are not working,
+
+* _Completely_ log your client out and then back in again.
+* Consider temporarily switching your KDF settings back to the default, and try again.
+
+> Especially on iOS, the Argon2 settings can be “too high”: change them to the default values (at least for
+> “memory”).
+> According to Bitwarden: “iOS limits app memory for autofill. Increasing memory from the default 64 MB may result in errors while unlocking the vault with autofill.”
+
+## Application hangs or crashes, or otherwise acts inexplicably
+
+If this Bitwarden client consistently crashes or has other inexplicable behavior, consider doing a full
+uninstall and reinstall.
+
+⚠️ Beware that uninstalling the Bitwarden mobile app, desktop app and browser extension will make those apps
+“unknown devices” for Bitwarden again, requiring the email login verification code due to the
+[new device verification](https://bitwarden.com/help/new-device-verification/) and login protection. 
+This is critical if you have failed to enable 2FA on your
+vault; make sure you have access to your email account, where you will get the email verification codes.
+
+1. Uninstall the app, (Do not worry if you cannot "log out" before doing the uninstall.)
+2. Delete the local storage of the app--make sure the uninstall did not leave traces of the app on your system.
+3. Reboot your device,
+4. Reinstall the app from a fresh download.
+5. Try to log in again.
+
+You can create a new post to get further help. Try to describe the problem as detailed as possible,
+what exact error message you get (ideally with a screenshot, but make sure to blur any personal and
+sensitive data), maybe what you already tried (and didn’t work) etc.
+
+You can always contact [Bitwarden support](https://bitwarden.com/contact/).
+
+If you believe you have found a bug--you have “other” or “weird” error messages--you can also report it on
+GitHub ([here](https://github.com/bitwarden/clients/issues) for the browser extension, desktop app,
+web vault and CLI, [here](https://github.com/bitwarden/android/issues) for the Android mobile app and
+Android Authenticator app, and [here](https://github.com/bitwarden/ios/issues) for the iOS mobile app and
+iOS Authenticator app…)
 
 ## Email and/or Master Password
 
-You believe the Bitwarden servers are functioning, but you still cannot log in,
-especially via the web vault.
-What's next?
+The web vault _seems_ to be functioning properly, but you cannot log in there. What next?
 
-* _Verify your email address and master password_.
-  Look at your
-  [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
+At this point you must start to suspect a problem with your username, your master password, or both.
+
+️⚠️ When trying to log in “too often”: the Bitwarden servers
+[will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
+after 9 failed login attempts from an unknown device, so be careful with your attempts.
+
+* Are you on the wrong web vault, [US vault](https://vault.bitwarden.com) versus [EU vault](https://vault.bitwarden.eu))?
+These are _not interchangeable_.
+Go ahead and try the other one.
+
+* _Do you actually have an account?_
+  [Go to Bitwarden](https://bitwarden.com/pricing/) and try to create a new account.
+  If you _already_ have an account, you _will not_ receive a message in your inbox.
+  If you _do_ receive an email message, you either remembered the email incorrectly, or someone (a malicious
+  family member?) has deleted it.
+  If you inadvertently created a new vault, please consider [deleting it]((https://bitwarden.com/help/forgot-master-password/) now.)
+* _Verify your email address and master password_
+  by referring to your [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
 * Did you set a "master password hint"? If so, it's time to [request it](https://vault.bitwarden.com/#/hint).
 
 > Pro tip: many people use the master password hint to remind them where they stored their emergency sheet.
@@ -292,10 +326,30 @@ You master password should only use the "safe" 95-character
 
 Even if your master password currently works, a system upgrade could cause it to fail at a future date! 
 
-This "safe" 95-character set is:
+A strong sign you may have a character set problem is if you can
+log in via your web vault or some Bitwarden clients, but not others.
+In this case, consider changing your master password,
+but create an export of your vault first!
+
+Many people think a password is "safer" if it has weird characters in it. In terms of security, a weird
+character does not add that much: `MyDögHàŝFlèaß` does not add nearly as much security ("randomness" or "entropy") as
+simply using a slightly longer but much more tractable [passphrase](https://xkcd.com/936/), such as
+`polka-fame-curled-either-passover` or `WinnerPlasmaKabobSinuous`.
+
+To add insult to injury, punctuation and
+special characters make the master password harder to memorize and harder to type.
+
+If you choose to update your master password, use a 4-word passphrase, generated by Bitwarden itself.
+If you want extra security, have
+Bitwarden add a word (or two) to the passphrase.
+
+⚠️ Start by making a [backup](#make-a-backup)!
+
+Getting back to problematic special characters, the "safest" characters, the "printable ASCII character set",
+consist of:
 
 * capital letters A-Z
-* small letterts a-z
+* small letters a-z
 * numerals 0-9
 * the space character
 * ! (exclamation point)
@@ -328,28 +382,12 @@ This "safe" 95-character set is:
 > Note that even though all these characters are acceptable in a Bitwarden master password, be aware
 > that other websites may have trouble with some of them.
 
-A strong sign you may have a character set problem is if you can
-log in to via web vault or some other Bitwarden clients, but not others.
-In this case, consider changing your master password,
-but create an export of your vault first!
-
-When changing your master password, consider using a 4-word passphrase, generated by Bitwarden itself,
-such as 
-
-`polka-fame-curled-either-passover` or `WinnerPlasmaKabobSinuous`. 
-
-If you want extra security, have
-Bitwarden add a word (or two) to the passphrase _instead of_ punctuation or special characters. Punctuation and
-special characters do not add as much security as an extra word, and it makes the master password harder to memorize
-and harder to type.
-
 _Autocorrect Issues_
 
-If the master password itself seems okay, it could still
-be autocorrections by your keyboard(s), client, or device. 
-You may not easily spot this, especially
-since password input is often obscured. 
-Even if you stick to the safe character set, as recommended above,
+It's possible that your master password can be mangled by your keyboard, device, or even the client (browser)
+itself. There could be an autocorrect problem.
+You may not easily spot this, especially since password input is often obscured. 
+Even with the aforementioned safe characters,
 some characters may get autocorrected by your keyboard, client, or device:
 
 * Some systems will replace straight-quotes (`'` or `"`) with curly-quotes 
@@ -362,6 +400,8 @@ some characters may get autocorrected by your keyboard, client, or device:
 * In general, all kinds of apostrophes and quotation marks (', ", `, ´, ‘, ’, ‛, “, ”, ‟) may be
   autocorrected into a different form preferred by the device or app you are using.
 
+What can you try to find the correct password you entered or to type in the correct password on your system?
+
 * _Turn off autocorrect_, if possible. Try to _change your (virtual or physical) keyboard_.
 * Make your _keyboard input is visible_ if possible.
 * Type it more carefully (look at your hands!).
@@ -370,47 +410,9 @@ some characters may get autocorrected by your keyboard, client, or device:
 * Consider composing the password in a text editor such as `Notepad` or `TextEdit` and then pasting it into your
   login form.
 
-## KDF Issues
-
-* Did you change your 
-  [KDF settings](https://bitwarden.com/help/kdf-algorithms/) from the default? 
-  If so, do you use default settings for Argon2 or PBKDF2?
-  Consider temporarily switching your KDF settings back to the default.
-
-> Especially on iOS, the Argon2 settings can be “too high”: change them to the default values (at least for
-> “memory”).
-> ⚠️make an export before you change the KDF settings!
-According to Bitwarden: “iOS limits app memory for autofill. Increasing memory from the default 64 MB may result in errors while unlocking the vault with autofill.”
-
-## Application hangs or crashes, or otherwise acts inexplicably
-
-If your Bitwarden client consistently crashes or has other inexplicable behavior, consider doing a full
-uninstall and reinstall.
-
-Beware that uninstalling the Bitwarden mobile app, desktop app and browser extension will make those apps
-“unknown devices” for Bitwarden again, requiring the email login verification code due to the new device
-verification and login protection. This is critical if you have failed to enable 2FA on your
-vault; make sure you have access to your email account, where you will get the email verification codes.
-
-1. Uninstall the app, (Do not worry if you cannot "log out" before doing the uninstall.)
-2. Delete the local storage of the app--make sure the uninstall did not leave traces of the app on your system.
-3. Reboot your device,
-4. Reinstall the app from a fresh download.
-5. Try to log in again.
-
-You can create a new post to get further help. Try to describe the problem as detailed as possible,
-what exact error message you get (ideally with a screenshot, but make sure to blur any personal and
-sensitive data), maybe what you already tried (and didn’t work) etc.
-
-You can always contact [Bitwarden support](https://bitwarden.com/contact/).
-
-If you believe you have found a bug--you have “other” or “weird” error messages--you can also report it on
-GitHub ([here](https://github.com/bitwarden/clients/issues) for the browser extension, desktop app,
-web vault and CLI, [here](https://github.com/bitwarden/android/issues) for the Android mobile app and
-Android Authenticator app, and [here](https://github.com/bitwarden/ios/issues) for the iOS mobile app and
-iOS Authenticator app…)
-
 ## Lost Password or Lost 2FA
+
+> None of this is working! The web vault is there, but it won't let me log in.
 
 If you have truly lost your password, then--unfortunately--there is no super-duper sneaky secret back door
 to get back into your vault.
@@ -421,18 +423,21 @@ major factor in the encryption of your vault.
 _Your master password is a necessary input to decrypt your vault, and
 your master password never leaves your device._
 
-This is for your protection. It means that even if the Bitwarden server is seized by malefactors, they will not
-have the necessary secret to decrypt your vault. This is also why, as long as your master password isn’t available, it 
+This is for your protection. It means that even if the Bitwarden server were to be seized by malefactors, they would not
+have the necessary secret to decrypt your vault. This is also why, as long as your master password isn’t available, it
 cannot be reset or changed by anyone else.
 
+⚠️ If at all possible, do you have a [backup](#make-a-backup)?
+
 Your only remaining hope is if you can remember the master password or even “guess it”.
-If you think, there may be a chance of remembering or “guessing” it, then take your time.
-Even a few days--maybe you will remember it. Sometimes it is good to sit down and focus on it, and sometimes
+If you believe there is a chance of remembering or “guessing” it, then take your time,
+even a few days--maybe you will remember it.
+Sometimes it is good to sit down and focus on it, and sometimes
 it is good to stop thinking about it for a few days…
 
 ⚠️ When  you try to log in “too often”: Be aware, that the Bitwarden servers
 “will require CAPTCHA verification after 9 failed login attempts from an unknown device”.
-Be careful and as accurate as possible" with your attempts. 
+Be careful and as accurate as possible" with your attempts.
 Otherwise you will start facing additional CAPTCHA
 challenges before each password guess.
 
@@ -440,21 +445,23 @@ _If you have truly lost your Bitwarden account_,
 [you can delete your Bitwarden account](https://bitwarden.com/help/forgot-master-password/) as long as
 you have access to the email address you used.
 
-⚠️If you reach the point of deleting your old vault,
-first export your data, if possible.
 Account deletion is not reversible!
-Next, you can [create a new account](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md) 
+Again, do you have a backup?
+Next, you can [create a new account](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md)
 and ideally import/restore your most recent backup/export.
 
 ## Was I "hacked"?
 
 Sometimes when someone cannot log into their password manager, they believe they "must have been hacked".
-Let's look at that more closely.
+I believe this is naive:
 
-For the purpose of this discussion, I will assume you have a strong master password (unique, complex, and
-randomly generated) as well as good 2FA on your vault (a FIDO2 hardware security token or a TOTP app).
+I assume you have a strong master password (unique, complex, and
+randomly generated) as well as good 2FA on your vault (a FIDO2 hardware security token or a TOTP app). 
+I assume that you do not download malware on your device: no "hacks", "cracks", or "cheats"; your device has
+current OS patches (and you don't use it if it does not have current patches or cannot be updated); you do not
+allow anyone else to have access to the keyboard or even the USB ports, and so forth.
 
-The overwhelming odds are that you _did this to yourself_. Yes, there are exotic attacks out there that you
+In this case the overwhelming odds are that you _did this to yourself_. Yes, there are exotic attacks out there that you
 might be helpless against, but they are extremely rare. One report indicates that the entities that deploy
 these sophisticated attacks charge $250,000 _per person_.
 
@@ -480,3 +487,62 @@ The one exception to this might be a spiteful ex-spouse
 or rebellious teenager who is looking to cause you grief _by denying your
 access to your own secrets_. Outside a real corner case like this, an attacker modifying your vault is not a
 likely scenario.
+
+## An Ounce of Prevention
+
+> Barn door? Needs to be closed?
+
+Not specifically on-topic, here are some additional thoughts to try to prevent this from happening again.
+
+_Perform regular backups of your vault_
+
+  These won’t prevent a “lockout scenario” _per se_, but if you ever
+  have a login problem or a “lockout” from your Bitwarden account, then you will still have most or all of your
+  important data, and be able to restore that data to a new vault.
+
+Set a timer/task/reminder for every three, six, or even twelve months to make backups of your vault.
+
+_Set up Two-Factor Authentication now_
+
+In addition to being a smart cybersecurity measure, if you set up 2FA it will bypass potential problems with
+the Bitwarden "new device verification", which can cause a "circular lockout" problem. Just make sure to
+include your 2FA recovery information in your full backup.
+
+_Emergency Access_
+
+Bitwarden [Emergency Access](https://bitwarden.com/help/emergency-access/) may also help.
+Note this requires
+a paying Bitwarden subscription, and there is a mandatory waiting period before someone will have access
+to your vault.
+
+_Login With Passkey_
+
+You can add a backup login method for the Bitwarden account via
+“login-with-passkey”-passkeys, ideally “with encryption.
+This makes it possible to login without entering
+the master password and without your 2FA or “new device verification” code.
+These login-passkeys with encryption depend on a PRF capable browser, the “passkey-wallet”
+(i.e. where you store that passkey) and the OS must support their creation.
+Currently, “login-with-passkey” is still in Beta and only possible for login to the web vault.
+
+⚠️ But, as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those
+Bitwarden-login-passkeys don’t replace your master password. Some critical actions still need a
+master password confirmation (like changing the master password and exporting the vault). Do not rely
+solely on Bitwarden-login-passkeys (for now).
+
+
+## Acknowledgments
+
+This guide is based on https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188/4.
+
+That version is in turn based on
+[another older post](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282).
+
+Thanks to [@grb](https://community.bitwarden.com/u/grb), [@DenBesten](https://community.bitwarden.com/u/denbesten),
+[@Neuron5569](https://community.bitwarden.com/u/neuron5569) and [@dh024](https://community.bitwarden.com/u/dh024),
+whose contributions on the
+[Community Forum](https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188)
+have served as inspirations for this post!
+
+Kudos to [Nail1684](https://community.bitwarden.com/u/Nail1684/summary); any mistakes are doubtless mine, not his.
+

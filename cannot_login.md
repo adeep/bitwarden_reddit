@@ -41,7 +41,7 @@ TOTP app is on your phone, and your phone slipped and fell under the wheels of a
 ...and so forth. An emergency sheet presumes that your credential datastore is intact, but you cannot open it
 and use it.
 
-A [full backups](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) 
+A [full backup](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) 
 goes one step further: what if the cloud copy of your credential datastore is lost or corrupted?
 How could that happen?
 
@@ -103,8 +103,12 @@ If you cannot use the Bitwarden export function, _but you still have access to a
 * Pay close attention to the differences between "0" (zero) and "O" (capital oh), "1" (one), and "l" (small ell),
   "5" (five), and "S" (capital ess) and so forth.
 * Take your time! Double-check your work.
+* You will not be able to hand copy [passkeys](https://bitwarden.com/passwordless-passkeys/).
+* There are a number of items that will be difficult to save by hand.
+  That includes file attachments, 
+  [custom URI match detection](https://bitwarden.com/help/uri-match-detection/), and an organization vault.
 
-Before you do anything else, be sure your exported copy is complete.
+After you have tried copying everything, go back and try to ensure your exported copy is complete.
 
 For the rest of this guide, we assume that you have made a backup, if you can.
 
@@ -121,7 +125,7 @@ Your Bitwarden vault is always in one of _three_ status:
 * _Locked_ -- your vault has passed authentication by the Bitwarden server, but there is no local access.
   Unlocking your vault entails a PIN, biometrics, or possibly even re-entering the master password.
   These options are controlled by the options in your Bitwarden client.
-* 
+
 More on all this ([here](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in)).
 
 If you are merely "locked", you need to unlock your current Bitwarden client.
@@ -174,7 +178,7 @@ on the functioning of your Bitwarden client(s).
 ⚠️ Have you made a [backup](#make-a-backup)?
 
 Did you try [connecting to the web vault](#first-steps-test-the-web-vault) and had issues?
-Itt could be the server itself or your connection:
+It could be the server itself or your connection:
 
 * Try to log in via _other devices and other networks_ (that is, Wi-Fi versus cellular).
 
@@ -294,7 +298,7 @@ Go ahead and try the other one.
   If you _already_ have an account, you _will not_ receive a message in your inbox.
   If you _do_ receive an email message, you either remembered the email incorrectly, or someone (a malicious
   family member?) has deleted it.
-  If you inadvertently created a new vault, please consider [deleting it]((https://bitwarden.com/help/forgot-master-password/) now.)
+  If you inadvertently created a new vault, please consider [deleting it](https://bitwarden.com/help/forgot-master-password/) now.)
 * _Verify your email address and master password_
   by referring to your [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
 * Did you set a "master password hint"? If so, it's time to [request it](https://vault.bitwarden.com/#/hint).
@@ -385,7 +389,7 @@ consist of:
 _Autocorrect Issues_
 
 It's possible that your master password can be mangled by your keyboard, device, or even the client (browser)
-itself. There could be an autocorrect problem.
+itself. That is, this could be an autocorrect problem.
 You may not easily spot this, especially since password input is often obscured. 
 Even with the aforementioned safe characters,
 some characters may get autocorrected by your keyboard, client, or device:
@@ -494,11 +498,18 @@ likely scenario.
 
 Not specifically on-topic, here are some additional thoughts to try to prevent this from happening again.
 
-_Perform regular backups of your vault_
+_The Emergency Sheet_
 
-  These won’t prevent a “lockout scenario” _per se_, but if you ever
-  have a login problem or a “lockout” from your Bitwarden account, then you will still have most or all of your
-  important data, and be able to restore that data to a new vault.
+An [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) is a minimal
+prophylaxis that every use should consider.
+
+_Backups_
+
+_Perform regular [backups](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) of your vault.
+
+These won’t prevent a “lockout scenario” _per se_, but if you ever
+have a login problem or a “lockout” from your Bitwarden account, then you will still have most or all of your
+important data, and be able to restore that data to a new vault.
 
 Set a timer/task/reminder for every three, six, or even twelve months to make backups of your vault.
 
@@ -529,7 +540,6 @@ Currently, “login-with-passkey” is still in Beta and only possible for login
 Bitwarden-login-passkeys don’t replace your master password. Some critical actions still need a
 master password confirmation (like changing the master password and exporting the vault). Do not rely
 solely on Bitwarden-login-passkeys (for now).
-
 
 ## Acknowledgments
 

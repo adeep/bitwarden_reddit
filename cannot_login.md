@@ -1,5 +1,8 @@
 _The most recent version of this document is 
-[on GitHub](https://github.com/djasonpenney/bitwarden_reddit/blob/main/cannot_login.md)._
+[on GitHub](https://github.com/djasonpenney/bitwarden_reddit/blob/main/cannot_login.md).
+If you wish to make improvements or corrections, please consider
+[creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+
 # Contents
 
 TBD

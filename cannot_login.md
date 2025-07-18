@@ -126,7 +126,9 @@ Your Bitwarden vault is always in one of _three_ status:
   Unlocking your vault entails a PIN, biometrics, or possibly even re-entering the master password.
   These options are controlled by the options in your Bitwarden client.
 
-More on all this ([here](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in)).
+More on all this [here](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in).
+
+_Unlocking Problems_
 
 If you are merely "locked", you need to unlock your current Bitwarden client.
 The server is not involved; it is a local problem with your Bitwarden client..
@@ -282,7 +284,6 @@ iOS Authenticator app…)
 ## Email and/or Master Password
 
 The web vault _seems_ to be functioning properly, but you cannot log in there. What next?
-
 At this point you must start to suspect a problem with your username, your master password, or both.
 
 ️⚠️ When trying to log in “too often”: the Bitwarden servers

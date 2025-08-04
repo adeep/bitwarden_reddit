@@ -1,130 +1,92 @@
-u/aj0413 suggested that I make a revision of 
-[this post](https://www.reddit.com/r/Bitwarden/comments/y6d588/making_bitwarden_backups_one_approach). When I went back
-to look at it, I decided it would be better if I just started over. Here's my updated version!
+u/aj0413, [bu gönderinin](https://www.reddit.com/r/Bitwarden/comments/y6d588/making_bitwarden_backups_one_approach) bir revizyonunu yapmamı önerdi. Geri dönüp baktığımda, baştan başlamanın daha iyi olacağına karar verdim. İşte güncellenmiş versiyonum!
 
-# Introduction
+# Giriş
 
-For new users of Bitwarden, we recommend creating 
-[an emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). An emergency sheet is a disaster
-recovery mitigation. It ensures that if you forget your master password, lose access to your TOTP datastore, or
-otherwise get disconnected from the Bitwarden servers, that you can regain access.
+Bitwarden'ın yeni kullanıcıları için, 
+[bir acil durum sayfası](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) oluşturmayı öneriyoruz. Acil durum sayfası bir felaket kurtarma azaltma önlemidir. Ana şifrenizi unutursanız, TOTP veri deponuza erişimi kaybederseniz veya başka bir şekilde Bitwarden sunucularından bağlantınız koparsa, erişimi yeniden kazanabilmenizi sağlar.
 
-A backup goes one step beyond that. It ensures that if the Bitwarden servers disappear or corrupt your datastore, a recent copy of your data is  still recoverable. 
+Yedekleme bunun bir adım ötesine geçer. Bitwarden sunucuları ortadan kaybolursa veya veri deponuzu bozarsa, verilerinizin yakın tarihli bir kopyasının hala kurtarılabilir olmasını sağlar.
 
-# What's in a backup?
+# Yedeklemede neler var?
 
-A backup needs the following pieces:
+Bir yedekleme aşağıdaki parçalara ihtiyaç duyar:
 
-## The Emergency Sheet
-To my mind, a full backup is a proper superset of an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md). It is a single concise file that will
-allow you to regain access to your Bitwarden vault as well as your TOTP datastore.
+## Acil Durum Sayfası
+Benim düşünceme göre, tam bir yedekleme [acil durum sayfasının](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) uygun bir üst kümesidir. Bitwarden kasanıza ve TOTP veri deponuza yeniden erişim kazanmanızı sağlayacak tek ve özlü bir dosyadır.
 
-## Bitwarden Vault Export
+## Bitwarden Kasa Dışa Aktarımı
 
-This needs to be a [JSON export](https://bitwarden.com/help/export-your-data/). The
-"CSV" format is useful but not necessary unless you want to leave the Bitwarden ecosystem. The CSV format is also
-an incomplete representation of your vault. For technical reasons, you should create the "password protected" version
-of the JSON export. DO NOT USE the "account restricted" export format.
+Bunun bir [JSON dışa aktarımı](https://bitwarden.com/help/export-your-data/) olması gerekir. "CSV" formatı yararlıdır ama Bitwarden ekosisteminden ayrılmak istemediğiniz sürece gerekli değildir. CSV formatı ayrıca kasanızın eksik bir temsilidir. Teknik nedenlerle, JSON dışa aktarımının "şifre korumalı" versiyonunu oluşturmalısınız. "Hesap kısıtlı" dışa aktarım formatını KULLANMAYIN.
 
+## TOTP veri deposu
 
-## TOTP datastore 
+"Authenticator uygulamanız" o altı haneli sayıları günün şu anki saati artı sunucuyla paylaştığınız bir sır aracılığıyla üretir. O uygulamanın sırlarının bir dışa aktarımını da tutmanız en iyinize hizmet eder.
 
-Your "authenticator app" generates those six-digit numerals via the current time of day plus
-a secret that you share with the server. You are best served by keeping an export of that app's secrets as well.
+## Kurtarma Kodları
+Tıpkı Bitwarden'ın bir [2FA kurtarma kodu](https://bitwarden.com/help/two-step-recovery-code/) olduğu gibi, güçlü kimlik doğrulamayı destekleyen çoğu web sitesinin de bir kurtarma iş akışı vardır. En iyi güvenlik için, bunları kasanızda kaydetmek istemezsiniz, ama kesinlikle felaket kurtarma için bunların mevcut olması en iyisidir.
 
-## Recovery Codes 
-Just like Bitwarden has a [2FA recovery code](https://bitwarden.com/help/two-step-recovery-code/), most websites that support strong 
-authentication also have a recovery workflow. For best security, you don't want to save these in your vault, but it 
-is definitely best to have these available  for disaster recovery.
+## Bitwarden Organizasyon dışa aktarımları
+Paylaşılan Koleksiyonlardaki veriler [ayrı ayrı dışa aktarılmalıdır](https://bitwarden.com/help/export-your-data/#export-an-organization-vault). Yine, JSON dışa aktarımının "şifre korumalı" versiyonunu kullanın.
 
+## Dosya eklentileri
+Premium aboneliği olan kasalar kasa girişlerine rastgele dosyalar ekleyebilir. Yedeğiniz için "şifrelenmiş ZIP formatını" seçerseniz, Bitwarden bunları dışa aktarımınıza dahil edecektir.
 
-## Bitwarden Organization exports 
-The data in shared Collections must be [exported separately](https://bitwarden.com/help/export-your-data/#export-an-organization-vault). Again, use the 
-"password protected" version of the JSON export.
+Şifrelenmiş Zip formatından akıllıca kaçınmayı seçerseniz, bunları tek tek elle indirmeniz gerekecektir. Ek olarak, hangi dosya eklerinin hangi kasa girişine ait olduğunu açıklayan bir metin dosyası yapmanız gerekir. (Bu son nokta hakkında daha sonra detay.)
 
-## File attachments 
-Vaults with a premium subscription can have arbitrary files attached to vault entries. If you choose the "encrypted ZIP
-format" for your backup, Bitwarden will include these in your export.
+## Acil Durum Sayfası
 
-If you unwisely choose to eschew the encrypted Zip format, you will need to 
-download these, by hand, one at a time. In addition, you need to make a text file that explains which file 
-attachments belong to which vault entry. (More on that last point later.)
+İyi bir Bitwarden yedeklemesi ayrıca her yedekleme için üst düzey bir `emergency_sheet.txt` olmalıdır. Bu tam olarak [acil durum sayfanızdır](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
 
-## Emergency Sheet
+# Yedeğinizi Oluşturmak
 
-A good Bitwarden backup should also have a top-level `emergency_sheet.txt` for each backup. This is exactly 
-your [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
+Bu rehberin önceki versiyonunda, yedeklemeyi oluşturmak ve sürdürmek için [VeraCrypt](https://veracrypt.fr/en/Home.html) kullanmayı önermiştim. Nasıl kullanılacağı konusunda acı verici detaylı talimatlarım vardı. Hala onu tercih ediyorum. Dinamik olarak okuyabileceğiniz ve güncelleyebileceğiniz şifrelenmiş bir zip arşivi gibidir. Dosyalarınızın şifresi çözülmüş versiyonunun diskinize hiç yazılmaması için ayarlayabilirsiniz.
 
-# Creating Your Backup
+Ancak, belirli bir sinirlilikle, [7-Zip](https://www.7-zip.org/) veya [Picocrypt](https://github.com/Picocrypt/Picocrypt) gibi bir şeyle idare edebileceğinizi düşünüyorum. Şeytan, şifresi çözülmüş sırların sabit diskinize hiç yazılmasına izin vermeden yeni bir arşiv oluşturmanın nasıl yapılacağında olacaktır. Eğer umursuyorsanız. Ama bu rehberin geri kalanında VeraCrypt kullandığınızı varsayacağım.
 
-In the previous version of this guide, I recommended using [VeraCrypt](https://veracrypt.fr/en/Home.html) to create
-and maintain the backup. I had painfully detailed instructions on how to use it. I still prefer it. It is like an
-encrypted zip archive that you can dynamically read and update. You can set it up so that a decrypted version of your
-files is never written to your disk.
+# Yedekleme Organizasyonu
 
-However, I think that with a certain amount of aggravation, you can get away with something like
-[7-Zip](https://www.7-zip.org/) or [Picocrypt](https://github.com/Picocrypt/Picocrypt). The devil will be in how to
-create a new archive without allowing decrypted secrets to ever be written to your hard disk. If you care. But
-for the remainder of this guide, I will assume you are using VeraCrypt.
+Bu bölümde çok genel bir format özetliyorum. Kendiniz ve diğer aile üyeleri için yedekleme yapmanıza olanak tanır.
 
-# Backup Organization
+## Üst Düzey
 
-In this section I outline a very general format. It allows you to perform backups for yourself as well as other
-family members.
+USB sürücünüzdeki genel görüntü en dıştaki `AAAREADME.txt`'yi ve ardından şifrelenmiş arşivi içerecektir. Arşiv makul olarak `backup.hc` olarak adlandırılabilir. Ayrıca VeraCrypt için bazı yükleyiciler kaydedeceksiniz.
 
-## Top Level
-
-The overall image on your USB drive will contain an outermost `AAAREADME.txt` and then the encrypted archive.
-The archive might reasonably be called `backup.hc`. You will also save some installers for VeraCrypt.
-
-`AAAREADME.txt` has more information about the backup itself.
-You want to explain how this is a VeraCrypt backup and include installers for the app (like VeraCrypt).
-`AAAREADME.txt` has no secrets in it. It is a 4-1-1 for the contents of the backup. Its contents should be simple,
-like:
+`AAAREADME.txt` yedeğin kendisi hakkında daha fazla bilgi içerir.
+Bunun bir VeraCrypt yedeklemesi olduğunu açıklamak ve uygulama (VeraCrypt gibi) için yükleyiciler dahil etmek istiyorsunuz.
+`AAAREADME.txt`'de hiçbir sır yoktur. Yedeğin içeriği için bir 4-1-1'dir. İçeriği şu şekilde basit olmalıdır:
 
 ```
-This is a Bitwarden backup for my family. The backup is encrypted via VeraCrypt. (Hopefully) compatible
-installers are enclosed.
+Bu ailem için bir Bitwarden yedeklemesidir. Yedekleme VeraCrypt aracılığıyla şifrelenmiştir. (Umarım) uyumlu yükleyiciler dahil edilmiştir.
 
-You should already have the encryption key to open this backup.
+Bu yedeklemeyi açmak için şifreleme anahtarına zaten sahip olmalısınız.
 ```
 
-`installers/` should be a folder that has the appropriate installation apps for VeraCrypt, on the architectures you
-are likely to need.
+`installers/` ihtiyaç duyabileceğiniz mimarilerde VeraCrypt için uygun kurulum uygulamalarına sahip bir klasör olmalıdır.
 
-## Inside `backup.hc`
+## `backup.hc` İçinde
 
-This an encrypted archive (like with VeraCrypt).
+Bu şifrelenmiş bir arşivdir (VeraCrypt ile olduğu gibi).
 
-For each vault or Organization collection, create a folder. Inside each folder:
+Her kasa veya Organizasyon koleksiyonu için bir klasör oluşturun. Her klasörün içinde:
 
 ### `emergency_sheet.txt`
-This is the full emergency sheet for that vault.
+Bu o kasa için tam acil durum sayfasıdır.
 
-### `bitwarden_export.json` (or similar obvious name) 
-This is the export of the vault or organization Collection. Be sure to add the
-password you chose when you created the export to `emergency_sheet.txt`.
+### `bitwarden_export.json` (veya benzer açık ad)
+Bu kasa veya organizasyon Koleksiyonunun dışa aktarımıdır. Dışa aktarımı oluştururken seçtiğiniz şifreyi `emergency_sheet.txt`'ye eklediğinizden emin olun.
 
-### `recovery_codes.txt` 
+### `recovery_codes.txt`
 
-When you enable strong 2FA, good websites give you a recovery workflow in case you lose
-your Yubikey or TOTP app. I know, with everything else you're doing here, this should not be important. But when
-it comes to backups, redundancy is a very good thing. [Google](https://support.google.com/accounts/answer/1187538?hl=en&co=GENIE.Platform%3DDesktop), [Microsoft](https://support.microsoft.com/en-us/account-billing/microsoft-account-recovery-code-2acc2f88-e37b-4b44-99d4-b4419f610013),
-[Bitwarden](https://bitwarden.com/help/two-step-recovery-code/), and others typically use a one-time code or set of
-one-time codes.
+Güçlü 2FA'yı etkinleştirdiğinizde, iyi web siteleri Yubikey'inizi veya TOTP uygulamanızı kaybetmeniz durumunda size bir kurtarma iş akışı verir. Biliyorum, burada yaptığınız diğer her şeyle birlikte, bu önemli olmamalı. Ama yedeklemelere gelince, fazlalık çok iyi bir şeydir. [Google](https://support.google.com/accounts/answer/1187538?hl=en&co=GENIE.Platform%3DDesktop), [Microsoft](https://support.microsoft.com/en-us/account-billing/microsoft-account-recovery-code-2acc2f88-e37b-4b44-99d4-b4419f610013), [Bitwarden](https://bitwarden.com/help/two-step-recovery-code/) ve diğerleri tipik olarak tek kullanımlık kod veya tek kullanımlık kodlar kümesi kullanır.
 
-There is little point storing these recovery codes in your vault. If you have your Yubikey and your Ente Auth login, the vault storage is not needed. Some
-will even argue that having the recovery codes inside your vault is like storing
-your TOTP codes in the vault, which to them is anathema.
+Bu kurtarma kodlarını kasanızda saklamanın pek anlamı yoktur. Yubikey'iniz ve Ente Auth girişiniz varsa, kasa depolaması gerekli değildir. Hatta bazıları kurtarma kodlarının kasanızın içinde olmasının TOTP kodlarını kasada saklamak gibi olduğunu, ki bu onlara göre anatema, tartışacaktır.
 
-So what to do? I recommend that this full backup is the right place for this. Make
-a text file that properly names each site and gives the list of recovery codes
-for each one. For instance,
+Peki ne yapmalı? Bu tam yedeğin bunun için doğru yer olduğunu öneriyorum. Her siteyi uygun şekilde adlandıran ve her biri için kurtarma kodlarının listesini veren bir metin dosyası yapın. Örneğin,
 
 ```text
 Hotmail https://outlook.live.com/owa/
 
-recovery code: 1234-5678-9012-3456-7890
+kurtarma kodu: 1234-5678-9012-3456-7890
 
 -----
 Best Buy https://www.bestbuy.com
@@ -138,12 +100,12 @@ Best Buy https://www.bestbuy.com
 -----
 Docker Hub https://hub.docker.com/
 
-Recovery code: 1234567890abc
+Kurtarma kodu: 1234567890abc
 ```
 
-# Backup Organization
+# Yedekleme Organizasyonu
 
-At the outermost level of your USB, you should see something like,
+USB'nizin en dış düzeyinde şöyle bir şey görmelisiniz:
 
 ```text
     AAAREADME.txt
@@ -153,7 +115,7 @@ At the outermost level of your USB, you should see something like,
     backup.hc
 ```
 
-When you open the encrypted archive, you will see something like,
+Şifrelenmiş arşivi açtığınızda şöyle bir şey göreceksiniz:
 
     mom/
       emergency_sheet.txt
@@ -168,67 +130,36 @@ When you open the encrypted archive, you will see something like,
     family_organization/
       family_organization.json
 
+# Yedeğinizi Saklamak
 
-# Storing Your Backup
+Yedeğinizin iki parçası vardır: arşiv dosyasının kendisi ve şifreleme şifresi (VeraCrypt "volume şifresi"). Yedeğinizin güvenliği, yalnızca yetkili tarafların _her iki_ parçaya da erişimi olmasını sağlamaktan gelir.
 
-There are two parts to your backup: the archive file itself, and the encryption password 
-(the VeraCrypt "volume password"). The security of your backup comes from ensuring 
-that only authorized parties have access to _both_ parts.
+*Online yedeklemeler ne durumda?*
 
-*What about online backups?*
+Online yedeklemeler ekstra adımlar gerektirir ve ekstra risk yaratır. Online hizmete güveniyorsunuz. Ayrıca hala bulutun DIŞINDAki tutulması gereken sayısız ekstra sır vardır: arşiv dosyası için URL, kullanıcı adı, şifre, 2FA sırları ve 2FA kurtarma kodu. Ve tabii ki hala bulutun dışında saklanması gereken şifreleme şifresi de var.
 
-Online backups entail extra steps and create extra risk. You are trusting the online service. There are also a myriad
-of extra secrets that must STILL be held outside the cloud: the URL for the archive file, the username, the password,
-the 2FA secrets, and the 2FA recovery code. And of course there is still the encryption password, which also must be
-stored outside the cloud.
+Son olarak, yedeğinizin çok büyük olacağı gibi bir durum yok. Beni, karımı, kayınbiraderimi ve bir yeğenimi içeren yedeğim toplamda 80 megabayttan az. Bu çok küçük! Amazon size 1Gb flash bellek 10'lu paketini 20 dolardan az fiyata satacaktır.
 
-Finally, it's not like your backup is going to be very large. My backup, which includes me, my wife, my brother-in-law,
-and a niece, totals to less than 80 megabytes. This is tiny! Amazon will sell you a 10-pack of 1Gb thumb drives
-for less than $20.
+Online yedeklemelerle uğraşmayın. Bunun yerine güvenli konumlarda, çevrimdışı, fiziksel kopyalara yatırım yapın.
 
-Don't bother with online backups.  Invest instead in physical copies, offline, in secure locations.
+*Çevrimdışı Depolama*
 
-*Offline Storage*
+Arşiv dosyasının kendisini eski usul hava boşluklu çevrimdışı saklamanızı öneriyorum: birden fazla konumda birden fazla USB flash bellek. Flash belleklerin iklim kontrollü bir konumda olmasını istiyorsunuz (arabanızın torpido gözünde değil). Anahtarlığınızdaki gibi savurulup titreştirilmemelerini istiyorsuniz. Evinizin sessiz ve sakin bir köşesini bulmanız gerekiyor.
 
-I recommend storing the archive file itself air gapped offline old school: multiple USB thumb drives, in multiple
-locations. You want the thumb drives to be in a climate controlled location (not in the glove box of your car). You
-don't want them to be tossed around or vibrated, like on your keychain. You want to find a quiet calm corner of
-your house.
+Her konumda, tercihen farklı üreticilerden, flash bellek çiftleri bulundurmayı seviyorum. Bu, flash belleklerdeki herhangi bir tekil tasarım veya üretim kusununun tüm yedeklerinizi etkileme riskini azaltır. Onları bir anahtarlığa koyuyorum ve flash bellekerle birlikte her anahtarlıkta kayıtlı bir Yubikey var.
 
-I like to have pairs of thumb drives, ideally by different manufacturers, in each location. This reduces the risk
-that any single design or production defect in the thumb drives will affect all your backups. I put them on a keyring,
-and there is a registered Yubikey on each keyring with the thumb drives.
+Kesinlikle başka bir flash bellek çiftinin saha dışında olmasını istiyorsunuz. Yangın, sel, deprem varsa veya hükümet gelip tüm dosyalarınızı alırsa, başka bir yerde başka bir yedeğinizin olmasını istiyorsunuz.
 
-You definitely want to have another pair of thumb drives offsite. If there is a fire, flood, earthquake, or if the
-gubbermint comes and takes all your files, you want another backup somewhere else.
+# Peki ya o şifreleme anahtarı?
 
-# What about that encryption key?
+Daha önce dediğim gibi, buradaki numara bir saldırganın HEM arşiv dosyanıza HEM de şifreleme anahtarına erişim kazanmamasını sağlamaktır. Tek doğru cevap yoktur. Tam durumunuza bağlıdır.
 
-Like I said earlier, the trick here is to ensure that an attacker does not gain access to BOTH your archive file
-AND its encryption key. There is no single correct answer. It depends on your exact situation.
+*Kasa kiralama* -- Eğer hükümet bir tehdit yüzeyi değilse ve kasa kiralamalaya erişiminiz varsa, şifrelemeyi tamamen atlayıp flash bellekleri orada kaydetmeyi düşünebilirsiniz. Pek çok insana hitap edeceğinden emin değilim, ama bir düşünce. Hey, iklim kontrollü, yangın geçirmez ve hırsızlık geçirmez.
 
-*Safe deposit box* -- If the government is not a threat surface and you have access to a safe deposit box, you
-might dispense with encryption entirely and just save the thumb drives there. Not sure if that will appeal to a lot
-of people, but it's a thought. Hey, it's climate controlled, fireproof, and burglarproof.
+*Benim yaptığım* -- Karım Bitwarden kasasında şifreleme anahtarının bir kopyasına sahip. Eğer önce ben ölürsem, flash bellekleri artı Yubikey'i alıp açabilecek. Yasal miras icracısı olan oğlumuzun da evinde flash bellekler ve Yubikey var, kasasında şifreleme anahtarının bir kopyası var. Şehir dışındaysak ve kasamızdan kilitlenip kalırsak, yedek telefonlarımızı yeniden temin etmek ve tekrar giriş yapmak için gerekenleri yapabilir. Karım ve ben öldükten sonra, bu ona kasamıza erişim verecek. Ayrıca kendi kasamda şifreleme anahtarının bir kopyası var: bu felaket kurtarmaya yardımcı olmaz, ama kendi arşivimi açmama ve onu periyodik olarak güncellememeni sağlar.
 
-*What I do* -- My wife has a copy of the encryption key in her Bitwarden vault. If I die first, she will be able to
-grab the thumb drives plus Yubikey and open it. Our son, who is the legal executor estate, also has the thumb drives
-and Yubikey at his house, and a copy of the encryption key in his vault. If we are out of town and get locked out of 
-our vault, he can do the needful to get our replacement phones reprovisioned and logged back in. After my wife and I
-die, this will give him access to my vault. I also have a copy of the encryption key in my own vault: this doesn't
-help with disaster recovery, but it allows me to open my own archive and to update it on a periodic basis.
+*Akıllı bir Redditor* -- her flash bellek setinin yanında şifreleme anahtarının bir kopyasına sahip! Numara şu ki bu bir bulmaca şeklinde ve sadece aile üyeleri bulmacayı çözecek kadar biliyor. Benim çözümüm gibi, bu da kendisinin, eşinin, kardeşlerinin, hatta ebeveynlerinin gerektiğinde yedeklemeyi açacak kadar bildiğini garanti eder.
 
-*One smart Redditor* -- has a copy of the encryption key next to each set of thumb drives! The trick is that it is in
-the form of a puzzle, and only family members know enough to solve the puzzle. Like my solution, this ensures that he,
-his spouse, his brothers, or even his parents know enough to open the backup hen necessary.
+*Kimseye Güvenme* -- Bunu gündeme getirmekten neredeyse nefret ediyorum, ama [Shamir'in Sır Paylaşımı](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) hakkında bilmeniz gerekiyor. Sır, seçilen bir grubun yeteri kadarı bilgilerini birleştirmek için birlikte hareket etmedikçe açığa çıkarılamaz." Sırrı kaç parçaya böleceğinizi ve sırrı yeniden oluşturmak için kaç parçanın bir araya getirilmesi gerektiğini siz karar veriyorsunuz. Bu arada, bunun gerçekten güzel bir [web uygulaması](https://simon-frey.com/s4/) var. Sadece parçaları birleştirmeye başlamadan önce tarayıcınızın çevrimdışı olduğundan emin olun.
 
-*Trust No One* -- I almost hate to bring it up, but you should know about 
-[Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing). The secret cannot be revealed
-unless a quorum of a select group acts together to pool their knowledge." You decide how many parts to split the
-secret into, and how many parts of need to be brought together to reconstruct the secret. By the way, there is a
-really nice [web implementation](https://simon-frey.com/s4/) of this. Just make sure your browser is offline before
-you start assembling the parts.
-
-I say I "almost hate to bring it up", because the operational complexity of this last approach is challenging. Each
-member of the group must hold their part carefully. They must know about each other in order to come together, and
-you must trust them enough not to collude inappropriately, but enough to be able to cooperate when necessary.
+Bunu "gündeme getirmekten neredeyse nefret ediyorum" diyorum, çünkü bu son yaklaşımın operasyonel karmaşıklığı zorlayıcıdır. Grubun her üyesi kendi parçasını dikkatli tutmalıdır. Bir araya gelebilmek için birbirlerini bilmeleri gerekir, onlara uygunsuz şekilde işbirliği yapmayacak kadar güvenmeniz ama gerektiğinde işbirliği yapabilecek kadar güvenmeniz gerekir.

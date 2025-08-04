@@ -1,218 +1,206 @@
-When people talk about password managers, they always think of storing passwords for websites.  That's an important use, but there are plenty of other things you should consider as well.
 
-I am going to talk about things you should NOT store in your password manager, things that you MIGHT want to store in a password manager (but perhaps not), and try to give you some ideas of things to store in your password manager that you may not have thought of.
+# Şifre Yöneticisi Kullanım Rehberi
 
-In the last section I will also talk about some ideas about HOW to fill out a password vault entry. Sure, you can do it any way you want, but perhaps I can give you some ideas on how to improve your vault organization
+İnsanlar şifre yöneticilerinden bahsederken, genellikle web siteleri için şifre saklamayı düşünürler. Bu önemli bir kullanım alanıdır, ancak dikkate almanız gereken birçok başka şey de vardır.
 
-# But first, a review of risk management and your password manager
+Şifre yöneticinize **saklamamanız gereken şeyler**, **belki saklamak isteyebileceğiniz ama emin olunmayan şeyler** ve **şifre yöneticinize saklamak isteyebileceğiniz ama aklınıza gelmemiş olabilecek şeyler** hakkında konuşacağım.
 
-At the highest level, there are *two* threats to your credential storage. The first one, the risk that an unauthorized party might gain access to your secrets, is the one everyone thinks of. Steps to prevent that include good encryption, a good master password, and keeping your devices free of malware.
+Son bölümde ayrıca bir şifre kasası (vault) girişinin nasıl doldurulabileceği ile ilgili bazı fikirler vereceğim. Tabii, istediğiniz şekilde yapabilirsiniz; ama kasanızı daha iyi organize etmek için bazı önerilerim olabilir.
 
-The second threat is also important. You do not want to get locked out of your password manager! The Bitwarden master password plus your 2FA are your "keys" to unlocking your credential storage. If you lose those, your secrets can be lost forever.
+---
 
-The basis of thoughtful risk management is to identify your risks, prioritize their likelihood, and assign resources to mitigate those threats. When considering your credential storage, you want to ensure that no one can read it without your permission, yet it is available when you need it.
+## Öncelikle, risk yönetimi ve şifre yöneticinizin gözden geçirilmesi
 
-A good example of how *not* to do this are those people who do not write down their master password at all. If they have chosen a random, complex, and unique master password, they are at risk of forgetting it entirely. This is not a theoretical risk; people post about this a couple times a month on Reddit, and they are looking for a super duper sneaky back door to get back into the vault. The bad news, of course, is that if your password manager has a back door, the bad guys will know about it as well.
+En üst düzeyde, kimlik bilgilerinizi saklamanızda *iki* tehdit vardır. İlk tehdit, yetkisiz bir kişinin gizli bilgilerinize erişmesidir. Bu herkesin düşündüğü tehdittir. Bunu önlemek için iyi şifreleme, güçlü bir ana şifre ve cihazlarınızı kötü amaçlı yazılımlardan korumak gerekir.
 
-So when it comes to the contents of your credential storage, you analyze the threats to it and decide how to manage those threats. This ends up being a subjective assessment. What are the most likely threats? What is at risk? What are you willing to do to mitigate those risks? What price are you willing to pay if the threat is carried out?
+İkinci tehdit de önemlidir: Şifre yöneticinize erişimi kaybetmek istemezsiniz! Bitwarden ana şifreniz ve 2FA kodlarınız, kimlik bilgilerinizi açmak için kullandığınız "anahtarlar"dır. Bunları kaybederseniz, bilgileriniz sonsuza kadar kaybolabilir.
 
-One example here is that perhaps you are willing to simply run the recovery workflows for every website if you lose access to your vault. There are a lot of problems with that: where do you get the list of websites? The "recovery questions" can be a threat if you are sharing the same answers with multiple websites. And you have (or should have) secrets such as the combination lock on your gym locker that involve a locksmith and a service fee.  Are you really willing to deal with all that?
+Düşünceli risk yönetimi; riskleri tanımlamak, olasılıklarını önceliklendirmek ve bu tehditleri azaltmak için kaynak ayırmaktır. Kimlik bilgilerinize kimsenin sizin izniniz olmadan erişemediğinden emin olmak ama gerektiğinde ulaşılabilir olması önemlidir.
 
-The bottom line here is you may decide there are things that you may not feel comfortable placing in your password manager. There are arguments (not necessarily convincing) for these things. But again, this will be a subjective decision.
+En kötü örnek, ana şifresini hiç yazmayan kişilerdir. Rastgele, karmaşık ve benzersiz bir ana şifre seçmiş olabilirler, ancak onu tamamen unutma riski vardır. Bu teorik değil; Reddit’te ayda birkaç kez bu durumdan şikayet edenler görülür ve gizli bir yoldan kasaya tekrar girmeye çalışırlar. Ama kötü haber şu ki, eğer şifre yöneticinizde bir arka kapı varsa, kötü niyetli kişiler de bunu bilir.
 
-# What NOT to store in your password manager
+Bu yüzden kimlik bilgilerinizi saklarken tehditleri analiz edip bunları nasıl yöneteceğinize karar vermelisiniz. Bu öznel bir değerlendirmedir. En olası tehditler neler? Risk altındaki şeyler neler? Riskleri azaltmak için neler yapmaya hazırsınız? Bir tehdit gerçekleşirse bunun bedeli nedir?
 
-This section is obviously per my personal opinion. Feel free to take exception.
+Örneğin, kasaya erişimi kaybederseniz, her web sitesinde kurtarma işlemini yapmaya razı olabilirsiniz. Ancak bu pek çok sorun yaratır: Web sitelerinin listesini nereden alacaksınız? "Kurtarma soruları" aynı cevaplar birden çok site için paylaşılıyorsa tehlike yaratabilir. Ayrıca spor salonundaki kilit şifreniz gibi gizli bilgileriniz, çilingir ve hizmet bedeli gerektirebilir. Tüm bunlarla gerçekten uğraşmaya değer misiniz?
 
-# Your Bitwarden Recovery Information
+Sonuç olarak, bazı şeyleri şifre yöneticinizde saklamaya rahat hissetmeyebilirsiniz. Bunun için geçerli (ama tam ikna edici olmayan) sebepler vardır. Ama yine de bu tamamen öznel bir karardır.
 
-You can lose access to your vault. You can forget the master password. Your TOTP ("Authenticator App") might fail and leave you high and dry.  If only you had the username, master password, and 2FA recovery code!
+---
 
-The problem is the circularity. You cannot look inside your vault to find these things if you are locked out of the vault. What you want instead is an [emergency sheet](https://www.reddit.com/r/Bitwarden/comments/1fknnbo/emergency_kit_20/).
+## Şifre yöneticinize SAKLAMAMANIZ GEREKENLER
 
-# 2FA recovery codes for other websites
+Bu bölüm tamamen benim kişisel görüşümdür. Katılmayabilirsiniz.
 
-Most websites have a recovery workflow. It could be as simple as an email address that you control, or as complex as a list of one-time passwords. I strongly urge you to be aware of these workflows and to make a record of them. When it comes to disaster recovery, redundancy is a very good thing.
+### Bitwarden Kurtarma Bilgileriniz
 
-But if you can open your password manager and have access to your 2FA, you do not need any 2FA recovery codes. If you have lost access to your password manager, you need your emergency sheet. If you have lost access to your 2FA (such as your Yubikey or TOTP app), you need a [full backup](https://www.reddit.com/r/Bitwarden/comments/1f995wl/making_bitwarden_backups_version_20/). Neither the existing vault nor an emergency sheet will solve your problem.
+Kasaya erişiminizi kaybedebilirsiniz. Ana şifrenizi unutabilirsiniz. TOTP (Authenticator Uygulaması) başarısız olabilir. O an kullanışlı olabilecek kullanıcı adı, ana şifre ve 2FA kurtarma koduna ihtiyacınız olabilir!
 
-If for some reason someone were to gain access to your vault, these recovery codes could arguably be a risk. Even if you use a Yubikey or a TOTP app, having these recovery codes inside your credential storage means that someone no longer needs your Yubikey to gain access.
+Problem şu ki, kasaya kilitlenmişseniz içine bakamazsınız. Bunun yerine bir [acil durum sayfası (emergency sheet)](https://www.reddit.com/r/Bitwarden/comments/1fknnbo/emergency_kit_20/) kullanmalısınız.
 
-In either event, storing recovery codes in your credential storage is somewhere between pointless and conceivably an unnecessary threat surface.
+### Diğer Web Siteleri için 2FA Kurtarma Kodları
 
-# Security questions and their answers
+Çoğu web sitesi kurtarma sürecine sahiptir. Bu bazen kontrolünüzdeki bir e-posta adresi, bazen de bir dizi tek kullanımlık parola olabilir. Bu kurtarma süreçlerini bilin ve kayıt altına alın. Felaket kurtarma için yedeklilik önemlidir.
 
-Some websites still use a list of "security questions" as their recovery workflow. These are answers like, "the name of your first boyfriend" and "the name of the first school you attended". At one level, this is just like the 2FA recovery codes. You definitely want to record these questions and the answers you gave. If you have access to your vault, you don't need these answers. And anyone who knows these answers might conceivably gain unauthorized access to the website.
+Ancak şifre yöneticinize erişiminiz varsa 2FA kurtarma kodlarına gerek yoktur. Şifre yöneticinize erişimi kaybettiyseniz acil durum sayfanız gerekir. 2FA erişiminizi kaybettiyseniz (Yubikey veya TOTP uygulaması gibi) [tam yedeğe](https://www.reddit.com/r/Bitwarden/comments/1f995wl/making_bitwarden_backups_version_20/) ihtiyacınız olur. Kasadaki ya da acil durum sayfasındaki kodlar sorununuzu çözmez.
 
-Side note: you do *not* want to give truthful consistent answers to these questions. Someone who is targeting you (like the meth crazed ex brother-in-law) might be able to leverage their personal knowledge against you. Or if one website that stores your answers gets breached, the attackers may be able to leverage your answers on other websites. The bottom line is, you do need a record of these questions and the unique lies you give each website.
+Eğer biri kasanıza erişirse, bu kodlar risk yaratabilir. Yubikey veya TOTP kullanıyor olsanız bile, kurtarma kodlarını saklamak Yubikey olmadan erişim sağlanmasına yol açabilir.
 
-# Crypto Seeds
+Bu yüzden kurtarma kodlarını şifre yöneticinizde saklamak ya gereksiz ya da bir tehdit yüzeyidir.
 
-Cryptocurrency accounts are not normal financial accounts.  Credit cards, debit cards, and bank loans all have special checks and balances.  It's quite possible for someone to forge a check and steal from you. But the rest of the picture is that banks are VERY GOOD at getting the money BACK. The chain of accountability will lead to the thief, your funds will be returned, and the thief will ultimately have a Very Bad Day.
+### Güvenlik Soruları ve Cevapları
 
-Cryptocurrency is different. These interlocks do not exist. If you have control of the account, you have complete, unfettered, and unchecked control over the funds.
+Bazı siteler hala kurtarma yöntemi olarak "güvenlik soruları" kullanır. Örneğin "ilk erkek arkadaşınızın adı" veya "gittiğiniz ilk okulun adı" gibi. Bunlar da 2FA kurtarma kodları gibi düşünülmeli. Soruları ve cevaplarınızı kayıt edin. Kasanıza erişiminiz varsa bunlara gerek yoktur. Ama bu cevapları bilen biri siteye izinsiz erişebilir.
 
-For this reason, the best practice is to keep the crypto seeds offline. You can have it written on a piece of paper in a safe place. You can even have a copy of it in two places in case of fire. But most experts will advise you do not ever leave it online. There are just too many ways you can get robbed, and you will have no recourse.
+Not: Bu sorulara gerçek ve tutarlı cevaplar vermek istemezsiniz. Size karşı hedeflenen biri (örneğin eski ve sinirli bir akraba) kişisel bilgilerinizi kullanabilir. Ya da bir sitenin güvenliği ihlal edilirse saldırganlar cevapları diğer sitelerde kullanabilir. En iyisi her siteye farklı ve yalan cevaplar vermektir.
 
-# Things that MIGHT be okay in your password manager?
+### Kripto Tohumları (Crypto Seeds)
 
-This section is obviously per my personal opinion. Feel free to take exception.
+Kripto para hesapları normal finansal hesaplar değildir. Kredi kartları, banka hesapları belirli kontrol mekanizmalarına sahiptir ve çalınan para genellikle geri alınabilir. Ancak kripto parada böyle bir denetim zinciri yoktur. Hesabı kontrol eden, parayı da kontrol eder.
 
-# TOTP Keys
+Bu nedenle en iyi uygulama kripto tohumlarını (seed) çevrimdışı tutmaktır. Kağıda yazılı ve güvenli bir yerde saklanabilir, hatta yangına karşı iki yerde tutulabilir. Ama çevrimiçi bırakmak uzmanlarca önerilmez. Çünkü çok fazla soygun yöntemi var ve kurtarma şansınız yok.
 
-[TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password) is a pretty good 2FA mechanism. It works by combining a secret shared between you and the website (the TOTP key) together with the current datetime to produce a "token" that changes over time. That's usually a six-digit numeral that changes every 30 seconds.
+---
 
-In this manner no secrets are exposed during the 2FA authentication protocol. There is indeed a small risk from an "attacker in the middle", where you are misled to a "Trojan Horse" website and mistakenly enter your password and the current TOTP token. An attacker can use this information to immediately log into your website and harvest your browser session cookies among other secrets. But only a FIDO2 hardware token or a passkey is stronger. Overall, it's a decent form of 2FA.
+## Şifre yöneticinizde BULUNDURABİLECEĞİNİZ ŞEYLER? (Kişisel görüşüm)
 
-The concern is that if an attacker were to "somehow" gain access to your credential storage, they would gain both your password AND your TOTP key. From the viewpoint of separation of concern, it is arguably stronger to place your TOTP keys...elsewhere; not in your password vault.
+### TOTP Anahtarları
 
-*Why it might be okay*
+[TOTP](https://tr.wikipedia.org/wiki/Zaman_tabanlı_tek_kullanımlık_parola) iyi bir 2FA yöntemidir. Sizin ve sitenin paylaştığı gizli anahtar ve güncel zamanla birlikte 30 saniyede bir değişen 6 haneli kod üretir.
 
-You might reason that a direct compromise of your password vault is unlikely; other attacks on your websites are more likely. As an analogy, are you better protected by keeping a loaded shotgun under your bed or by improving the locks and burglar alarm on your house?
+Bu protokolde 2FA sırasında gizli bilgi açığa çıkmaz. Bir “ortadaki adam saldırısı” risk vardır: sizi sahte siteye yönlendirirler, şifrenizi ve o anki TOTP kodunu girersiniz, saldırgan bunları kullanır. Ancak FIDO2 donanım anahtarı veya passkey daha güçlüdür. Genel olarak iyidir.
 
-Some reason that your risk mitigation is better served in other ways. Don't forget that the integrity and safety of the datastore in your external TOTP app becomes another concern. And in any event, if you are using TOTP to secure Bitwarden itself, you might conclude that--since you already need that external app--you may as well keep all your TOTP keys there.
+Endişe şu: saldırgan şifre kasanıza erişirse hem şifrenizi hem de TOTP anahtarınızı elde eder. Ayrım için TOTP anahtarlarını başka bir yerde tutmak daha güvenlidir.
 
-(This is a frequent topic of discussion on this subreddit: whether it's okay to use the internal TOTP function in Bitwarden. There is no consensus on this. You will have to decide whether there is a significant improvement in security, or whether the convenience of the builtin function outweighs any possible reduction in security.)
+*Niye olabilir?*
 
-# Your Bitwarden Master Password
+Kasaya doğrudan saldırı az olasıdır; diğer web saldırıları daha yaygındır. Mesela, yatak altına yüklü bir pompalı tüfek koymak mı, kapı kilitlerinizi ve alarm sisteminizi iyileştirmek mi daha iyidir?
 
-Maybe?
+Bazıları risk azaltmayı başka yollardan sağlar. Unutmayın ki TOTP uygulamanızdaki veri bütünlüğü ve güvenliği de önemlidir. Ayrıca Bitwarden’da TOTP kullanıyorsanız, zaten o dış uygulamaya ihtiyacınız var demektir ve TOTP anahtarlarınızı orada tutabilirsiniz.
 
-The thought here is that if you have a lapse in operational security, someone manages to get to your unlocked device, and then gets to your unlocked vault, *then* they would learn your master password. That might be a significant leg up for an attacker to acquire your passwords at a later date.
+(Bitwarden içindeki TOTP fonksiyonunu kullanmak sık tartışılır. Karar size kalmıştır: güvenlik artışı mı, yoksa kullanım kolaylığı mı daha önemli?)
 
-*Why it might be okay*
+### Bitwarden Ana Şifreniz
 
-Obviously if you are looking at the vault entry for your Bitwarden vault, you used the master password. At least, recently. And if someone is perusing the contents of your vault, the master password is no longer serving its purpose.
+Belki?
 
-And although this vault entry would not help you regain access to your vault, your emergency sheet or full backup would do that. So perhaps there is an added convenience here, without a significant loss of security.
+Düşünce şu: operasyonel güvenlikte bir zafiyetiniz varsa, biri kilitsiz cihazınıza ve kasanıza erişirse ana şifrenizi öğrenebilir. Bu ileride saldırgan için avantajdır.
 
-# Your Yubikey FIDO2 PIN (et cetera)
+*Niye olabilir?*
 
-Similar to the TOTP keys in your vault, if someone has stolen your Yubikey but they don't know your PIN, they cannot employ the Yubikey to pass the 2FA check on your websites.
+Eğer kasadaki giriş kaydınıza bakıyorsanız, ana şifreyi zaten kullandınız demektir. Ve kasanız açıksa ana şifre amacına hizmet etmiyor.
 
-*Why it might be okay*
+Ayrıca bu giriş ana şifreyi kurtarmaya yardımcı olmaz; acil durum sayfanız veya tam yedeğiniz bunu yapar. Yani ek bir kolaylık olabilir, ciddi güvenlik kaybı olmadan.
 
-For many of us, physical incursion is not a high probability risk. My main Yubikey is on my keychain and not available to attackers. My spare Yubikeys are locked away, and only my spouse and our alternate executor knows their locations.
+### Yubikey FIDO2 PIN’iniz (ve benzerleri)
 
-A Yubikey will clear all its secrets if you enter the wrong PIN too many times. There is some peace of mind knowing there is a backup of those PINs that I can use if I forget it.
+Kasadaki TOTP anahtarları gibi, Yubikey’iniz çalındı ama PIN bilinmiyorsa 2FA geçemez.
 
-# "Important" Logins
+*Niye olabilir?*
 
-Some people partition their web logins into two categories: ones that they feel have a higher risk from attackers--like bank accounts--versus ones that are less vulnerable, like ButtBook and SickSuck. They only store the less critical secrets in their password manager, and use an alternate method for the rest.
+Çoğumuz için fiziksel saldırı düşük risklidir. Ana Yubikey anahtarlığımda, yedeklerim kilitli yerde. Yanımda sadece eşim ve yetkili kişi bilir.
 
-*Why it might be okay*
+Yubikey yanlış PIN girilirse tüm verileri siler. PIN yedeği olması rahatlatıcıdır.
 
-The big issue is that "alternate method". If they are using a second password manager, how is that one less vulnerable, and why aren't you using it for everything? Or else, are you using weak or reused passwords for those "important" accounts? That's obviously a nonstarter. And in any event, you've doubled the complexity of your emergency sheet or full backup.
+### "Önemli" Girişler
 
-Also, let's talk about what you call an "important" login.  Instagram comments have been used to publish links to child pornography on the Dark Web. You don't want to find out your IG account was compromised when a pair of grim FBI agents come knocking on your door. Bottom line, perhaps ALL your logins are important.
+Bazıları web girişlerini ikiye ayırır: banka gibi yüksek riskli ve daha az kritik olanlar (örneğin sosyal medya). Şifre yöneticisine sadece az kritik olanları koyar, diğerleri için farklı yöntemler kullanır.
 
-# Things you really SHOULD store in your password manager
+*Niye olabilir?*
 
-This section is just a grab bag of things you may or may not have thought of.
+Asıl sorun o “farklı yöntem”. İkinci bir şifre yöneticisi kullanıyorsanız neden hepsini ona koymuyorsunuz? Ya da kritik hesaplar için zayıf ya da tekrar eden şifreler mi kullanıyorsunuz? Bu kabul edilemez.
 
-* *Website Logins* -- This is the one everyone thinks of first. It is an important use case. Every single one of your logins should have unique, complex, and randomly generated passwords. There are other things to consider here as well. We will talk about that later.
-* *Store warranty and serial numbers* -- Having the serial numbers for your important devices (like the service number of your Dell laptop) can be useful.
-* *Software license keys* -- Those pesky software license keys...they don't seem to be as common now as they were ten years ago, but I still have a few. What kind of secure stable storage can I use for those? Oh wait! My password manager is a good place for this.
-* *Passwords for other people* -- My wife is a really great person: intelligent, funny, but not particularly computer literate. I manage the backups and effectively operate as her system administrator. As such, I keep a few key secrets in my own vault, including her master password, PIN to her debit card, and a few other items for use in emergencies.
+Ayrıca acil durum sayfanız ve yedeğiniz karmaşıklaşır.
 
-My brother-in-law is similar. He is much more technically minded, but he is a medical professional; computers are only a passing part of his scope of knowledge. I manage all his backups and security.
+Son olarak, önemli hesabınızın ne olduğuna dikkat edin. Örneğin Instagram hesabınız ele geçirilip karanlık web’e yasadışı içerik yüklenmiş olabilir. FBI kapınızı çalabilir. Belki de TÜM hesaplarınız önemlidir.
 
-On another side of the family, I have a dear niece who...well, she struggles. After she lost her phone (and the blankity-blank useless Google Authenticator datastore), I stepped in and helped her upgrade her security. I am her fallback, and I manage her backups.
+---
 
-* *Gate Passwords* -- My brother-in-law lives in a gated community; I store the gate password there. I have the door alarm code for a dear friend so that I can go in his house, collect his mail when he is on vacation, and the like.
-* Gym Locker -- That cheap MasterLock I use at the gym: it may not help me get my clothes back if I've been working out, but the vault entry will save me from having to pay someone to destroy the lock in order to get my wallet and phone back.
+## Şifre yöneticinizde MUTLAKA SAKLAMANIZ GEREKENLER
 
-If you take inventory, I would bet that you too have a number of these kinds of secrets as well.
+Bu bölümde aklınıza gelmemiş olabilecek çeşitli gizli bilgiler vardır.
 
-* *Driver's License(s)* --  I have my driver's license information in a vault entry, together with the license number and its expiration date.  (Pro tip: create a reminder in your calendar app to renew your license for about sixty days before it expires.) If your password manager supports file attachments, save an image of it as well. The image may not be legal for driving, but you would be surprised how often it may be useful. If applicable, save copies for your partner and the children.
+- **Web sitesi girişleri** — Herkesin aklına gelen ilk şey budur. Her giriş için benzersiz, karmaşık ve rastgele oluşturulmuş şifreler olmalı. Başka konular da var, sonra konuşuruz.
+- **Garanti ve seri numaraları** — Önemli cihazlarınızın seri numaraları (ör. Dell dizüstü servis numarası) faydalı olabilir.
+- **Yazılım lisans anahtarları** — Lisans anahtarları azaldı ama hala var. Nerede güvenli saklayabilirsiniz? Şifre yöneticisi iyi bir yer.
+- **Başka kişiler için şifreler** — Eşim bilgisayar kullanımı az bildiği için yedeklerini ve önemli şifrelerini yönetiyorum. Kardeşim teknik olsa da doktor, bilgisayar onun işinin küçük bir parçası. Onun yedeklerini de ben tutuyorum. Yeğenim ise teknolojiyle arası iyi değil, onun da güvenliğini sağlıyorum.
+- **Site giriş şifreleri** — Örneğin kapı şifresi, spor salonu kilit şifresi gibi.
+- **Ehliyet bilgileri** — Ehliyet numarası, son kullanma tarihi, varsa resmi fotoğraf. Yenileme hatırlatıcı takın.
+- **Araç bilgileri** — Araç VIN, plaka, ruhsat, sigorta bilgileri, detaylı araç açıklaması gibi.
+- **Sağlık sigortası bilgileri** — Kart görüntüleri ve detayları.
+- **Pasaportlar** — Pasaport numarası, son kullanma ve sayfa kopyaları.
+- **Sosyal güvenlik numaraları** — Sık ihtiyaç duyulur.
+- **İlaç ve aşı listesi** — Kişisel sağlık geçmişiniz için önemli.
+- **Evcil hayvan bilgileri** — Mikroçip ID ve aşı kayıtları.
 
-*Motor vehicle information*
+---
 
-For each vehicle,
+## Hesap Dışı Şifreler
 
-* the VIN
-* license plate number
-* license expiration date
+- Telefon PIN’leri
+- Bilgisayar giriş şifreleri
+- NAS giriş bilgileri (TOTP anahtarı dahil)
+- Bitwarden yedekleme şifreleme anahtarı
+- Kredi kartı bilgileri ve müşteri hizmetleri numaraları
+- Banka hesap bilgileri (kart numarası, PIN, hesap numarası, yönlendirme kodu)
+- Sesli mesaj şifresi
+- Bitlocker şifreleri
 
-I also like to add in the notes for the vehicle a full description of the item as might be in Kelly Blue Book, such as,
+---
 
->2021 Toyota Venza LE, 4D Sport Utility, 2.5L 4-Cylinder DOHC 16V, Continuously Variable (ECVT), AWD, Ruby Flare Pearl, Boulder w/Fabric Seat Trim, 6 Speakers, ABS brakes, Active Cruise Control, Air Conditioning, AM/FM radio: SiriusXM, Apple CarPlay/Android Auto, Auto High-beam Headlights, Automatic temperature control, Electronic Stability Control, Exterior Parking Camera Rear, Fabric Seat Trim, Four wheel independent suspension, Front Bucket Seats, Front dual zone A/C, Fully automatic headlights, Illuminated entry, Leather Shift Knob, Leather steering wheel, Low tire pressure warning, Power door mirrors, Power driver seat, Power Liftgate, Power windows, Rear window defroster, Rear window wiper, Remote keyless entry, Speed-sensing steering, Split folding rear seat, Steering wheel mounted audio controls, Traction control, Turn signal indicator mirrors, Variably intermittent wipers, Wheels: 7 x 18 Alloy.
+## WiFi Şifreleri
 
-* *Vehicle Insurance* -- In my state, the image produced by the mobile app on my phone is actually legal documentation during a stop. But hey, an extra copy is useful. And in any event, the details (contact information, account number) can be useful in an accident.
-* *Vehicle Registration* -- In a similar vein, the details of your vehicle registration (tag number, registration ID, expiration) should be in your vault. Oh, and again, put a reminder in your calendar app to remind you to update your tags.
-* *Health insurance* -- No comments about the nucking futs craziness of the US health insurance system, please.  But the details (front and back) as well as images of your medical and dental insurance cards are all that your providers really need. You want one for each family member. (Man, that can be a lot of plastic that you don't need to carry any more.)
-* *Passports* -- Those passport numbers and the expiration of each passport as well a copy of the passport page are valuable.
-* *Social security numbers* (if not the entire card as a photo): you end up needing this surprisingly often. (And, if the family member is older, you have the dang Medicare number as well.)
-* *Medication and vaccination list* -- When I have my annual physical examination, my doctor asks for my list of medications. It's surprising how many you might have: that medicated hand cream, those allergy meds, vitamin supplements, etc.: they all add up. And of course, the doctor wants to know the dosage as well. I just ended up creating a vault entry that lists all these things: it takes the guesswork out of it, and it's more accurate. Of course create one for each family member. What if your husband is unconscious in the emergency room?
-* *Don't forget the pets* -- We love our cat, but let's face it: he requires a lot of work. His RFID chip id (and the contact information for the vendor) is in our vault. We have another entry that has his vaccination record (necessary for when we board him). When he gets older, we might even have a record of his medications.
+Birçok kişi iPhone KeyChain’e güvenir ama Android cihaz kullanıyorsanız veya Apple hesabınız kapandıysa bu yetersiz kalabilir. En azından önemli WiFi şifrelerini kaydedin.
 
-*Non-account passwords*
+---
 
-* PIN for my mobile phone
-* PIN for my wife's mobile phone
-* login password to my desktop (and other machines in my house)
-* login password to my wife's desktop
-* login to my NAS; note that the TOTP key is part of this as well
-* encryption key my Bitwarden backup: it won't help during disaster recovery, but it helps me when I need to refresh the backup.
-* credit cards: not just the card number, expiration and CVV: you want the customer service phone numbers in case it is lost.
-* checking account: debit card number/expiration/CVV, PIN, routing number, account number
-* Voice mail password for my mobile phone (remember when voice mail was all the rage?)
-* Bitlocker drive encryption key -- my wife has a great Windows laptop, and it is secured with Bitlocker. Once I fired it up and the CMOS battery had run down, so I had to enter the key to boot up. My employer assigned me a rockin' Mac laptop. It has secure password that I need before the thing even boots.
+## Router Giriş Bilgileri
 
-*WiFi Passwords*
+Router’ı değiştirmek zorunda kalabilirsiniz ve eski çalışmayabilir. Yeni router’a şu bilgiler gereklidir:
 
-I know, lots of people just rely on KeyChain on their iPhone for this, but I argue it's not enough. What if you are using a replacement Android device? What if your Apple account has been deactivated (it happens)? In the interest of fault tolerance, make a record of the your WiFi passwords: at least, the important ones; I don't bother with the one for my coffeeshop or my alehouse.
+- Yönetici kullanıcı adı ve şifresi
+- IP adresi (genelde 192.168.0.1)
+- PPPoE kullanıcı adı ve şifresi
+- DHCP ayarları
+- WiFi ayarları (kanallar vs)
+- Varsayılan ağ geçitleri
 
-*Router login information*
+Evde statik IP atadığınız cihazların listesini not olarak saklayın.
 
-I have had to replace our router more often than I would have ever imagined. And of course, the old router is typically dead when I need to do this. There is a lot of things you need to enter into the new router:
+---
 
-* admin username
-* admin password
-* website (usually [192.168.0.1](http://192.168.0.1), but...)
-* PPoE username, password
-* DHCP configuration
-* WiFi configuration details, such as chosen channels
-* default gateways, etc.
+## Personel Numarası
 
-I also assign static IPs to the non-mobile devices in my house, such as my smart thermostat. I have a Secure Note that lists those devices and their permanently assigned IP addresses.
+Büyük şirketlerde sık ihtiyaç duyabilirsiniz.
 
-*Employee number* -- contact information, etc.  If you are in a larger company, you may find you need this information surprisingly often.
+---
 
-# Thoughts on filling out a Bitwarden vault entry
+## Bitwarden Kasası Girişi Doldurma Düşünceleri
 
-*Why you created this entry*
+- **Bu girişi neden oluşturdunuz?**  
+  Belirli bir amaç olabilir, örneğin McDonald’s promosyonu. Girişin geçerliliğini hatırlamak ve gerekirse silmek için not alın.
 
-Sometimes it was for a specific purpose like a McDonald's giveaway. It can help to remind whether the login (still) has value, and whether it might makes sense to try to cancel the login and delete it from your vault.
+- **Neden web sitesini kullanmıyorsunuz?**  
+  Kötü müşteri deneyimi veya daha iyi alternatif olabilir.
 
-*Why you do NOT use a website*
+- **Hesabı ne zaman oluşturdunuz?**  
+  Şifre yöneticisine ekleme tarihi değil, hesap açılış tarihidir.
 
-Sometimes we create a web login, and then something happens. Perhaps it's a bad customer experience. Perhaps you found a better alternative. In any event, making a note about why you have the entry but chose not to use it might help save you from a headache.
+- **Notlar**  
+  Hangi e-posta ve kullanıcı adı kullanıldı?
 
-*When you created an account*
+- **2FA türü**  
+  SMS, FIDO2/WebAuthn donanım anahtarı, güvenlik soruları vb.
 
-*Not* when you added it to your password manager -- doesn't happen often, but customer service reps have been known to ask this.
+- **İpuçları**  
+  2FA için isim sonuna emoji ekleyin:  
+  - 🗝 basit şifre  
+  - ⏰ TOTP  
+  - 📞 SMS  
+  - 🔒 FIDO2/WebAuthn  
+  - ❓ Güvenlik soruları  
+  - ✉ E-posta 2FA  
 
-*Notes*
+>Passkey kullanmadım ama kullanmaya başlayınca 🩻 ekleyeceğim.
 
-Which email address? You might have several. And the username may not necessarily reflect the email address that is used by the website.
-
-*2FA type* -- I like to record what kind of 2FA is in use.
-
-* If it's SMS, which phone number is in use? I employ a VoIP number for certain logins. Note that adding the phone number in the note also makes that phone number searchable.
-* If it's FIDO2/WebAuthn, which hardware tokens are registered with this site? Some people mark each token with a drop of colored nail polish. I used a Dymo labeler.  But in any event recording which key knows about which website is valuable.
-
->Pro-tip: a separate vault entry for each key can be helpful too. You can make notes about which tokens, stored offsite, need to be updated when they become accessible.
-
-Here's a trick I like to use for 2FA: at the end of the *Name*
-
-* 🗝 uses a simple password;
-* ⏰ uses a TOTP key
-* 📞 uses SMS
-* 🔒 uses a FIDE2/WebAuthn hardware security key
-* ❓️has those dreadful "security questions" as a recovery workflow
-* ✉ uses email 2FA (wtf!)
-
->I don't work with passkeys yet, but when I do, I'll add a 🩻 (skeleton) to represent it.
-
-Go ahead and be creative. With this system I can search for the emoji itself or search for the normal name of the item.
+Yaratıcı olun! Bu sistemle emoji veya isimle arama yapabilirsiniz.
+"""

@@ -1,149 +1,77 @@
-# A Password Journey
+# Bir Şifre Yolculuğu
 
-## Introduction
+## Giriş
 
-Back when I was starting out in software development, passwords were a very
-different value proposition. We did all our work on large "timeshare" mainframes. This was the era of
-Digital Equipment Corporation, TOPS-20, and similar machines.
+Yazılım geliştirmede işe başladığım zamanda, şifreler oldukça farklı bir değer önerisiydi. Tüm işlerimizi büyük "zaman paylaşımlı" ana bilgisayarlarda yapıyorduk. Bu Digital Equipment Corporation, TOPS-20 ve benzer makinelerin çağıydı.
 
-Passwords in this era were pretty trivial. Our computers were inside of
-large corporate offices, with many locked doors as well as 24x7 security guards. I may have had as many as two? three?
-passwords. I typically wrote them on a piece of paper and left them in my wallet. 
+Bu çağda şifreler oldukça önemsizdi. Bilgisayarlarımız büyük kurumsal ofislerin içinde, birçok kilitli kapının yanı sıra 24x7 güvenlik görevlileriyle birlikte bulunuyordu. İki? üç? şifrem olabilirdi. Genellikle bunları bir kağıt parçasına yazıp cüzdanımda bırakırdım.
 
-If my wallet was lost or stolen, the passwords would not benefit a thief. Physical access controls aside,
-they would also need to know WHICH machines to log into, and typically what username was used. If I forgot
-my password as well, I could visit the IT admin on duty, who would happily reset my password.
+Cüzdanım kaybolur veya çalınırsa, şifreler bir hırsıza yarar sağlamazdı. Fiziksel erişim kontrollerinin yanı sıra, HANGI makinelere giriş yapacaklarını ve genellikle hangi kullanıcı adının kullanıldığını da bilmeleri gerekirdi. Şifremi de unutursam, nöbetçi BT yöneticisini ziyaret edebilir, o da mutlulukla şifremi sıfırlardı.
 
-The 1980s started a revolution in computing, where desktop computers went from a novelty to an essential
-part of computing. We started out with very small IBM PCs (running DOS), until by the end of the decade we
-were running SunOS and MentorGraphics workstations. Even by the advent of the 1990s, security and
-disaster recovery were pretty much the same. To wit, physical access was still the prime protection for all
-your computing resources.
+1980'ler, masaüstü bilgisayarların bir meraktan bilgi işlemin temel bir parçasına dönüştüğü bilgi işlemde bir devrim başlattı. Çok küçük IBM PC'lerle (DOS çalıştıran) başladık, on yılın sonunda SunOS ve MentorGraphics iş istasyonları çalıştırıyorduk. 1990'ların gelişiyle bile, güvenlik ve felaket kurtarma hemen hemen aynıydı. Yani, fiziksel erişim hâlâ tüm bilgi işlem kaynaklarınız için birincil korumaydi.
 
-## And then...THE INTERNET
+## Ve sonra...İNTERNET
 
-Things got a lot more complex as the 1990s rolled on. We had dialup such as CompuServe, America Online, and
-its related services. Even my places of employment started offering dialup: in the comfort of my own
-spare bedroom, I could dial into my workstation at work or even other workstations or servers, such as a 
-SPARCstation supercomputer. That slip of paper in my wallet now had as many a half a dozen or more passwords.
-Usernames started to become non-obvious.
+1990'lar ilerledikçe işler çok daha karmaşık hale geldi. CompuServe, America Online ve ilgili hizmetler gibi çevirmeli bağlantılarımız vardı. İş yerlerim bile çevirmeli erişim sunmaya başladı: kendi evimin çalışma odasının konforunda, işteki iş istasyonuma hatta SPARCstation süper bilgisayarı gibi diğer iş istasyonları veya sunuculara çevirmeli bağlantı yapabilirdim. Cüzdanimdaki o kağıt parçasında artık yarım düzine veya daha fazla şifre vardı. Kullanıcı adları belirgin olmamaya başladı.
 
-What if I lost my wallet? How would I even remember exactly which passwords I had on that piece of paper? Even
-more concerning, some of those passwords might actually be useful if someone snagged that wallet and understood
-what they were looking at. Something needed to change...
+Cüzdanımı kaybetsem ne olurdu? O kağıt parçasında tam olarak hangi şifrelerin olduğunu nasıl hatırlardım? Daha da endişe verici olanı, bu şifrelerin bazıları, cüzdanı kapan biri tarafından bakılan şeyi anlıyor olsaydı, gerçekten yararlı olabilirdi. Bir şeylerin değişmesi gerekiyordu...
 
-*My Palm III to the Rescue*
+*Palm III'üm İmdada*
 
-In a happy serendipity, this was the time I invested in my first personal digital assistant, a Palm Computing
-[Palm III](https://en.wikipedia.org/wiki/Palm_III). In terms of computing, my Palm was a very limited (and
-frustrating) device. It had very little storage. Its OS barely worked. It was so slow you wanted to stick your
-foot out the door and help push it along.
+Mutlu bir tesadüfle, bu, ilk kişisel dijital asistanım olan Palm Computing [Palm III](https://en.wikipedia.org/wiki/Palm_III)'e yatırım yaptığım zamandı. Bilgi işlem açısından, Palm'ım çok sınırlı (ve sinir bozucu) bir cihazdi. Çok az depolaması vardı. OS'si zar zor çalışıyordu. O kadar yavaştı ki, ayağınızı kapıdan dışarı çıkarıp onu itmeye yardım etmek istiyordunuz.
 
-But what it COULD do was...revolutionary. For the first time, I had my address book, calendar, task list, and even a
-recent copy of my email sitting in my pocket. (You put the Palm into a special cradle, pushed a button, and
-it synchronized with Outlook Express.) If I lost my Palm, I still had my data on my desktop device. I no longer
-had to worry about losing a physical day planner.
+Ancak yapabildiği şey...devrimciydi. İlk kez, adres defterim, takvimim, görev listem ve hatta e-postamın son kopyası cebimdeydi. (Palm'ı özel bir kürüğe koyuyor, bir düğmeye basıyor ve Outlook Express ile senkronize oluyordu.) Palm'ımı kaybetsem, verilerim hâlâ masaüstü cihazımda olurdu. Fiziksel günlük planlayıcısını kaybetme konusunda artık endişelenmem gerekmiyordu.
 
-So how did this help passwords? I [found an app](https://splashid.com/) that allowed my to store my passwords. Everything
-was encrypted, so if my Palm III was stolen, the thief would still need a special password to read it. (Note the
-Palm III didn't have a desktop password. If you got your hands on the device, you could read everything. But
-this app ensured your secrets were safe.) Even better,
-it integrated with my synchronization in Outlook Express; when I synchronized everything else, it would coordinate
-the updates, and then I could even read that same database via my desktop.
+Peki bu şifrelere nasıl yardım etti? Şifrelerimi saklamama izin veren [bir uygulama buldum](https://splashid.com/). Her şey şifrelenmişti, bu yüzden Palm III'üm çalınırsa, hırsızın onu okumak için hâlâ özel bir şifreye ihtiyacı olurdu. (Palm III'ün masaüstü şifresi olmadığını unutmayın. Cihazı elinize geçirirseniz, her şeyi okuyabilirsiniz. Ancak bu uygulama sırlarınızın güvenli olmasını sağlıyordu.) Daha da iyisi, Outlook Express'teki senkronizasyonumla entegre oluyordu; diğer her şeyi senkronize ettiğimde, güncellemeleri koordine eder, sonra aynı veritabanını masaüstümden bile okuyabilirdim.
 
-By modern standards, this app was pretty basic. In modern terms, it was only a database of "secure notes". You
-could open an entry called "AOL", and you'd see a small text document that would, for instance, have the username
-and password for your online account.
+Modern standartlara göre, bu uygulama oldukça temeldi. Modern terimlerle, sadece "güvenli notlar" veritabanıydı. "AOL" adlı bir girişi açabilir ve örneğin çevrimiçi hesabınız için kullanıcı adı ve şifreyi içeren küçük bir metin belgesi görürdünüz.
 
-But on top of everything else, it was pretty neat. If I updated my credential datastore, 
-added a calendar event or updated a contact, I just made a mental note to sync the Palm as soon as I got home.
-I didn't worry so much about my email, since my dialup service kept copies on their servers.
+Ancak her şeyin üstüne, oldukça hoştu. Kimlik bilgisi veri tabanımı güncelleseydim, takvim etkinliği ekleseydim veya kişi güncelleseydim, eve gelir gelmez Palm'ı senkronize etmek için zihinsel not alırdım. E-postam konusunda çok endişelenmezdim, çünkü çevirmeli hizmetim sunucularında kopyalar tutuyordu.
 
-## But disaster recovery?
+## Peki felaket kurtarma?
 
-Even though this new system was a lot better, I got to thinking about the corner cases. I realized I still had
-problems.
+Bu yeni sistem çok daha iyi olsa da, köşe durumları hakkında düşünmeye başladım. Hâlâ sorunlarım olduğunu fark ettim.
 
-First, my backup copy was the hard disk on my Windows 98 machine. This device was shared by the entire family.
-Security and backups were <ahem> limited. Kids could accidentally brick the OS or worse. And then...my house used a wood store as an auxiliary source of heat. Fire was plausible threat. (Though 
-everyone in my family was pretty cautious, accidents do happen.)
+İlk olarak, yedek kopyam Windows 98 makinemdeaki sabit disktí. Bu cihaz tüm aile tarafından paylaşılıyordu. Güvenlik ve yedeklemeler <ahem> sınırlıydı. Çocuklar yanlışlıkla OS'yi bozabilir veya daha kötüsü. Ve sonra...evim yardımcı ısı kaynağı olarak odun sobası kullanıyordu. Yangın muhtemel bir tehdiţti. (Ailemdeki herkes oldukça tedbirlı olsa da, kazalar olur.)
 
-So I added a step: after I synced my Palm, I would copy the Outlook Express datastore to a 3.5" floppy disk,
-carry it to work, and store it--in a waterproof plastic bag--in a locked drawer at my desk. I knew we had fire
-suppression at the office, and the likelihood of losing both the desktop machine at home and the office were remote.
+Bu yüzden bir adım ekledim: Palm'ımı senkronize ettikten sonra, Outlook Express veri tabanını 3.5" disket diskete kopyalar, işe götürür ve masadaki kilitli çekmecede --su geçirmez plastik torba içinde-- saklardım. Ofiste yangın söndürme sistemi olduğunu biliyordum ve hem evdeki masaüstü makineyi hem de ofisi kaybetme olasılığı uzaktı.
 
-Later I added a second 3.5" floppy, and kept that one in a fireproof box ([like this](https://www.amazon.com/SentrySafe-Resistant-Chest-Cubic-1160/dp/B008NHKWZU/ref=sr_1_6)).
+Daha sonra ikinci bir 3.5" disket ekledim ve onu yangına dayanıklı kutuda ([bunun gibi](https://www.amazon.com/SentrySafe-Resistant-Chest-Cubic-1160/dp/B008NHKWZU/ref=sr_1_6)) sakladım.
 
-## Time marches on...
+## Zaman ilerliyor...
 
-As the 20-aughts went on, my credential store grew in size. More of a problem though, was the _number of devices_
-I was using.  It was more than a PDA and a desktop machine. I had a laptop and a tablet (because I am a
-voracious reader). I had a [Samsung S III](https://en.wikipedia.org/wiki/Samsung_Galaxy_S_III) instead of my Palm. 
-Outlook Express was no longer so interesting, but I really needed my credential datastore on all these devices.
+2000'ler ilerledikçe, kimlik bilgisi mağazam boyut olarak büyüdü. Daha büyük sorun ise, kullandığım _cihaz sayısıydı_. PDA ve masaüstü makinesinden fazlaydı. Dizüstü bilgisayarım ve tabletim vardı (çünkü açgözlü bir okuyucuyum). Palm yerine [Samsung S III](https://en.wikipedia.org/wiki/Samsung_Galaxy_S_III)'üm vardı. Outlook Express artık o kadar ilginç değildi, ancak kimlik bilgisi veri tabanımın tüm bu cihazlarda olması gerekiyordu.
 
-My password manager had matured quite a bit. It was still a secure notes app, but I could sync it locally-via wifi--on my
-home intranet. No exposure to the Web, no wired connections, hooray! But it opened up another can of worms. If I updated
-my Samsung while I was away from home, _I had to remember that_. If I made another change on my laptop, I would lose
-an update if I tried to sync.  I was back to a single point of failure, and I could be my own worst enemy if I
-got it wrong.  This was getting hard!
+Şifre yöneticim oldukça olgunlaşmıştı. Hâlâ güvenli notlar uygulamasıydı, ancak onu yerel olarak-wifi aracılığıyla--ev intranetime senkronize edebiliyordum. Web'e maruz kalma yok, kablolu bağlantılar yok, yaşasın! Ancak başka bir sorun kutusu açtı. Samsung'umı evden uzaktayken güncelleseydim, _bunu hatırlamam gerekirdi_. Dizüstü bilgisayarımda başka bir değişiklik yaparsam, senkronize etmeye çalıştığımda bir güncellemeyi kaybederdim. Tekrar tek başarısızlık noktasına dönmüştüm ve yanlış yapsam kendi en kötü düşmanım olabilirdim. Bu zorlaşıyordu!
 
-## Hooray, LastPass!
+## Yaşasın, LastPass!
 
-I started casting about for another solution and came upon [LastPass](https://www.lastpass.com/). This was before
-their latest series of stumbles and fumbles. They had a free tier that seemed--at least at the time--to be a great
-value proposition: LastPass operated as a cloud backing store, providing seamless high availability and data
-recovery for all my devices.
+Başka bir çözüm aramaya başladım ve [LastPass](https://www.lastpass.com/)'a rastladım. Bu onların son tökezleme ve beceriksizlik serilerinden önceydi. Tüm cihazlarım için sorunsuz yüksek kullanılabilirlik ve veri kurtarma sağlayan bulut yedekleme deposu olarak çalışan--en azından o zamanlar--harika bir değer önerisi gibi görünen ücretsiz katmanları vardı.
 
-LastPass also helped me raise my password security. They have an excellent [leaderboard](https://www.lastpass.com/features/security-dashboard) that
-allows you to see your weak passwords and even gives you a relative security ranking against other LastPass users.
-I went through and updated all my passwords to be strong (randomly generated), and a [passphrase](uhttps://xkcd.com/936/)
-for my corporate laptop.
+LastPass ayrıca şifre güvenliğimi artırmama yardımcı oldu. Zayıf şifrelerinizi görmenizi ve hatta diğer LastPass kullanıcılarına karşı göreceli güvenlik sıralamanızı veren mükemmel [liderlık tabloları](https://www.lastpass.com/features/security-dashboard) var. Gittim ve tüm şifrelerimi güçlü (rastgele oluşturulmuş) olacak şekilde güncelledim ve kurumsal dizüstü bilgisayarım için [parola öbeği](https://xkcd.com/936/) kullandım.
 
-I didn't have to worry about a lost-update problem. Every time I made a change, the latest version was pushed
-to the cloud, and every time I opened my vault, I got the latest version.
+Kayıp güncelleme sorunu hakkında endişelenmem gerekmiyordu. Her değişiklik yaptığımda, en son sürüm buluta itiliyordu ve kasayı her açtığımda en son sürümü alıyordum.
 
-The browser integration in LastPass was also a real culture shock for me. Instead of having to dig into my
-glorified "secure notes" app to find a password, LastPass would helpfully allow passwords to be "autofilled"
-in my browser.
+LastPass'taki tarayıcı entegrasyonu da benim için gerçek bir kültür şokuydu. Yüceltilmiş "güvenli notlar" uygulamama şifre bulmak için kazmak yerine, LastPass şifrelerin tarayıcımda "otomatik doldurulmasına" yardımcı olarak yardım ederdi.
 
-Backups consisted of copying the LastPass datastore--at a convenient time interval--onto removable media.
-Again, I'd keep a copy at home and one at my office desk. But with the LastPass cloud storage, I didn't have
-to worry about my phone dying before I got home. Heck, I didn't really have to worry (much) about a house fire
-anymore...maybe?
+Yedeklemeler LastPass veri tabanını--uygun zaman aralığında--çıkarılabilir medyaya kopyalamaktan ibaretti. Yine, evde bir kopya ve ofis masamda bir kopya tutardım. Ancak LastPass bulut depolaması sayesinde, eve varmadan telefonumun ölmesi konusunda endişelenmem gerekmiyordu. Heck, artık (çok fazla) ev yangını konusunda endişelenmem gerekmiyordu...belki?
 
-## Uh-oh, my master password...
+## Ah-oh, ana şifrem...
 
-At this point I have to confess that the master password I had for about ten years was <ahem> quite weak. I had used
-the same one for most of that time. Remember, at the start all of these computers were behind locked doors. And
-at the end, someone would have to unlock my Samsung phone and/or break into my house and unlock my Windows
-desktop.  The vault password was really secondary. I tended to use very simple master passwords like 
-`xyzzyxyzzy` or `plughplugh`.
+Bu noktada yaklaşık on yıl boyunca sahip olduğum ana şifrenin <ahem> oldukça zayıf olduğunu itiraf etmeliyim. O zamanın çoğunda aynısını kullanmıştım. Unutmayın, başlangıçta tüm bu bilgisayarlar kilitli kapıların arkasındaydı. Ve sonunda, birinin Samsung telefonumun kilidini açması ve/veya evime girip Windows masaüstümün kilidini açması gerekirdi. Kasa şifresi gerçekten ikincilydi. `xyzzyxyzzy` veya `plughplugh` gibi çok basit ana şifreler kullanma eğilimindeyidim.
 
-With exposure on the Internet, I clearly needed to do better. I never got attacked, but now I had a brand-new problem! What if I forgot my master password? I understood--based on my advanced degree in Information Science
-Artificial Intelligence--that human memory could not be trusted.
+İnternette maruz kalmayla, açıkça daha iyisini yapmam gerekiyordu. Hiç saldırıya uğramadım, ancak şimdi yepyeni bir sorunum vardı! Ana şifremi unutursam ne olurdu? Bilgi Bilimi Yapay Zeka alanında yüksek lisans dereceme dayanarak, insan hafızasına güvenilemeyeceğini anlıyordum.
 
-At this point, the solution was obvious. I put a copy of the email address and master password on a piece of paper in
-my fireproof safe, where either a family member or me could get to it.
+Bu noktada, çözüm belirgin di. E-posta adresini ve ana şifreyi bir aile üyesinin veya benim erişebileceğim yangına dayanıklı kasamdaki bir kağıt parçasına koydum.
 
+## Günümüze geçiş...
 
-## Moving to the present... 
+LastPass 2015'te [tökezlediğinde](https://www.wired.com/2015/06/hack-brief-password-manager-lastpass-got-breached-hard/) başladı.
 
-It started when LastPass 
-[stumbled](https://www.wired.com/2015/06/hack-brief-password-manager-lastpass-got-breached-hard/) in 2015.
+Şimdi, LastPass'ın operasyonel hata yapmasının bu _ilk_ kez olmadığını kabul edeceğim, ancak benim için son saman çöpüydü. Ücretli kullanıcı olmaya hazırlanmıştım ve bu beni alternatiflere bakmaya yönlendirdi. (Zaferin ağzından yenilgiyi kapma hakkında konuşmak!)
 
-Now, I will admit that this was not the _first_ time that LastPass had an operational error, but for me, it was
-the last straw. I had been poised to become a paying user, and this got me looking alternatives. (Talk about
-snatching defeat from the jaws of victory!)
+Neyse ki, neredeyse tam aynı zamanda, [açık kaynaklı sıfır bilgi alternatifi](https://en.wikipedia.org/wiki/Bitwarden) kullanılabilir hale geldi. Daha da iyisi, (ve hâlâ) ücretsizdi!
 
-Fortunately,
-at almost the exact time, an [open source zero-knowledge alternative](https://en.wikipedia.org/wiki/Bitwarden) became available.
-Even better, it was (and still is) free!
+O zamandan beri yolculuğum 2FA ([TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password) ve [FIDO2](https://en.wikipedia.org/wiki/FIDO_Alliance)) ve [donanım güvenlik anahtarlarına](https://www.yubico.com/) ciddi dalışlar oldu.
 
-My journey since then has been serious dives into 2FA ([TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password)
-and [FIDO2](https://en.wikipedia.org/wiki/FIDO_Alliance)) and [hardware security keys](https://www.yubico.com/).
-
-I still worry a lot about fault tolerance and backups, but I feel I at least have a better handle on the problem.
-Passkeys are still very rocky. I think the future is going to involve some interesting twists on password
-sharing and reliability. The future is going to be interesting!
-
-
+Hâlâ hata toleransı ve yedeklemeler konusunda çok endişeleniyorum, ancak sorunu en azından daha iyi kavradığımı hissediyorum. Geçiş anahtarları hâlâ çok sarsıntılı. Geleceğin şifre paylaşımı ve güvenilirlik konusunda bazı ilginç değişimler içereceğini düşünüyorum. Gelecek ilginç olacak!

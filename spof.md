@@ -1,121 +1,85 @@
+Bu, "tek başarısızlık noktası" kavramı hakkında bir yazıdır. Modern veri yönetiminde kritik bir kavramdır ve şifre veritabanınızın bakımına doğrudan uygulanır.
 
-This is a ramble about the notion of a "single point of failure". It's a critical concept in modern
-data management, and it directly applies to how your care and feeding of your password database.
+## ACID İşlemleri
 
-## ACID Transactions
+Üniversiteden yüksek lisans derecemle mezun olup yazılım geliştirici olarak çalışmaya başladığımda, çok sayıda radikal fikrim ve vizyonum vardı. Sadece birkaç yıl sonra, veritabanlarını yönetmeye radikal yeni yaklaşım geliştirmekle meydan okuyulduğumuz en büyüleyici alanda çalışmaya başladım.
 
-When I graduated with my advanced college degree and started working as a software developer, I had a lot of radical ideas and vision. Just a few years in, I ended up working in a most fascinating area, where we were challenged to devise a radical new approach to managing databases.
+Beni veritabanı güvenilirliğinin temellerinde çalıştıran çok sabırlı olan mükemmel bir mentörum (Alan) olduğum için çok şanslıydım. Kavram aslında oldukça basittir. Alice'in Bob'a latte için 10 dolar ödediğini varsayalım. Veritabanı işlemi bakış açısından, aşağıdakilerden tam olarak biri olmalıdır:
 
-I was very fortunate to have an excellent mentor (Alan) who was also very patient, as he worked me through the basics of database reliability.
-The concept is actually rather simple.  Suppose Alice pays Bob $10 for a latte. From the viewpoint of a database operation, exactly
-one of the following things should happen:
+1. Alice 10 dolar daha fakir, Bob 10 dolar daha zengin olur -- bu mutlu yoldur.
+2. Ödeme başarısız olmaz. Alice'in bakiyesi değişmez. Bob'un bakiyesi değişmez.
 
-1. Alice ends up $10 poorer, and Bob ends up $10 richer -- this is the happy path.
-2. The payment does not succeed. Alice's balance does not change. Bob's balance does not change.
+Asla OLMAMASI gereken bazı şeyler:
 
-Some things that should NEVER happen:
+* Alice 10 dolarını tutar, Bob ödeme almaz, ancak Alice latte'sini alır.
+* Alice 20 dolar ücretlendirilir ancak sadece bir latte alır.
+* Bob sadece bir latte sattığı için 20 dolar ödeme alır.
 
-* Alice keeps her $10, Bob doesn't get paid, but Alice gets her latte.
-* Alice gets charged $20 but only gets one latte.
-* Bob gets paid $20 for only selling one latte.
+Dahası, Cindy işlemleri izliyor olabilir. Herhangi bir noktada, sadece uçuşta 10 dolar görmelidir. Kimse para sahte yapmıyor, süreçte sadece 10 dolar var.
 
-Furthermore, Cindy may be watching the transactions. At any point, she should only see $10 in flight. Nobody
-is counterfeiting money, there's only $10 in process.
+...ve bunun gibi. Daha sonraki yıllarda, bu kavram veritabanı işlemlerinin [ACID özelliği](https://en.wikipedia.org/wiki/ACID) olarak resmileştirildi:
 
-...and so on. In more recent years, this concept has been formalized as an [ACID property](https://en.wikipedia.org/wiki/ACID)
-of database transactions:
+_Atomicitiy_: İşlem tek, bölünmez birim olarak ele alınır. Ya işlem içindeki tüm operasyonlar başarıyla tamamlanır ve işlenir ya da hiçbiri işlenmez. İşlemin herhangi bir parçası başarısız olursa, tüm işlem önceki durumuna geri alınır, kısmi güncellemeleri engeller.
 
-_Atomicity_: A transaction is treated as a single, indivisible unit. Either all operations within the transaction are successfully completed and committed, or none of them are. If any part of the transaction fails, the entire transaction is rolled back to its previous state, preventing partial updates.
+_Tutarlılık_: İşlem veritabanını bir geçerli durumdan başka bir geçerli duruma getirmelidir. Tüm veri bütünlüğü kısıtlamalarının (örneğin, birincil anahtar kısıtlamaları, yabancı anahtar kısıtlamaları) işlem öncesi ve sonrasında korunmasını sağlar.
 
-_Consistency_: A transaction must bring the database from one valid state to another valid state. It ensures that all data integrity constraints (e.g., primary key constraints, foreign key constraints) are maintained before and after the transaction.
+_İzolasyon_: Eşzamanlı işlemler birbirinden izole edilir, yani bir işlemin ara sonuçları diğer eşzamanlı işlemlere görünmez. Bu girişimi engeller ve her işlemin tek çalışıyormuş gibi çalışmasını sağlar.
 
-_Isolation_: Concurrent transactions are isolated from each other, meaning that the intermediate results of one transaction are not visible to other concurrent transactions. This prevents interference and ensures that each transaction operates as if it were the only one running.
+_Dayanıklılık_: İşlem bir kez işlendiğinde, değişiklikleri kalıcı olarak saklanır ve sistem arızalarına veya çökmelerine dayanır. Bu genellikle değişiklikleri geçici olmayan depolamaya yazarak elde edilir.
 
-_Durability_: Once a transaction is committed, its changes are permanently stored and will survive system failures or crashes. This is typically achieved by writing the changes to non-volatile storage. 
+Her sabah Alan'ın ofisine taze bir fincan kahveyle gelir, veritabanımızı nasıl ACID yapacağımızı tartışırdık. Haftalar boyunca, o kadar destekliydi: "Bu harika, Jason! Ama ne olur eğer...", kuyruğum bacaklarımın arasına girer, yeni bir kıvrım veya köşe durumu cevaplamak için masamama döneridim.
 
-Every morning I would come into Alan's office with a fresh cup of coffee, and we would discuss how to make our database
-ACID. For weeks, he was so supportive: "That's great, Jason! But what happens if...", my tail would sink between my legs,
-and I would go back to my desk to answer a new wrinkle or corner case.
+_Spoiler: Bir-iki ay sürdü, ama çözdük._
 
-_Spoiler: it took most of a month or two, but we figured it out._
+## Tek Başarısızlık Noktası (SPOF)
 
-## Single Point of Failure (SPOF)
+Bu sonraki soruna yol açtı. Dostum, o adam benimle çok sabırlıydı. Ne olur eğer...
 
-This led to the next problem. Man, that guy was so patient with me. What happens if...
+* Güncelleme ortasında bilgisayar çöker.
+* Güncelleme sırasında ağ bağlantısı kesilir.
+* Güncelleme sırasında disk çöker?
 
-* A computer crashes in the middle of an update.
-* A network connection severs during an update.
-* A disk crashes during an update?
+* Güncelleme sırasında birden fazla bilgisayar çöker?
+* Güncelleme sırasında birden fazla disk çöker?
+* Heck, tüm veri merkezi çevrimdışı olursa?
 
+ACID temelinde, kullanıcı _en fazla_ tek günceleme kaybetmeyi bekler. Bu güncelmemin başarısız olduğu (veya başarılı olduğu) konusunda net mesaj almalılar. Alice Bob'a ödeme yaptıysa, latte'sini almalı. Ödemesi geçmediyse, Bob bunu bilecek ve ona latte vermeyecek.
 
-* Multiple computers crash during an update?
-* Multiple disks crash during an update?
-* Heck, what if an entire datacenter goes offline?
+## Şifre Yöneticisinde SPOF
 
-Based on ACID, the user expects to lose _at most_ a single update. They should get a clear message that this one update
-failed (or succeeded). Either Bob got paid or he didn't.  If Alice paid Bob, she should get her latte. If her payment
-did not go through, Bob will know and won't give her the latte.
+Tüm bunlar doğrudan şifre veri tabanınıza uygulanır. Tam olarak nasıl?
 
-## SPOF in a Password Manager
+_İstemci makineniz_
 
-All of this directly applies to your password datastore. How, exactly?
+Bitwarden mimarisinde, telefonunuz veya tarayıcınız SPOF _değildir_. Sadece kasanızın önbelleğe alınmış kopyasını tutar.
 
-_Your client machine_
+Kasa girişini düzenlediğinizde, değişiklikler _sadece_ makinenizde olur. "Kaydet"e tıkladığınızda, güncelleme atomik olarak Bitwarden sunucularına kaydedilir. En kötü ihtimalle değişikliğin sunucu tarafından kabul edilip edilmediği konusunda belirsizlik penceresi vardır (isteği gönderdikten hemen sonra ağ bağlantınızın kesilmesi gibi). Ancak bu bile "idempotent" istek çerçevesiyle hafifletilir...ama konudan saptım.
 
-In the Bitwarden architecture, your phone or browser is _not_ a SPOF. It merely holds a cached copy of your vault.
+_Bitwarden Sunucusu_
 
-When you edit a vault entry, the changes are _only_ on your machine. When you click "Save", the update is atomically 
-saved to the Bitwarden servers. There is at worst a window of uncertainty of whether the change was accepted by the server
-(such as if your network connection goes down immediately after sending the request).  But even that is ameliorated by
-an "idempotent" request framework...but I digress.
+Yani istemci makineniz SPOF değil. Peki sunucu makinesi? Bitwarden sunucunuz kesinlikle MSSQL, PostgreSQL, MySQL veya SQLite dahil olmak üzere ACID özelliklerine sahip veritabanı kullanır. Bu, sunucu çökerse ve yeniden başlarsa, en fazla gönderilen son işlemi kaybedeceği anlamına gelir.
 
-_The Bitwarden Server_
+_Bitwarden Diskleri_
 
-So your client machine is not a SPOF. What about the server machine? Your Bitwarden server most assuredly uses a database
-with ACID properties, including  MSSQL, PostgreSQL, MySQL, or SQLite. This means that if the server crashes and restarts,
-it will lose at most the very last transaction that was sent.
+Bitwarden sunucunuz Azure veri merkezinde çalışır. Tüm disk başarısız olursa ne olur? Bu durumda, Azure'un kendisinin verilerinizi yönetmek için [disk artıklık seçenekleri](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-redundancy) vardır. [Ayrıntılar](https://bitwarden.com/help/data-storage/) biraz belirsiz. Bitwarden'a güvenmenin yanı sıra [kendi yedeklerinizin olması](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) her zaman iyi bir fikirdir.
 
-_The Bitwarden Disks_
+_Azure Veri Merkezi_
 
-Your Bitwarden server runs in an Azure datacenter. What if an entire disk fails? In this case, 
-Azure itself has [disk redundancy options](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-redundancy) for
-managing your data. [The details](https://bitwarden.com/help/data-storage/) are a bit vague. It's always a good
-idea for you to [have your own backups](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) 
-as well as relying on Bitwarden.
+Tüm veri merkezi çökerse ne olur? Bu disklerle tam olarak aynı soru. Zaman zaman tam yedeklemeler yapmalısınız.
 
-_The Azure Data Center_
+## Şifre Yöneticisi kullanımınızda SPOF
 
-What if the entire datacenter crashes? This is exactly the same question as the disks. You should make full backups from time to time.
+Bu çok daha ilginç hale geliyor. Kimlik bilgisi veri tabanınızda SPOF'u önlemek kendi davranışınızın işlevidir.
 
-## SPOF in your use of a Password Manager
+* _Ana Şifreniz_ -- Ayda yaklaşık bir kez, /r/Bitwarden'da biri ana şifresini unuttuğu için süper gizli arka kapı aradığı için panik halinde gönderi yapar. Beyniniz tek başarısızlık noktasıdır! Ana şifre isteğe bağlı değildir ve hafızanız güvenilir değildir. Ana şifreyi yeniden kazanmak için kurtarma iş akışına ihtiyacınız vardır. En basit haliyle, [acil durum sayfasına](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) ihtiyacınız vardır.
+* _2FA'nız_ -- telefonunuz ölürse, Bitwarden'ın kendisi için bile bir veya daha fazla site için TOTP kaybedebilirsiniz. Sarhoş amcanız ceketinizin üstüne oturursa, Yubikey'inizi yok edebilir.
+* _Acil durum sayfanız_ -- acil durum sayfasının sadece bir kopyası varsa, doğal (veya doğal olmayan) felaket tarafından yok edilebilir.
+* _Yedeğiniz_ -- yedeğin kendisinin sadece bir kopyası varsa, okunmaz hale gelebilir; dijital medya güvenilmezdir. Yedeğin kopyaları sadece bir yerdeyse, ev yangını tüm kopyaları yok edebilir -- esasen tekrar tek başarısızlık noktası.
+* _Yedeklemenizi veya acil durum sayfanızı okuyacak varlıklar_ -- yedeği sakladığınız Google Drive'a giriş, yedek için şifreleme şifresi, hatta bulut hizmetinin kendisi bile SPOF olabilir. Bu yüzden Eski Okul'a gidiyorum ve sadece birden fazla USB bellek diski birden fazla konumda kaydediyorum. Artı yedek için şifreleme anahtarı benzer şekilde dağıtılır -- _USB'den farklı yerlerde_.
+* _Ölümünüz_ -- Hepimiz bir noktada bu fani hayattan ayrılırız. Bu olduğunda, başka birinin parçaları toplaması gerekecek. Mahkeme kararı, tüm fotoğraflarınızın üzerinde olduğu NAS'a girişi mutlaka yeniden kazanmayabilir. Mahkeme kararı varlıklarınızı kurtarmalarına yardımcı olmayabilir (o ev yangınından sonra yeni çatı, kim?). Evet, ölümünüz potansiyel olarak SPOF olabilir.
 
-This gets much more interesting. Preventing a SPOF in your credential datastore is a function of your own behavior.
+## Sizin İçin Meydan Okuma
 
-* _Your Master Password_ -- About once a month, someone in /r/Bitwarden posts in a panic, looking for a super
-sneaky back door because they've forgotten their master password. Your brain is a single point of failure! The master password is not optional, and your
-memory is not reliable. You need a recovery workflow to regain the master password. In its simplest form,
-you need an [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
-* _Your 2FA_ -- if your phone dies, you could lose TOTP for one or more sites, even for Bitwarden itself. If your
-drunk uncle sits on your jacket, he could destroy your Yubikey.
-* _Your emergency sheet_ -- if you have only one copy of the emergency sheet, it could be destroyed by natural (or unnatural)
-disaster.
-* _Your backup_ -- if you only have one copy of the backup itself, it could become unreadable; digital media is unreliable.
-If your copies of the backup are only in one place, a house fire could destroy all the copies -- essentially a single point
-of failure again.
-* _Assets to read your backup or emergency sheet_ -- the login to Google Drive where you've stored the backup, the
-encryption password for the backup, or possibly even the cloud service itself can all be a SPOF. That's why I
-go Old School and just save multiple USB thumb drives in multiple locations. Plus the encryption key for the
-backup is similarly distributed -- _in different places from the USB_.
-* _Your death_ -- We all part from this mortal coil at some point. When that happens, someone else will need to
-pick up the pieces. A court order will not necessarily regain the login to your NAS with all your photographs on it.
-A court order may not help them salvage your assets (new roof after that house fire, anyone?). Yes, your death can
-potentially be a SPOF.
+Şifre yöneticinizde tek başarısızlık noktanız var mı? En azından muhtemel risklere karşı hâlâ savunmasız mısınız? Yani, yüz megaton füzyon bombasından bahsetmiyorum, ancak ev yangını mümkün olan şeylerin kapsamı dışında değil.
 
-## Challenge for You
-
-Do you have a single point of failure in your password manager? Are you still vulnerable to risks that are at
-least plausible? I mean, I'm not talking about a hundred megaton fusion bomb, but a house fire is not
-beyond the realm of possibility.
-
-Think about the way you manage your risk here. An emergency sheet, full backup, and possibly some encryption are
-all reasonable answers. It depends on your risk model.
+Burada riski yönetme şeklinizi düşünün. Acil durum sayfası, tam yedekleme ve muhtemelen biraz şifreleme makul cevaplardır. Risk modelinize bağlıdır.

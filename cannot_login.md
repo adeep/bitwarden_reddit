@@ -1,596 +1,521 @@
-_The most recent version of this document is 
-[on GitHub](https://github.com/djasonpenney/bitwarden_reddit/blob/main/cannot_login.md)_.
+_Bu belgenin en güncel sürümü 
+[GitHub'da bulunmaktadır](https://github.com/djasonpenney/bitwarden_reddit/blob/main/cannot_login.md)_.
 
-If you wish to make improvements or corrections, please consider
-[creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+Eğer iyileştirmeler veya düzeltmeler yapmak istiyorsanız, lütfen
+[bir pull request oluşturmayı](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) düşünün.
 
-# Contents
+# İçindekiler
 
 TBD
 
-# Introduction
+# Giriş
 
-Oh no! You can't log into your vault. What could be the problem?
+Ah hayır! Kasanıza giriş yapamıyorsunuz. Sorun ne olabilir?
 
-First, the bad news: you are going to have to run some experiments to find out what the problem is. There are
-numerous possibilities, and it's going to require some research to decide what happened.
+Önce kötü haber: Sorunun ne olduğunu öğrenmek için bazı deneyler yapmanız gerekecek. Birçok olasılık var ve ne olduğunu anlamak için biraz araştırma yapmanız gerekecek.
 
-Even worse, there is a chance that you have entirely lost the contents of your vault. If you have not made
-preparations in advance, you may be forced to 
-[delete your vault](https://bitwarden.com/help/forgot-master-password/) and 
-[start over](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md).
+Daha da kötüsü, kasanızın içeriğini tamamen kaybetmiş olma ihtimaliniz var. Eğer önceden hazırlık yapmadıysanız, 
+[kasanızı silmeye](https://bitwarden.com/help/forgot-master-password/) ve 
+[yeniden başlamaya](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md) zorlanabilirsiniz.
 
-If you are reading this, and you still have access, please create an
-[emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
-You can go further and actually create a
-[full backup](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md).
-That is more work; if you are overwhelmed, please do at least create the emergency sheet.
+Eğer bunu okuyorsanız ve hâlâ erişiminiz varsa, lütfen bir
+[acil durum sayfası](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) oluşturun.
+Daha da ileri gidip gerçek bir
+[tam yedekleme](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) oluşturabilirsiniz.
+Bu daha fazla iş; eğer bunaldıysanız, lütfen en azından acil durum sayfasını oluşturun.
 
-# Make A Backup!
+# Yedek Yapın!
 
-> Where are we going, and why I am I in this handbasket?
+> Nereye gidiyoruz ve neden bu sepetteyim?
 
-Some of the things you are going to try are potentially destructive. For this reason--if at all possible--you
-should have a backup before you do anything.
+Deneyeceğiniz bazı şeyler potansiyel olarak yıkıcı olabilir. Bu nedenle - mümkünse - herhangi bir şey yapmadan önce yedeğiniz olmalıdır.
 
-An [Emergency Sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md)
-is your rescue in a number of simple situations:
+Bir [Acil Durum Sayfası](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md)
+birçok basit durumda kurtuluşunuzdur:
 
-* You forget your master password (that's right; you cannot trust your brain to remember _anything_);
-* Your vault is secured via [TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password), the
-TOTP app is on your phone, and your phone slipped and fell under the wheels of a passing bus;
-* Your vault is secured via a FIDO2 security key, but your security key is lost or broken.
-* You _are DEAD_, and your husband needs to get into your vault to pay the electric bill
+* Ana şifrenizi unutursunuz (evet doğru; beyninin _hiçbir şeyi_ hatırlayacağına güvenemezsiniz);
+* Kasanız [TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password) ile güvenlidir, TOTP uygulaması telefonunuzdadır ve telefonunuz kayıp geçen bir otobüsün tekerlekleri altında kalmıştır;
+* Kasanız FIDO2 güvenlik anahtarı ile güvenlidir, ancak güvenlik anahtarınız kaybolmuş veya bozulmuştur.
+* Siz _ÖLÜ_sünüz ve kocanızın elektrik faturasını ödemek için kasanıza girmesi gerekir
 
-...and so forth. An emergency sheet presumes that your credential datastore is intact, but you cannot open it
-and use it.
+...ve bunun gibi. Acil durum sayfası, kimlik bilgilerinizin bozulmamış olduğunu ancak açıp kullanamadığınızı varsayar.
 
-A [full backup](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) 
-goes one step further: what if the cloud copy of your credential datastore is lost or corrupted?
-How could that happen?
+Bir [tam yedekleme](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) 
+bir adım daha ileri gider: kimlik bilgilerinizin bulut kopyası kaybolur veya bozulursa ne olur?
+Bu nasıl olabilir?
 
-* You fumble-finger an update to a vault entry, damaging or deleting it, and you don't notice until months have passed;
-* A malicious ex or teenager gains momentary access to the Bitwarden backing email and explicitly 
-  [deletes your vault](https://bitwarden.com/help/forgot-master-password/).
-  (A lot of people are astonished to hear that the security of this backing email leaves this minor Achilles heel.
-  This in addition to the critical messages from Bitwarden such as unusual activity on your account.)
-* The Earth opens up and swallows the Bitwarden datacenters, so there is literally no copy on any cloud server.
+* Bir kasa girişini güncellerken elleriniz titrer, onu zarar verir veya silersiniz ve aylar geçene kadar fark etmezsiniz;
+* Kötü niyetli bir eski sevgili veya genç, Bitwarden yedekleme e-postasına anlık erişim sağlar ve açıkça 
+  [kasanızı siler](https://bitwarden.com/help/forgot-master-password/).
+  (Birçok kişi bu yedekleme e-postasının güvenliğinin bu küçük Aşil topuğunu bıraktığını duymaktan şaşırır.
+  Bu, hesabınızdaki olağandışı etkinlik gibi Bitwarden'dan gelen kritik mesajlara ek olarak.)
+* Dünya açılır ve Bitwarden veri merkezlerini yutar, böylece hiçbir bulut sunucusunda kelimenin tam anlamıyla kopya kalmaz.
 
-If you cannot log into your Bitwarden vault, and you do not already have a backup, _you are in disaster recovery_.
-Your first priority should be to recover and save as much data as possible.
+Bitwarden kasanıza giriş yapamıyorsanız ve zaten yedeğiniz yoksa, _felaket kurtarmada_sınız.
+İlk önceliğiniz mümkün olduğunca çok veri kurtarmak ve kaydetmek olmalıdır.
 
-In the next section, we will outline how to do that.
-This is your first priority, and the rest of this document will assume you have made as much of a backup
-as you can.
+Sonraki bölümde bunun nasıl yapılacağını özetleyeceğiz.
+Bu sizin ilk önceliğinizdir ve bu belgenin geri kalanı yapabildiğiniz kadar yedek aldığınızı varsayacaktır.
 
-## Making an Export (if you can)!
+## Dışa Aktarma Yapma (eğer yapabiliyorsanız)!
 
-Bitwarden has an
-[export function](https://bitwarden.com/help/export-your-data/).
-This is an important part of making a backup. 
-There are some things you should be cognizant about exports in general:
+Bitwarden'in bir
+[dışa aktarma işlevi](https://bitwarden.com/help/export-your-data/) vardır.
+Bu, yedekleme yapmanın önemli bir parçasıdır. 
+Genel olarak dışa aktarmalar hakkında dikkat etmeniz gereken bazı şeyler vardır:
 
-* A Bitwarden export requires that you are still logged into Bitwarden in at least one client.
+* Bitwarden dışa aktarımı, en az bir istemcide Bitwarden'a hâlâ giriş yapmış olmanızı gerektirir.
 
-* A Bitwarden export requires that you know the master password. 
-If your login problems include
-an issue with your master password, you won’t be able to use the export function. Again, you
-need to export everything manually. 
+* Bitwarden dışa aktarımı ana şifreyi bilmenizi gerektirir. 
+Giriş sorunlarınız ana şifrenizle ilgili bir sorunu içeriyorsa, dışa aktarma işlevini kullanamazsınız. Yine, her şeyi manuel olarak dışa aktarmanız gerekir. 
 
-* A Bitwarden export does not contain [Sends](https://bitwarden.com/products/send/) or any items in the trash.
+* Bitwarden dışa aktarımı [Gönderimler](https://bitwarden.com/products/send/) veya çöp kutusundaki hiçbir öğeyi içermez.
 
-Bitwarden exports are either in CSV or JSON format.
+Bitwarden dışa aktarımları CSV veya JSON formatındadır.
 
-* CSV exports do not contain file attachments, cards, identities and passkeys. They are best for if/when
-you choose to leave the Bitwarden ecosystem. They are not as complete as a JSON export.
+* CSV dışa aktarımları dosya eklerini, kartları, kimlikleri ve geçiş anahtarlarını içermez. Bitwarden ekosisteminden ayrılmayı seçerseniz en iyisidir. JSON dışa aktarımı kadar eksiksiz değildir.
 
-* JSON exports are the most complete.
-  If possible, use the encrypted password-protected ones. _Do not use the
-  "restricted" export format._
-  "Unencrypted JSON" exports are acceptable in this situation, since you are already in disaster recovery.
+* JSON dışa aktarımları en eksiksizdir.
+  Mümkünse, şifre korumalı şifreli olanları kullanın. _"Kısıtlı" dışa aktarma formatını kullanmayın._
+  "Şifrelenmemiş JSON" dışa aktarımları bu durumda kabul edilebilir, çünkü zaten felaket kurtarmaddasınız.
 
-* If you use an organization and have Collections, you have to export those separately via the
-  [admin console](https://bitwarden.com/help/export-your-data/#export-an-organization-vault) in the web vault.
+* Bir kuruluş kullanıyorsanız ve Koleksiyonlarınız varsa, bunları web kasasındaki
+  [yönetici konsolu](https://bitwarden.com/help/export-your-data/#export-an-organization-vault) aracılığıyla ayrı ayrı dışa aktarmanız gerekir.
 
-## Doing it the Hard Way
+## Zor Yoldan Yapma
 
-If you cannot use the Bitwarden export function, _but you still have access to an unlocked Bitwarden client_:
+Bitwarden dışa aktarma işlevini kullanamazsanız, _ancak kilidi açılmış bir Bitwarden istemcisine hâlâ erişiminiz varsa_:
 
-* _Unplug that device from the network_. 
-  If it is a mobile device, put it in "Airplane Mode".
-  If it is a desktop, unplug your Ethernet cable or otherwise disconnect it from the rest of the world.
-  The risk is that a Bitwarden client may act strangely when it talks to the server and log you out.
+* _O cihazı ağdan çıkarın_. 
+  Mobil cihazsa, "Uçak Modu"na alın.
+  Masaüstüyse, Ethernet kablonuzu çıkarın veya başka bir şekilde dünyanın geri kalanından bağlantısını kesin.
+  Risk, bir Bitwarden istemcisinin sunucuyla konuşurken garip davranması ve sizi çıkarması olabilir.
 
-* Grab pen and paper. In a quiet private place, go through each and every entry in your unlocked vault.
-* Copy every single entry onto your paper.
-* Write neatly.
-* Pay close attention to the differences between "0" (zero) and "O" (capital oh), "1" (one), and "l" (small ell),
-  "5" (five), and "S" (capital ess) and so forth.
-* Take your time! Double-check your work.
-* You will not be able to hand copy [passkeys](https://bitwarden.com/passwordless-passkeys/).
-* There are a number of items that will require extra work.
-  These include file attachments, 
-  [custom URI match detection](https://bitwarden.com/help/uri-match-detection/), and any organization vaults.
+* Kalem ve kağıt alın. Sessiz özel bir yerde, kilidi açık kasanızdaki her girişi tek tek gözden geçirin.
+* Her girişi kağıdınıza kopyalayın.
+* Düzgün yazın.
+* "0" (sıfır) ile "O" (büyük oh), "1" (bir) ile "l" (küçük ell),
+  "5" (beş) ile "S" (büyük ess) arasındaki farklara çok dikkat edin.
+* Acele etmeyin! Çalışmanızı iki kez kontrol edin.
+* [Geçiş anahtarlarını](https://bitwarden.com/passwordless-passkeys/) elle kopyalayamazsınız.
+* Ekstra çalışma gerektirecek birçok öğe vardır.
+  Bunlar arasında dosya ekleri, 
+  [özel URI eşleştirme algılama](https://bitwarden.com/help/uri-match-detection/) ve herhangi bir kuruluş kasası bulunur.
 
-After you have tried copying everything, go back and try to ensure your exported copy is complete.
+Her şeyi kopyalamaya çalıştıktan sonra, geri dönün ve dışa aktardığınız kopyanın tam olduğundan emin olmaya çalışın.
 
-For the rest of this guide, we assume that you have made a backup, if you can.
+Bu kılavuzun geri kalanı için, yapabildiğiniz kadar yedek aldığınızı varsayıyoruz.
 
-# A Primer: Logged Out, Logged In, and Locked
+# Bir Başlangıç: Çıkış Yapmış, Giriş Yapmış ve Kilitli
 
-Your Bitwarden vault is always in one of _three_ status:
+Bitwarden kasanız her zaman _üç_ durumdan birindedir:
 
-* _Logged Out_ -- no access. 
-  From here, all you can do is try to log in. This requires your username,
-  master password, and your 2FA. It may also require passing a
-  [new device verification](https://bitwarden.com/help/new-device-verification/).
-* _Logged In_ -- your vault is open. From here your can explicitly log out. It is also possible to "lock"
-  the vault, usually due to a timeout. The details are contralled by the options in your Bitwarden client.
-* _Locked_ -- your vault has passed authentication by the Bitwarden server, but there is no local access.
-  Unlocking your vault entails a PIN, biometrics, or possibly even re-entering the master password.
-  These options are controlled by the options in your Bitwarden client.
+* _Çıkış Yapmış_ -- erişim yok. 
+  Buradan yapabileceğiniz tek şey giriş yapmaya çalışmaktır. Bu kullanıcı adınızı,
+  ana şifrenizi ve 2FA'nızı gerektirir. Ayrıca
+  [yeni cihaz doğrulaması](https://bitwarden.com/help/new-device-verification/) geçmeyi de gerektirebilir.
+* _Giriş Yapmış_ -- kasanız açık. Buradan açıkça çıkış yapabilirsiniz. Ayrıca kasayı "kilitlemek" de mümkündür,
+  genellikle zaman aşımı nedeniyle. Ayrıntılar Bitwarden istemcinizin seçenekleri tarafından kontrol edilir.
+* _Kilitli_ -- kasanız Bitwarden sunucusu tarafından kimlik doğrulamasından geçmiştir, ancak yerel erişim yoktur.
+  Kasanızın kilidini açmak PIN, biyometri veya hatta ana şifreyi yeniden girmeyi gerektirebilir.
+  Bu seçenekler Bitwarden istemcinizin seçenekleri tarafından kontrol edilir.
 
-More on all this [here](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in).
+Tüm bunlar hakkında daha fazla bilgi [burada](https://bitwarden.com/help/unlock-with-pin/#understanding-unlock-vs-log-in).
 
-_Unlocking Problems_
+_Kilidi Açma Sorunları_
 
-If you are merely "locked", you need to unlock your current Bitwarden client.
-The server is not involved; it is a local problem with your Bitwarden client..
-There are four common possibilities here:
+Eğer sadece "kilitli"yseniz, mevcut Bitwarden istemcinizin kilidini açmanız gerekir.
+Sunucu dahil değildir; bu Bitwarden istemcinizle yerel bir sorundur.
+Burada dört yaygın olasılık vardır:
 
-*   [Unlock with PIN](https://bitwarden.com/help/unlock-with-pin/) -- you must have set this up in advance;
-*   [Unlock with Biometrics](https://bitwarden.com/help/biometrics/) -- you must have set this up in advance;
-*   Unlock with your master password -- this is always allowed.
-*   You may also have access via a [passkey](https://bitwarden.com/help/login-with-passkeys/).
+*   [PIN ile Kilidi Açma](https://bitwarden.com/help/unlock-with-pin/) -- bunu önceden kurmuş olmanız gerekir;
+*   [Biyometri ile Kilidi Açma](https://bitwarden.com/help/biometrics/) -- bunu önceden kurmuş olmanız gerekir;
+*   Ana şifrenizle kilidi açma -- bu her zaman izin verilir.
+*   Ayrıca bir [geçiş anahtarı](https://bitwarden.com/help/login-with-passkeys/) aracılığıyla erişiminiz olabilir.
 
-Look closely; is your client asking for your _master password_,
-or for your _PIN_ (only applicable when unlocking)? 
-These are not interchangeable; the PIN won’t work when
-you’re asked for your master password (and vice versa), and you cannot _ever_ log in with your PIN alone.
+Dikkatle bakın; istemciniz sizden _ana şifrenizi_ mi
+yoksa _PIN'inizi_ mi (sadece kilidi açarken geçerli) istiyor? 
+Bunlar birbirinin yerine kullanılamaz; ana şifreniz istendiğinde PIN çalışmaz (ve tersi de geçerlidir), ve PIN'iniz tek başına _asla_ giriş yapamazsınız.
 
-If unlocking with your master password does not work, either your Bitwarden client has gone sideways (not
-common, but possible), or (horror of horrors!) you have forgotten your master password.
+Ana şifrenizle kilidi açmak işe yaramazsa, ya Bitwarden istemciniz yana gitmiştir (yaygın değil ama mümkün), ya da (korkunçlu!) ana şifrenizi unutmuşsunuzdur.
 
-# First Steps: Test the "web vault"
+# İlk Adımlar: "Web kasası"nı test edin
 
-⚠️ Have you made a [backup](#make-a-backup)?
+⚠️ [Yedek](#yedek-yapın) yaptınız mı?
 
-So what's going on here? Let's start from the top: eliminate your Bitwarden client entirely.
-Inside your browser, navigate to the vault web page
-(either [the US server](https://vault.bitwarden.com), the [EU server](https://vault.bitwaden.eu),
-or possibly a self-hosted instance).
+Peki burada ne oluyor? En baştan başlayalım: Bitwarden istemcinizi tamamen eleyim.
+Tarayıcınızda kasa web sayfasına gidin
+([ABD sunucusu](https://vault.bitwarden.com), [AB sunucusu](https://vault.bitwarden.eu),
+veya muhtemelen kendi barındırdığınız bir örnek).
 
-If the web page _does not load_, you either have a networking problem on your computer, or there is a server error.
+Web sayfası _yüklenmiyorsa_, ya bilgisayarınızda ağ sorunu var ya da sunucu hatası var.
 
-* If you aren't sure which server your account is on, try both. The servers are _not interchangeable_.
-* Try to log in with _different browsers_.
-* Try using a _private/incognito browser session_.
-* Try _deleting the browser cache_.
+* Hesabınızın hangi sunucuda olduğundan emin değilseniz, ikisini de deneyin. Sunucular _birbirinin yerine kullanılamaz_.
+* _Farklı tarayıcılarla_ giriş yapmaya çalışın.
+* _Özel/gizli tarayıcı oturumu_ kullanmayı deneyin.
+* _Tarayıcı önbelleğini silmeyi_ deneyin.
 
-️️️⚠️ Only  delete the cached browser content.
-  _Do not delete your browser cookies_.
-  Losing your browser cookies at this point could case Bitwarden to "forget" your device as a "known device", which
-  might lead to you needing [new device verification](https://bitwarden.com/help/new-device-verification/) 
-  or 2FA on your account.
+️️️⚠️ Sadece önbelleğe alınmış tarayıcı içeriğini silin.
+  _Tarayıcı çerezlerinizi silmeyin_.
+  Bu noktada tarayıcı çerezlerinizi kaybetmek Bitwarden'ın cihazınızı "bilinen cihaz" olarak "unutmasına" neden olabilir, bu da
+  [yeni cihaz doğrulaması](https://bitwarden.com/help/new-device-verification/) 
+  veya hesabınızda 2FA'ya ihtiyaç duymanıza yol açabilir.
 
-️⚠️ When trying to log in “too often”: the Bitwarden servers
-[will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
-after 9 failed login attempts from an unknown device, so be careful with your attempts.
+️⚠️ "Çok sık" giriş yapmaya çalışırken: Bitwarden sunucuları
+[9 başarısız giriş girişiminden sonra CAPTCHA doğrulaması gerektirecektir](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
+bilinmeyen bir cihazdan, bu yüzden denemelerinizde dikkatli olun.
 
-If at least one of these experiments succeeds, you know that it isn't a server problem, and you can focus
-on the functioning of your Bitwarden client(s).
+Bu deneylerden en az biri başarılı olursa, bunun bir sunucu sorunu olmadığını bilirsiniz ve Bitwarden istemci(ler)inizin işleyişine odaklanabilirsiniz.
 
-# Cannot Connect to the Bitwarden server
+# Bitwarden sunucusuna bağlanamıyor
 
-⚠️ Have you made a [backup](#make-a-backup)?
+⚠️ [Yedek](#yedek-yapın) yaptınız mı?
 
-Did you try [connecting to the web vault](#first-steps-test-the-web-vault) and had issues?
-It could be the server itself or your connection:
+[Web kasasına bağlanmayı](#ilk-adımlar-web-kasasını-test-edin) deneyip sorun yaşadınız mı?
+Sunucunun kendisi veya bağlantınız olabilir:
 
-* Try to log in via _other devices and other networks_ (that is, Wi-Fi versus cellular).
+* _Diğer cihazlar ve diğer ağlar_ aracılığıyla (yani Wi-Fi'ye karşı hücresel) giriş yapmayı deneyin.
 
-* On mobile devices: Try _turning off Wi-Fi temporarily_, i.e. changing to cellular. 
-  Or vice versa.
-  This might “solve” some network and/or IP address problems.
+* Mobil cihazlarda: _Wi-Fi'yi geçici olarak kapatmayı_ deneyin, yani hücresele geçin. 
+  Veya tam tersi.
+  Bu bazı ağ ve/veya IP adresi sorunlarını "çözebilir".
 
-* For all devices in your local network: power off the router, wait 30 seconds, and then turn it back on.
-  This might resolve some network addressing issues.
+* Yerel ağınızdaki tüm cihazlar için: yönlendiriciyi kapatın, 30 saniye bekleyin, sonra tekrar açın.
+  Bu bazı ağ adresleme sorunlarını çözebilir.
 
-* If you use a VPN, turn it off (or on), (at least temporarily).
+* VPN kullanıyorsanız, onu kapatın (veya açın), (en azından geçici olarak).
 
-If you cannot seem to connect to the Bitwarden server (but other sites seem to connect correctly):
+Bitwarden sunucusuna bağlanamıyor gibi görünüyorsanız (ancak diğer siteler doğru bağlanıyor gibi görünüyor):
 
-* Start by looking at the [Bitwarden status page](https://status.bitwarden.com).
-  Perhaps this is a known issue or a planned outage.
-* Are _the Bitwarden (US/EU) servers are temporarily down_?
-  [Downdetector](https://downdetector.com/status/bitwarden/) is a good crosscheck to see if other users
-  are also having a problem.
+* [Bitwarden durum sayfasına](https://status.bitwarden.com) bakarak başlayın.
+  Belki bu bilinen bir sorun veya planlı bir kesinti.
+* _Bitwarden (ABD/AB) sunucuları geçici olarak kapalı mı_?
+  [Downdetector](https://downdetector.com/status/bitwarden/) diğer kullanıcıların da sorunu yaşayıp yaşamadığını görmek için iyi bir çapraz kontrol.
 
-* _If you’re self-hosting_, verify your own server _is functioning correctly_.  It is possible your
-login problems due to local errors misconfigurations of your self-hosted Bitwarden server.
-These issues are out of the scope of this guide). But please do verify you have the _latest server version_
-installed. “New” client versions may have trouble communicating with 
-“old” server versions.
+* _Kendi barındırıyorsanız_, kendi sunucunuzun _doğru çalıştığını doğrulayın_.  Giriş sorunlarınızın kendi barındırdığınız Bitwarden sunucunuzun yerel hataları yanlış yapılandırmaları nedeniyle olması mümkün.
+Bu sorunlar bu kılavuzun kapsamı dışındadır). Ancak lütfen _en son sunucu sürümünün_
+yüklü olduğunu doğrulayın. "Yeni" istemci sürümleri 
+"eski" sunucu sürümleriyle iletişim kurmakta sorun yaşayabilir.
 
-If your Bitwarden server is down, there is not much more for you to do -- except again, to make a
-backup if you haven't already.
+Bitwarden sunucunuz kapalıysa, yapabileceğiniz çok fazla şey yok -- yine, henüz yapmadıysanız yedek yapmak dışında.
 
-If you can log in via the web vault, but not using your local Bitwarden client (or browser extension), you
-have a Bitwarden client problem.
+Web kasası aracılığıyla giriş yapabiliyorsanız, ancak yerel Bitwarden istemcinizi (veya tarayıcı uzantısını) kullanamıyorsanız, Bitwarden istemci sorununuz var.
 
-If you cannot log in via the web vault, you may have a username/password problem.
+Web kasası aracılığıyla giriş yapamıyorsanız, kullanıcı adı/şifre sorununuz olabilir.
 
-# Bitwarden Client Problems
+# Bitwarden İstemci Sorunları
 
-If you can successfully log in via the web vault, but are having trouble via your Bitwarden client, start with
-the good news: your credential datastore is not lost!
+Web kasası aracılığıyla başarıyla giriş yapabiliyorsanız, ancak Bitwarden istemciniz aracılığıyla sorun yaşıyorsanız, iyi haberle başlayın: kimlik bilgileriniz kaybolmadı!
 
-The question remains, however, whether your problem is with a single Bitwarden client, single host machine, or
-perhaps even a particular network.
+Ancak soru şu ki, sorununuz tek bir Bitwarden istemcisi, tek ana makine, hatta belki belirli bir ağla mı ilgili.
 
-⚠️ Have you made a [backup](#make-a-backup)?
+⚠️ [Yedek](#yedek-yapın) yaptınız mı?
 
-* Try _uninstalling the Bitwarden client and installing a fresh version_. 
-  There seem to be multiple situations where
-  an existing Bitwarden client can get confused after an upgrade. If you are currently logged with that client,
-  _do not uninstall the client until you have [made a backup](#make-a-backup)_.
+* _Bitwarden istemcisini kaldırıp taze bir sürüm yüklemeyi_ deneyin. 
+  Mevcut bir Bitwarden istemcisinin yükseltmeden sonra kafasının karışabileceği birden fazla durum var gibi görünüyor. O istemciyle şu anda giriş yaptıysanız,
+  _[yedek yapmadan](#yedek-yapın) istemciyi kaldırmayın_.
 
-* Try to log in via [other Bitwarden clients](https://bitwarden.com/download/).
+* [Diğer Bitwarden istemcileri](https://bitwarden.com/download/) aracılığıyla giriş yapmayı deneyin.
 
-* Try to use a Bitwarden client on a different device.
-  This may indicate whether there is an OS problem,
-conflicting browser extension, or other environmental factors.
+* Farklı bir cihazda Bitwarden istemcisi kullanmayı deneyin.
+  Bu bir OS sorunu,
+çakışan tarayıcı uzantısı veya diğer çevresel faktörler olup olmadığını gösterebilir.
 
-* Again, if at all possible, try a different network.
-Take your laptop to a coffee shop. 
-Turn Wi-Fi off (or on) so that you are using a different connection to the Internet.
-Enable or disable your VPN.
-Try a different exit node for your VPN.
+* Yine, mümkünse, farklı bir ağ deneyin.
+Dizüstü bilgisayarınızı bir kafeye götürün. 
+Wi-Fi'yi kapatın (veya açın) böylece İnternet'e farklı bir bağlantı kullanacaksınız.
+VPN'inizi etkinleştirin veya devre dışı bırakın.
+VPN'iniz için farklı bir çıkış düğümü deneyin.
 
-The point behind these experiments is to ascertain the broken link in the chain and to direct your research
-more closely.
+Bu deneylerin arkasındaki nokta, zincirdeki kırık bağlantıyı tespit etmek ve araştırmanızı daha yakından yönlendirmektir.
 
-## KDF Issues
+## KDF Sorunları
 
-⚠️ Have you made a [backup](#make-a-backup)?
+⚠️ [Yedek](#yedek-yapın) yaptınız mı?
 
-Bitwarden now recommends that you modify your
-[KDF settings](https://bitwarden.com/help/kdf-algorithms/) to be different from
-the default settings you got when you first created your
-vault.
-It is possible some Bitwarden clients will behave badly when you make this change. 
-If you can log in via the web vault, but one
-or more Bitwarden clients are not working,
+Bitwarden artık
+[KDF ayarlarınızı](https://bitwarden.com/help/kdf-algorithms/) kasanızı ilk oluşturduğunuzda aldığınız
+varsayılan ayarlardan farklı olacak şekilde değiştirmenizi öneriyor.
+Bu değişikliği yaptığınızda bazı Bitwarden istemcilerinin kötü davranma olasılığı var. 
+Web kasası aracılığıyla giriş yapabiliyorsanız, ancak bir
+veya daha fazla Bitwarden istemciniz çalışmıyorsa,
 
-* _Completely_ log your client out and then back in again.
-* Consider temporarily switching your KDF settings back to the default, and try again.
+* İstemcinizi _Tamamen_ çıkarın ve tekrar girin.
+* KDF ayarlarınızı geçici olarak varsayılana geri döndürmeyi düşünün ve tekrar deneyin.
 
-> Especially on iOS, the Argon2 settings can be “too high”: change them to the default values (at least for
-> “memory”).
-> According to Bitwarden: “iOS limits app memory for autofill. Increasing memory from the default 64 MB may result in errors while unlocking the vault with autofill.”
+> Özellikle iOS'ta, Argon2 ayarları "çok yüksek" olabilir: bunları varsayılan değerlere değiştirin (en azından
+> "bellek" için).
+> Bitwarden'a göre: "iOS, otodoldurma için uygulama belleğini sınırlar. Belleği varsayılan 64 MB'den artırmak, otodoldurmayla kasanın kilidini açarken hatalara neden olabilir."
 
-## Application hangs or crashes, or otherwise acts inexplicably
+## Uygulama donuyor veya çöküyor, veya başka şekilde açıklanamaz davranıyor
 
-If a Bitwarden client consistently crashes or has other inexplicable behavior, consider doing a full
-uninstall and reinstall.
+Bir Bitwarden istemcisi tutarlı bir şekilde çökerse veya başka açıklanamaz davranışları varsa, tam kaldırma ve yeniden yükleme yapmayı düşünün.
 
-⚠️ Beware that uninstalling the Bitwarden mobile app, desktop app and browser extension will make those apps
-“unknown devices” for Bitwarden again, requiring the email login verification code due to the
-[new device verification](https://bitwarden.com/help/new-device-verification/) and login protection. 
-This is critical if you have failed to enable 2FA on your
-vault; make sure you have access to your email account, where you will get the email verification codes.
+⚠️ Bitwarden mobil uygulamasını, masaüstü uygulamasını ve tarayıcı uzantısını kaldırmanın bu uygulamaları
+Bitwarden için tekrar "bilinmeyen cihazlar" yapacağını unutmayın, 
+[yeni cihaz doğrulaması](https://bitwarden.com/help/new-device-verification/) ve giriş koruması nedeniyle e-posta giriş doğrulama kodu gerektirecektir. 
+Kasanızda 2FA'yı etkinleştirmeyi başaramadıysanız bu kritiktir; e-posta doğrulama kodlarını alacağınız e-posta hesabınıza erişiminiz olduğundan emin olun.
 
-1. Uninstall the app. Do not worry if you cannot "log out" before doing the uninstall.
-2. Delete the local storage of the app--make sure the uninstall did not leave traces of the app on your system.
-   Do not trust the uninstaller; see if there is other [local storage](https://bitwarden.com/help/data-storage/) that
-   the uninstaller may have missed.
-3. Reboot your device,
-4. Reinstall the app from a fresh download.
-5. Try to log in again.
+1. Uygulamayı kaldırın. Kaldırmadan önce "çıkış" yapamıyorsanız endişe etmeyin.
+2. Uygulamanın yerel depolamasını silin--kaldırmanın sistemde uygulamadan iz bırakmadığından emin olun.
+   Kaldırıcıya güvenmeyin; kaldırıcının kaçırmış olabileceği başka [yerel depolama](https://bitwarden.com/help/data-storage/) olup olmadığını görün.
+3. Cihazınızı yeniden başlatın,
+4. Uygulamayı taze indirmeden yeniden yükleyin.
+5. Tekrar giriş yapmayı deneyin.
 
-If this particular Bitwarden client continues to misbehave, but you have ruled out a username/passwordr issue,
-you can create a new post to get further help. Try to describe the problem as detailed as possible,
-what exact error message you get (ideally with a screenshot, but make sure to blur any personal and
-sensitive data), maybe what you already tried (and didn’t work) etc.
+Bu özel Bitwarden istemcisi kötü davranmaya devam ederse, ancak kullanıcı adı/şifre sorunu olmadığını dışladıysanız, daha fazla yardım almak için yeni bir gönderi oluşturabilirsiniz. Sorunu mümkün olduğunca ayrıntılı açıklamaya çalışın,
+hangi tam hata mesajını aldığınız (ideal olarak ekran görüntüsüyle, ancak kişisel ve
+hassas verileri bulanıklaştırdığınızdan emin olun), belki de zaten neyi denediğiniz (ve işe yaramadığı) vb.
 
-You can also contact [Bitwarden support](https://bitwarden.com/contact/) and create a new trouble ticket.
+Ayrıca [Bitwarden destek](https://bitwarden.com/contact/) ile iletişime geçip yeni bir sorun bileti oluşturabilirsiniz.
 
-If you believe you have found a bug--you have “other” or “weird” error messages--you can report it on
-GitHub ([here](https://github.com/bitwarden/clients/issues) for the browser extension, desktop app,
-web vault and CLI, [here](https://github.com/bitwarden/android/issues) for the Android mobile app and
-Android Authenticator app, and [here](https://github.com/bitwarden/ios/issues) for the iOS mobile app and
-iOS Authenticator app…)
+Bir hata bulduğunuza inanıyorsanız--"diğer" veya "garip" hata mesajlarınız var--bunu
+GitHub'da rapor edebilirsiniz (tarayıcı uzantısı, masaüstü uygulaması,
+web kasası ve CLI için [buraya](https://github.com/bitwarden/clients/issues), Android mobil uygulaması ve
+Android Authenticator uygulaması için [buraya](https://github.com/bitwarden/android/issues), ve iOS mobil uygulaması ve
+iOS Authenticator uygulaması için [buraya](https://github.com/bitwarden/ios/issues)…)
 
-## Email and/or Master Password
+## E-posta ve/veya Ana Şifre
 
-But what if the web vault _seems_ to be functioning properly, yet you cannot log in there (or anywhere else)?
-What next?
-At this point, you must suspect a problem with your username, your master password, or both.
+Peki web kasası _düzgün çalışıyor gibi görünüyorsa_, yine de oraya (veya başka hiçbir yere) giriş yapamıyorsanız ne olacak?
+Sonra ne yapacaksınız?
+Bu noktada, kullanıcı adınız, ana şifreniz veya her ikisiyle ilgili bir sorunu şüphelenmeli.z
 
-️⚠️ When trying to log in “too often”: the Bitwarden servers
-[will require CAPTCHA verification](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
-after 9 failed login attempts from an unknown device, so be careful with your attempts.
+️⚠️ "Çok sık" giriş yapmaya çalışırken: Bitwarden sunucuları
+[9 başarısız giriş girişiminden sonra CAPTCHA doğrulaması gerektirecektir](https://bitwarden.com/help/security-faqs/#q-how-can-i-protect-my-bitwarden-account-from-brute-force-attacks)
+bilinmeyen bir cihazdan, bu yüzden denemelerinizde dikkatli olun.
 
-* Are you on the wrong web vault, [US vault](https://vault.bitwarden.com) versus [EU vault](https://vault.bitwarden.eu))?
-These are _not interchangeable_.
-If you haven't tried this already, go ahead and try to log in via the other web server.
+* Yanlış web kasasında mısınız, [ABD kasası](https://vault.bitwarden.com) mı [AB kasası](https://vault.bitwarden.eu) mı)?
+Bunlar _birbirinin yerine kullanılamaz_.
+Bunu daha önce denemediyseniz, devam edin ve diğer web sunucusu aracılığıyla giriş yapmayı deneyin.
 
-_Check your email._
+_E-postanızı kontrol edin._
 
-* _Do you actually have an account?_
-  [Go to Bitwarden](https://bitwarden.com/pricing/) and try to create a new account.
-  If you _already_ have an account, you _will not_ receive a message in your inbox.
-  If you _do_ receive an email message, you either remembered the email incorrectly, or someone (a malicious
-  family member?) has deleted it.
-  If you inadvertently created a new vault, please consider [deleting it](https://bitwarden.com/help/forgot-master-password/) now.)
+* _Gerçekten hesabınız var mı?_
+  [Bitwarden'a gidin](https://bitwarden.com/pricing/) ve yeni hesap oluşturmayı deneyin.
+  Eğer _zaten_ hesabınız varsa, gelen kutunuzda mesaj _almayacaksınız_.
+  Eğer e-posta mesajı _alırsanız_, ya e-postayı yanlış hatırlamışsınız ya da biri (kötü niyetli
+  aile üyesi?) onu silmiş.
+  Yanlışlıkla yeni kasa oluşturduysanız, lütfen şimdi [silmeyi](https://bitwarden.com/help/forgot-master-password/) düşünün.)
 
-> For the email address, Bitwarden doesn't care whether you use lower case letters or upper-case letters,
-> so whether you try to login with example@example.com or EXAMPLE@EXAMPLE.COM – both should work exactly the
-> same. This is not true for the master password!
+> E-posta adresi için, Bitwarden küçük harf veya büyük harf kullanmanız umurunda değil,
+> dolayısıyla example@example.com veya EXAMPLE@EXAMPLE.COM ile giriş yapmaya çalışırsanız – ikisi de tam olarak aynı şekilde çalışmalıdır. Bu ana şifre için geçerli değil!
 
-_Check your master password_
+_Ana şifrenizi kontrol edin_
 
-* _Verify your email address and master password_
-  by referring to your [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md).
-* Did you set a "master password hint"? If so, it's time to [request it](https://vault.bitwarden.com/#/hint).
+* _E-posta adresinizi ve ana şifrenizi doğrulayın_
+  [acil durum sayfanıza](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) başvurarak.
+* "Ana şifre ipucu" belirlediniz mi? Öyleyse, [talep etme](https://vault.bitwarden.com/#/hint) zamanı.
 
-> Pro tip: many people use the master password hint to remind them where they stored their emergency sheet.
+> Pro ipucu: birçok kişi ana şifre ipucunu acil durum sayfalarını nerede sakladıklarını hatırlatmak için kullanır.
 
-* Perhaps _you recently changed your email address and/or master password_?
-  And worse, didn’t update your emergency sheet?
-  Step back, relax, take a walk, get a cup of coffee.
-  Perhaps it will come back to you in a moment.
+* Belki _yakın zamanda e-posta adresinizi ve/veya ana şifrenizi değiştirdiniz_?
+  Ve daha kötüsü, acil durum sayfanızı güncellemediniz mi?
+  Bir adım geri çekilin, rahatın, yürüyüşe çıkın, bir fincan kahve alın.
+  Belki bir anda aklınıza gelir.
 
-_Look for typos_
+_Yazım hatalarını arayın_
 
-* _Look for any typos in your email address and/or master password_, especially silly typos or more obvious
-  ones like _0 (zero) versus O (capital letter “oh”)_, _l (small “L”) versus I (capital letter “i”)_,
-  or _| (special character “vertical bar”)_.
-* _Look for added or missing spaces_: trailing spaces, leading spaces or double spaces within your master
-  password. Whitespace in a password is critical!
-  The discrepancy could be either when you were typing it in or when you created the
-  master password.
+* _E-posta adresinizde ve/veya ana şifrenizde herhangi bir yazım hatası arayın_, özellikle aptalca yazım hataları veya daha belirgin
+  olanlar như _0 (sıfır) ile O (büyük harf "oh")_, _l (küçük "L") ile I (büyük harf "i")_,
+  veya _| (özel karakter "dikey çubuk")_.
+* _Eklenen veya eksik boşlukları arayın_: sondaki boşluklar, başlangıç boşlukları veya ana şifrenizde çift boşluklar. Şifredeki boşluk kritiktir!
+  Tutarsızlık ya onu yazarken ya da ana
+  şifreyi oluştururken olabilir.
 
-_"Special" Characters_
+_"Özel" Karakterler_
 
-Do you have _problematic special characters_ in your master password?
-Non-ASCII, Unicode, or Emoji characters may work on one system but not on other systems.
-Your master password should only use the "safe" 95-character
-[printable ASCII character set](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg)
+Ana şifrenizde _sorunlu özel karakterler_ var mı?
+ASCII olmayan, Unicode veya Emoji karakterler bir sistemde çalışabilir ancak diğer sistemlerde çalışmayabilir.
+Ana şifreniz sadece "güvenli" 95 karakterli
+[yazdırılabilir ASCII karakter setini](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg) kullanmalıdır
 
-Even if your master password _currently_ works, a system upgrade could cause it to fail at a future date! 
+Ana şifreniz _şu anda_ çalışsa bile, sistem yükseltmesi gelecekte başarısız olmasına neden olabilir! 
 
-A strong sign you may have a character set problem is if you can
-log in via your web vault or some Bitwarden clients, but not others.
-In this case, consider changing your master password,
-but, again, start by [making a backup](#make-a-backup)!
+Karakter seti sorununuz olabileceğinin güçlü bir işareti, web kasanız veya bazı Bitwarden istemcilerinden giriş yapabilmeniz ancak diğerlerinden yapamamanızdır.
+Bu durumda, ana şifrenizi değiştirmeyi düşünün,
+ancak yine, önce [yedek yaparak](#yedek-yapın) başlayın!
 
-Many people think a password is "safer" if it has weird characters in it. In terms of security, a weird
-character does help as much as some might hope: `MyDögHàŝFlèaß` does not add nearly as much 
-security ("randomness" or "entropy") as
-simply using a slightly longer but much more tractable [passphrase](https://xkcd.com/936/), such as
-`polka-fame-curled-either-passover` or `WinnerPlasmaKabobSinuous`.
+Birçok kişi şifreye garip karakterler koymanın onu "daha güvenli" hale getirdiğini düşünür. Güvenlik açısından, garip karakter bazılarının umduğu kadar yardımcı olmaz: `MyDögHàŝFlèaß` neredeyse 
+güvenlik ("rastgelelik" veya "entropi") katmaz
+sadece biraz daha uzun ama çok daha idare edilebir [parola öbeği](https://xkcd.com/936/) kullanmak kadar, örneğin
+`polka-fame-curled-either-passover` veya `WinnerPlasmaKabobSinuous`.
 
-To add insult to injury, punctuation and
-special characters make the master password harder to memorize and harder to type.
+Dahası da var, noktalama işaretleri ve
+özel karakterler ana şifreyi hatırlamayı ve yazmayı zorlaştırır.
 
-If you choose to update your master password, use a 4-word passphrase, generated by Bitwarden itself.
-If you want extra security, have
-Bitwarden add another word (or even two words) to the passphrase.
+Ana şifrenizi güncellemeyi seçerseniz, Bitwarden'ın kendisi tarafından oluşturulan 4 kelimelik parola öbeği kullanın.
+Ekstra güvenlik istiyorsanız,
+Bitwarden'ın parola öbeğine başka bir kelime (hatta iki kelime) eklemesini sağlayın.
 
-Getting back to problematic special characters, the "safest" characters, the "printable ASCII character set",
-the only ones you should use in a master password, consist of:
+Sorunlu özel karakterlere geri dönersek, "en güvenli" karakterler, "yazdırılabilir ASCII karakter seti",
+ana şifrede kullanmanız gereken tek karakterler şunlardan oluşur:
 
-* capital letters A-Z
-* small letters a-z
-* numerals 0-9
-* the space character
-* ! (exclamation point)
-* " (double quote)
-* \# (octothorpe, a.k.a. "pound", "hashtag", or "sharp")
-* $ (dollar-sign)
-* % (percent)
+* büyük harfler A-Z
+* küçük harfler a-z
+* rakamlar 0-9
+* boşluk karakteri
+* ! (ünlem işareti)
+* " (çift tırnak)
+* \# (octothorpe, "pound", "hashtag" veya "sharp" olarak da bilinir)
+* $ (dolar işareti)
+* % (yüzde)
 * & (ampersand)
-* ' (apostrophe)
-* ( (left parenthesis)
-* ) (right parenthesis)
-* \* (asterisk, a.k.a. "star" or "splat")
-* \+ (plus)
-* , (comma)
-* \- (dash)
-* . (period, or "dot")
+* ' (apostrof)
+* ( (sol parantez)
+* ) (sağ parantez)
+* \* (yıldız işareti, "star" veya "splat" olarak da bilinir)
+* \+ (artı)
+* , (virgül)
+* \- (tire)
+* . (nokta, veya "dot")
 * / (slash)
-* : (colon)
-* ; (semicolon)
-* < ("less than")
-* = (equal)
-* \> ("greater than")
-* ? (question mark)
-* @ (at-sign)
+* : (iki nokta)
+* ; (noktalı virgül)
+* < ("küçüktür")
+* = (eşittir)
+* \> ("büyüktür")
+* ? (soru işareti)
+* @ (at işareti)
 * ^ (carat)
-* _ (underscore)
-* \` (back tick)
+* _ (alt çizgi)
+* \` (geri tik)
 * ~ (tilde)
 
-> Note that even though all these characters are acceptable in a Bitwarden master password, be aware
-> that other websites may have trouble with some of them.
+> Bu karakterlerin tümü Bitwarden ana şifresinde kabul edilebilir olsa da,
+> diğer web sitelerinin bazılarıyla sorun yaşayabileceğini unutmayın.
 
-_Autocorrect Issues_
+_Otomatik Düzeltme Sorunları_
 
-It's possible that your master password will be mangled by your keyboard, device, or even the client (browser)
-itself. That is, this could be an autocorrect problem.
-You may not easily spot this, especially since password input is often obscured. 
-Even with the aforementioned safe characters,
-some characters may get autocorrected by your keyboard, client, or device:
+Ana şifrenizin klavyeniz, cihazınız veya hatta istemci (tarayıcı) tarafından bozulması mümkündür. Yani, bu bir otomatik düzeltme sorunu olabilir.
+Özellikle şifre girişi genellikle gizlendiği için bunu kolayca fark etmeyebilirsiniz. 
+Bahsedilen güvenli karakterlerle bile,
+bazı karakterler klavyeniz, istemciniz veya cihazınız tarafından otomatik düzeltilebilir:
 
-* Some systems will replace straight-quotes (`'` or `"`) with curly-quotes 
-  (i.e., “smart-quotes”, such as "&ldquo;", "&rdquo;",
-  "&lsquo;" and "&rsquo;"). MacOS is especially notorious for this.
-* You may have inserted a "." (period/full stop) and/or invisible spaces after pressing the “space-bar”.
-* Some systems will automatically change a
-  input lower-case letter into an upper-case letter or vice versa.
-* On iOS: _deactivate smart punctuation_, since that can “autocorrect” characters you type in. 
-  Look under Settings->General->Keyboard, and set _Smart Punctuation_ off.
-* In general, all kinds of apostrophes and quotation marks (', ", `, ´, ‘, ’, ‛, “, ”, ‟) may be
-  autocorrected into a different form preferred by the device or app you are using.
+* Bazı sistemler düz tırnakları (`'` veya `"`) kıvrık tırnaklarla değiştirir 
+  (yani, "akıllı tırnaklar", örneğin "&ldquo;", "&rdquo;",
+  "&lsquo;" ve "&rsquo;"). MacOS bu konuda özellikle ünlüdür.
+* "." (nokta/tam durma) ve/veya "boşluk tuşu"na bastıktan sonra görünmez boşluklar eklemiş olabilirsiniz.
+* Bazı sistemler otomatik olarak
+  girdi küçük harfini büyük harfe veya tam tersine değiştirir.
+* iOS'ta: _akıllı noktalamayı devre dışı bırakın_, çünkü bu yazdığınız karakterleri "otomatik düzeltebilir". 
+  Ayarlar->Genel->Klavye altına bakın ve _Akıllı Noktalama_yı kapatın.
+* Genel olarak, her türlü apostrof ve tırnak işareti (', ", `, ´, ', ', ‛, ", ", ‟) kullandığınız cihaz veya uygulama tarafından tercih edilen farklı bir forma otomatik düzeltilebilir.
 
-What can you try to find the correct password you entered or to type in the correct password on your system?
+Girdiğiniz doğru şifreyi bulmak veya sisteminizde doğru şifreyi yazmak için ne deneyebilirsiniz?
 
-* _Turn off autocorrect_, if possible.
-  In iOS, go to Settings->General->Keyboard, and disable both _Auto-Capitalization_ and _Auto-Correction_.
-* Try to _change your (virtual or physical) keyboard_.
-* Make your _keyboard input visible_ if possible.
-* Type it more carefully (look at your hands!).
-* Use the _on-screen visible keyboard_ such as the [Character Map](https://support.microsoft.com/en-us/topic/how-to-use-special-characters-in-windows-documents-ec1a4e84-706e-67a5-e52b-e3ebab90313f) in Windows.
-* Consider composing the password in a text editor such as `Notepad` or `TextEdit` and then pasting it into your
-  login form.
+* Mümkünse _otomatik düzeltmeyi kapatın_.
+  iOS'ta, Ayarlar->Genel->Klavye'ye gidin ve hem _Otomatik Büyük Harf_ hem de _Otomatik Düzeltme_yi devre dışı bırakın.
+* _(Sanal veya fiziksel) klavyenizi değiştirmeyi_ deneyin.
+* Mümkünse _klavye girişinizi görünür yapın_.
+* Daha dikkatli yazın (ellerinize bakın!).
+* Windows'taki [Karakter Haritası](https://support.microsoft.com/en-us/topic/how-to-use-special-characters-in-windows-documents-ec1a4e84-706e-67a5-e52b-e3ebab90313f) gibi _ekran klavyesini kullanın_.
+* Şifreyi `Notepad` veya `TextEdit` gibi bir metin düzenleyicide yazmayı ve sonra giriş formunuza yapıştırmayı düşünün.
 
-## Lost Password or Lost 2FA
+## Kayıp Şifre veya Kayıp 2FA
 
-> None of this is working! The web vault is there, but it won't let me log in.
+> Bunların hiçbiri işe yaramıyor! Web kasası orada, ama giriş yapmama izin vermiyor.
 
-If you have truly lost your password, then--unfortunately--there is no super-duper sneaky secret back door
-to get back into your vault.
-Bitwarden can neither reset your master password nor “circumvent” it in any way.
-The Bitwarden master password does more than “authenticate” you; it is also a
-major factor in the encryption of your vault.
-_Your master password is a necessary input to decrypt your vault, and
-your master password never leaves your device._
+Şifrenizi gerçekten kaybettiyseniz, ne yazık ki kasanıza geri girmeniz için süper gizli bir arka kapı yoktur.
+Bitwarden ne ana şifrenizi sıfırlayabilir ne de herhangi bir şekilde "atlatabilir".
+Bitwarden ana şifresi sizi "kimlik doğrulamak"tan fazlasını yapar; aynı zamanda kasanızın şifrelenmesinde büyük bir faktördür.
+_Ana şifreniz kasanızın şifresini çözmek için gerekli bir girdimdir ve
+ana şifreniz asla cihazınızı terk etmez._
 
-This is for your protection. It means that even if the Bitwarden server were to be seized by malefactors, they would not
-have the necessary secret to decrypt your vault. This is also why, as long as your master password isn’t available, it
-cannot be reset or changed by anyone else.
+Bu sizin korunmanız içindir. Bu, Bitwarden sunucusu kötü niyetli kişiler tarafından ele geçirilse bile, kasanızın şifresini çözmek için gerekli sırrı ellerinde bulundurmayacağı anlamına gelir. Ana şifre mevcut olmadığı sürece, başka biri tarafından sıfırlanamaz veya değiştirilemez.
 
-⚠️ If at all possible, do you have a [backup](#make-a-backup)?
+⚠️ Mümkünse, [yedeğiniz](#yedek-yapın) var mı?
 
-Your only remaining hope is if you can remember the master password or even “guess it”.
-If you believe there is a chance of remembering it, then take your
-time--even a few days--and perhaps you will remember it.
-Sometimes it is good to sit down and focus on it.
-Or perhaps it is good to stop thinking about it for a few days…
+Tek kalan umudunuz ana şifreyi hatırlayabilmeniz veya hatta "tahmin edebilmenizdir".
+Hatırlama şansı olduğuna inanıyorsanız, zaman ayırın--hatta birkaç gün--ve belki hatırlarsınız.
+Bazen oturup odaklanmak iyidir.
+Ya da belki birkaç gün düşünmemek iyidir…
 
-⚠️ When  you try to log in “too often”: Be aware, that the Bitwarden servers
-“will require CAPTCHA verification after 9 failed login attempts from an unknown device”.
-Be careful and as accurate as possible" with your attempts.
-Otherwise you will start facing additional CAPTCHA
-challenges before each password guess.
+⚠️ "Çok sık" giriş yapmaya çalışırken: Bitwarden sunucularının
+"bilinmeyen bir cihazdan 9 başarısız giriş girişiminden sonra CAPTCHA doğrulaması gerektireceğini" unutmayın.
+Dikkatli olun ve denemelerinizde mümkün olduğunca doğru olun.
+Aksi takdirde her şifre tahmininizden önce ek CAPTCHA
+zorluklarıyla karşılaşmaya başlayacaksınız.
 
-_If you have truly lost your Bitwarden account_,
-[you can delete your Bitwarden account](https://bitwarden.com/help/forgot-master-password/) as long as
-you have access to the email address you used.
+_Bitwarden hesabınızı gerçekten kaybettiyseniz_,
+kullandığınız e-posta adresine erişiminiz olduğu sürece [Bitwarden hesabınızı silebilirsiniz](https://bitwarden.com/help/forgot-master-password/).
 
-Account deletion is not reversible!
-Again, do you have a [backup](#make-a-backup)?
-Next, you can [create a new account](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md)
-and ideally import/restore your most recent backup/export.
+Hesap silme geri alınamaz!
+Yine, [yedeğiniz](#yedek-yapın) var mı?
+Sonra, [yeni hesap oluşturabilir](https://github.com/djasonpenney/bitwarden_reddit/blob/main/getting_started.md)
+ve ideal olarak en son yedeğinizi/dışa aktarmanızı içe aktarabilir/geri yükleyebilirsiniz.
 
-## Was I "hacked"?
+## "Hacklendim" mi?
 
-Sometimes when someone cannot log into their password manager, they believe they "must have been hacked".
-I believe this is naive:
+Bazen biri şifre yöneticisine giriş yapamayınca, "hacklenmiş olmalıyım" diye düşünürler.
+Bunun naif olduğuna inanıyorum:
 
-I assume you have a strong master password (unique, complex, and
-randomly generated) as well as good 2FA on your vault (a FIDO2 hardware security token or a TOTP app). 
-I assume that you do not download malware on your device: no "hacks", "cracks", or "cheats"; your device has
-current OS patches (and you don't use it if it does not have current patches or cannot be updated); you do not
-allow anyone else to have access to the keyboard or even the USB ports, and so forth.
+Güçlü bir ana şifreniz (benzersiz, karmaşık ve rastgele oluşturulmuş) ve kasanızda iyi 2FA'nız (FIDO2 donanım güvenlik belirteci veya TOTP uygulaması) olduğunu varsayıyorum. 
+Cihazınıza kötü amaçlı yazılım indirmediğinizi varsayıyorum: "hack", "crack" veya "hile" yok; cihazınızda güncel OS yamaları var (ve güncel yamalar yoksa veya güncellenemiyorsa kullanmıyorsunuz); başka kimsenin klavyeye veya hatta USB portlarına erişimine izin vermiyorsunuz, vb.
 
-In this case the overwhelming odds are that you _did this to yourself_. Yes, there are exotic attacks out there that you
-might be helpless against, but they are extremely rare. One report indicates that the entities that deploy
-these sophisticated attacks charge $250,000 _per person_.
+Bu durumda ezici olasılık bunu _kendinizin yaptığıdır_. Evet, orada karşı koyamayacağınız egzotik saldırlar var, ama bunlar son derece nadir. Bir rapor, bu sofistike saldırıları kullanan varlıkların _kişi başına_ 250.000 dolar aldığını gösteriyor.
 
-If you really have malware, the overwhelming odds are _you downloaded and installed it_. This could be
-downloading (or side loading) a bad app, intentionally downloading a "hack" or "cracked" game, or perhaps 
-incautiously opening a strange or unexpected email attachment.
+Gerçekten kötü amaçlı yazılımınız varsa, ezici olasılık _onu indirip yüklediğinizdir_. Bu kötü bir uygulama indirmek (veya yan yükleme yapmak), kasıtlı olarak "hack" veya "crack"li oyun indirmek, ya da belki garip veya beklenmedik e-posta ekini dikkatsizce açmak olabilir.
 
-_Why the password manager?_
+_Neden şifre yöneticisi?_
 
-If an attacker wanted to plunder your bank accounts and other assets, they would make sure it took you as long as
-possible to discover the breach. They want as much time as possible to do
-their nefarious work.
-Modifying the login for your password
-manager is close to the bottom of the list of things they would do.
+Bir saldırgan banka hesaplarınızı ve diğer varlıklarınızı yağmalamak isteseydi, ihlali keşfetmenizin mümkün olduğunca uzun sürmesini sağlarlardı. Kötü işlerini yapmak için mümkün olduğunca çok zamana ihtiyaçları var.
+Şifre yöneticinizin girişini değiştirmek yapacakları şeylerin listesinin neredeyse en altındadır.
 
-Of course, there are exceptions. A bad actor might co-opt your Amazon account, for instance, to deliver merchandise 
-to a drop location or initiate a [brushing scam](https://www.uspis.gov/news/scam-article/brushing-scam).
+Tabii, istisnalar vardır. Kötü bir aktör örneğin Amazon hesabınızı ele geçirip bırakma konumuna mal göndermek veya [brushing dolandırıcılığı](https://www.uspis.gov/news/scam-article/brushing-scam) başlatmak için kullanabilir.
 
-They might modify the login to a social media account in order to publish illegal content (and delay you 
-removing the illicit content).
+Yasadışı içerik yayınlamak (ve yasadışı içeriği kaldırmanızı geciktirmek) için sosyal medya hesabının girişini değiştirebilirler.
 
-The one exception to this might be a spiteful ex-spouse 
-or rebellious teenager who is looking to cause you grief _by denying your
-access to your own secrets_. Outside a real corner case like this, an attacker modifying your vault is not a
-likely scenario.
+Bunun tek istisnası, _kendi sırlarınıza erişiminizi reddederek_ size keder vermek isteyen kinci eski eş veya asi genç olabilir. Bunun gibi gerçek köşe durum dışında, saldırganın kasanızı değiştirmesi olası bir senaryo değildir.
 
-## An Ounce of Prevention
+## Bir Önlem
 
-> Barn door? Needs to be closed?
+> Ahır kapısı? Kapatılması gerekiyor?
 
-Not specifically on-topic, here are some additional thoughts to try to prevent this from happening again.
+Özel olarak konu hakkında değil, bunun tekrar olmasını önlemeye çalışmak için bazı ek düşünceler.
 
-_The Emergency Sheet_
+_Acil Durum Sayfası_
 
-An [emergency sheet](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) is a minimal
-prophylaxis that every use should consider.
+Bir [acil durum sayfası](https://github.com/djasonpenney/bitwarden_reddit/blob/main/emergency_kit.md) her kullanıcının düşünmesi gereken minimal bir önlemdir.
 
-_Backups_
+_Yedeklemeler_
 
-_Perform regular [backups](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) of your vault.
+_Kasanızın düzenli [yedeklemelerini](https://github.com/djasonpenney/bitwarden_reddit/blob/main/backups.md) yapın.
 
-In my mind, a backup is a proper superset of the emergency sheet. The emergency sheet assumes you online
-credential datastore is intact. The backup goes beyond that and creates a full copy of your datastore that you
-can use elsewhere: [self-hosting](https://bitwarden.com/help/self-host-an-organization/) or even moving to a
-different password manager.
+Benim düşüncem, yedekleme acil durum sayfasının uygun bir üst kümesidir. Acil durum sayfası çevrimiçi kimlik bilgilerinizin bozulmadığını varsayar. Yedekleme bunun ötesine geçer ve başka yerde kullanabileceğiniz kimlik bilgilerinizin tam kopyasını oluşturur: [kendi barındırma](https://bitwarden.com/help/self-host-an-organization/) veya hatta farklı bir şifre yöneticisine geçmek.
 
-A backup won’t prevent a “lockout scenario” _per se_, but it provides another fallback.
-If you lose access to your Bitwarden vault, then you will still have most or all of your
-important data, and be able to restore that data to a new vault.
+Yedekleme "çıkarma senaryosunu" _kendi başına_ engellemez, ancak başka bir yedek sağlar.
+Bitwarden kasanıza erişimi kaybederseniz, o zaman önemli verilerinizin çoğuna veya tümüne sahip olacaksınız ve bu verileri yeni kasaya geri yükleyebileceksiniz.
 
-Backups need to be periodically updated. Consider creating a recurring calendar reminder for every three, six, or even 
-twelve months to make backups of your vault.
-I make my backup once a year and use it as another excuse to go visit my family in the next town over, to exchange
-the pair of encrypted USB thumb drives with a fresh copy.
+Yedeklemelerin periyodik olarak güncellenmesi gerekir. Her üç, altı, hatta on iki ayda bir kasanızın yedeklemesini yapmak için yinelenen takvim hatırlatıcısı oluşturmayı düşünün.
+Ben yıldızda bir kez yedekleme yaparım ve bunu bir sonraki kasabadaki ailemizle görüşmek için bir bahane olarak kullanırım, şifreli USB bellek çiftini taze kopyayla değiştirmek için.
 
-_Set up Two-Factor Authentication now._
+_Şimdi İki Faktörlü Kimlik Doğrulamayı Kurun._
 
-In addition to being a smart cybersecurity measure, if you set up 2FA it will bypass potential problems with
-the Bitwarden "new device verification", which can cause a "circular lockout" problem. Just make sure to
-include your 2FA recovery information in your full backup.
+Akıllı siber güvenlik önlemi olmasının yanı sıra, 2FA kurarısanız "dairesel çıkarma" sorununa neden olabilecek potansiyel Bitwarden "yeni cihaz doğrulaması" sorunlarını atlayacaktır. Sadece 2FA kurtarma bilgilerinizi tam yedeğinize dahil ettiğinizden emin olun.
 
-_Emergency Access_
+_Acil Erişim_
 
-Bitwarden [Emergency Access](https://bitwarden.com/help/emergency-access/) may also help.
-Note this requires
-a paying Bitwarden subscription, and there is a mandatory waiting period before someone will have access
-to your vault.
+Bitwarden [Acil Erişim](https://bitwarden.com/help/emergency-access/) de yardımcı olabilir.
+Bunun ücretli Bitwarden aboneliği gerektirdiğini ve birinin kasanıza erişim sağlamadan önce zorunlu bir bekleme süresi olduğunu unutmayın.
 
-_Login With Passkey_
+_Geçiş Anahtarı ile Giriş_
 
-You can add a backup login method for the Bitwarden account via
-“login-with-passkey”-passkeys, ideally “with encryption.
-This makes it possible to login without entering
-the master password and without your 2FA or “new device verification” code.
-These login-passkeys with encryption depend on a PRF capable browser, the “passkey-wallet”
-(i.e. where you store that passkey) and the OS must support their creation.
-Currently, “login-with-passkey” is still in Beta and only possible for login to the web vault.
+"Geçiş anahtarı ile giriş"-geçiş anahtarları aracılığıyla Bitwarden hesabı için yedek giriş yöntemi ekleyebilirsiniz, ideal olarak "şifrelemeyle.
+Bu ana şifreyi girmeden ve 2FA'nız veya "yeni cihaz doğrulaması" kodu olmadan giriş yapmayı mümkün kılar.
+Şifrelemeli bu giriş-geçiş anahtarları PRF özellikli tarayıcıya, "geçiş anahtarı-cüzdana"
+(yani o geçiş anahtarını nerede sakladığınıza) ve OS'nin oluşturulmasını desteklemesine bağlıdır.
+Şu anda, "geçiş anahtarı ile giriş" hâlâ Beta'dadır ve sadece web kasasına giriş için mümkündür.
 
-⚠️ But, as nice as additional login-passkeys to your Bitwarden account/vault are: currently, those
-Bitwarden-login-passkeys don’t replace your master password. Some critical actions still need a
-master password confirmation (like changing the master password and exporting the vault). Do not rely
-solely on Bitwarden-login-passkeys (for now).
+⚠️ Ancak, Bitwarden hesabınıza/kasanıza ek giriş-geçiş anahtarları ne kadar güzel olsa da: şu anda, bu
+Bitwarden-giriş-geçiş anahtarları ana şifrenizi değiştirmez. Bazı kritik eylemler hâlâ ana şifre onayı gerektirir (ana şifreyi değiştirmek ve kasayı dışa aktarmak gibi). (Şimdilik) sadece Bitwarden-giriş-geçiş anahtarlarına güvenmeyin.
 
-## Acknowledgments
+## Teşekkürler
 
-This guide is based on https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188/4.
+Bu kılavuz https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188/4 temel alınmıştır.
 
-That version is in turn based on
-[another older post](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282).
+Bu sürüm [başka eski gönderi](https://community.bitwarden.com/t/how-to-master-password-problems-and-best-practices/43282) temel alınmıştır.
 
-Thanks to [@grb](https://community.bitwarden.com/u/grb), [@DenBesten](https://community.bitwarden.com/u/denbesten),
-[@Neuron5569](https://community.bitwarden.com/u/neuron5569) and [@dh024](https://community.bitwarden.com/u/dh024),
-whose contributions on the
-[Community Forum](https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188)
-have served as inspirations for this post!
+[Topluluk Forumu](https://community.bitwarden.com/t/guide-i-cant-login-some-tips-for-login-problems-issues/82188)'ndaki katkıları bu gönderiye ilham kaynağı olarak hizmet etmiş olan [@grb](https://community.bitwarden.com/u/grb), [@DenBesten](https://community.bitwarden.com/u/denbesten), [@Neuron5569](https://community.bitwarden.com/u/neuron5569) ve [@dh024](https://community.bitwarden.com/u/dh024)'e teşekkürler!
 
-Kudos to [Nail1684](https://community.bitwarden.com/u/Nail1684/summary); any mistakes are doubtless mine, not his.
-
+[Nail1684](https://community.bitwarden.com/u/Nail1684/summary)'e övgüler; herhangi bir hata şüphesiz benim, onun değil.

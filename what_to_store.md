@@ -1,206 +1,139 @@
+İnsanlar şifre yöneticilerinden bahsettiklerinde, her zaman web siteleri için şifre saklamayı düşünürler. Bu önemli bir kullanım, ancak düşünmeniz gereken birçok başka şey de var.
 
-# Şifre Yöneticisi Kullanım Rehberi
+Şifre yöneticinizde saklamAMAmanız gereken şeyler, şifre yöneticisinde saklamak İSTEYEBİLECEĞİNİZ şeyler (ancak belki de değil) ve düşünmemiş olabileceğiniz şifre yöneticinizde saklanacak şeyler hakkında size bazı fikirler vermeye çalışacağım.
 
-İnsanlar şifre yöneticilerinden bahsederken, genellikle web siteleri için şifre saklamayı düşünürler. Bu önemli bir kullanım alanıdır, ancak dikkate almanız gereken birçok başka şey de vardır.
+Son bölümde şifre kasası girişini NASIL dolduracağınız hakkında bazı fikirlerden de bahsedeceğim. Elbette, istediğiniz şekilde yapabilirsiniz, ancak belki kasa organizasyonunuzu nasıl geliştireceğiniz konusunda size bazı fikirler verebilirim.
 
-Şifre yöneticinize **saklamamanız gereken şeyler**, **belki saklamak isteyebileceğiniz ama emin olunmayan şeyler** ve **şifre yöneticinize saklamak isteyebileceğiniz ama aklınıza gelmemiş olabilecek şeyler** hakkında konuşacağım.
+# Ama önce, risk yönetimi ve şifre yöneticinizin incelemesi
 
-Son bölümde ayrıca bir şifre kasası (vault) girişinin nasıl doldurulabileceği ile ilgili bazı fikirler vereceğim. Tabii, istediğiniz şekilde yapabilirsiniz; ama kasanızı daha iyi organize etmek için bazı önerilerim olabilir.
+En üst düzeyde, kimlik bilgisi depolamanıza *iki* tehdit vardır. İlki, yetkisiz bir tarafın sırlarınıza erişim sağlayabileceği riski, herkesin düşündüğü şeydir. Bunu önlemek için adımlar arasında iyi şifreleme, iyi ana şifre ve cihazlarınızı kötü amaçlı yazılımlardan korumak yer alır.
 
----
+İkinci tehdit de önemlidir. Şifre yöneticinizden kilitli kalmak istemezsiniz! Bitwarden ana şifresi artı 2FA'nız kimlik bilgisi depolamanızın kilidini açmak için "anahtarlarınızdır". Eğer bunları kaybederseniz, sırlarınız sonsuza kadar kaybolabilir.
 
-## Öncelikle, risk yönetimi ve şifre yöneticinizin gözden geçirilmesi
+Düşünceli risk yönetiminin temeli risklerinizi belirlemek, olasılıklarını önceliklendirmek ve bu tehditleri hafifletmek için kaynak ayırmaktır. Kimlik bilgisi depolamanızı düşünürken, kimsenin izniniz olmadan okuyamayacağından emin olmak, ancak ihtiyacınız olduğunda kullanılabilir olmasını istiyorsunuz.
 
-En üst düzeyde, kimlik bilgilerinizi saklamanızda *iki* tehdit vardır. İlk tehdit, yetkisiz bir kişinin gizli bilgilerinize erişmesidir. Bu herkesin düşündüğü tehdittir. Bunu önlemek için iyi şifreleme, güçlü bir ana şifre ve cihazlarınızı kötü amaçlı yazılımlardan korumak gerekir.
+Bunu nasıl yapmaMANIN iyi bir örneği, ana şifrelerini hiç yazmayan insanlardır. Rastgele, karmaşık ve benzersiz ana şifre seçtilerse, onu tamamen unutma riskiyle karşı karşıyadırlar. Bu teorik risk değil; insanlar ayda birkaç kez Reddit'te bu konuda gönderi yapıyorlar ve kasaya geri dönmek için süper gizli arka kapı arıyorlar. Kötü haber, tabii ki, şifre yöneticinizin arka kapısı varsa, kötü adamlar da bunu bilecektir.
 
-İkinci tehdit de önemlidir: Şifre yöneticinize erişimi kaybetmek istemezsiniz! Bitwarden ana şifreniz ve 2FA kodlarınız, kimlik bilgilerinizi açmak için kullandığınız "anahtarlar"dır. Bunları kaybederseniz, bilgileriniz sonsuza kadar kaybolabilir.
+Bu yüzden kimlik bilgisi depolamanızın içeriği söz konusu olduğunda, ona tehditlerini analiz eder ve bu tehditleri nasıl yöneteceğinize karar verirsiniz. Bu öznel değerlendirme haline gelir. En muhtemel tehditler nelerdir? Risk altında olan nedir? Bu riskleri hafifletmek için ne yapmaya isteklisiniz? Tehdit gerçekleşirse ödemeye istekli olduğunuz bedel nedir?
 
-Düşünceli risk yönetimi; riskleri tanımlamak, olasılıklarını önceliklendirmek ve bu tehditleri azaltmak için kaynak ayırmaktır. Kimlik bilgilerinize kimsenin sizin izniniz olmadan erişemediğinden emin olmak ama gerektiğinde ulaşılabilir olması önemlidir.
+Burada bir örnek, belki kasanıza erişimi kaybederseniz her web sitesi için kurtarma iş akışlarını çalıştırmaya istekli olmanızdır. Bununla ilgili çok sorun var: web sitelerinin listesini nereden alacaksınız? "Kurtarma soruları" birden fazla web sitesinde aynı cevapları paylaşıyorsanız tehdit olabilir. Ve spor salonu dolabının kilit kombinasyonu gibi (veya olması gereken) çilingir ve hizmet ücreti içeren sırlarınız var. Gerçekten tüm bunlarla uğraşmaya istekli misiniz?
 
-En kötü örnek, ana şifresini hiç yazmayan kişilerdir. Rastgele, karmaşık ve benzersiz bir ana şifre seçmiş olabilirler, ancak onu tamamen unutma riski vardır. Bu teorik değil; Reddit’te ayda birkaç kez bu durumdan şikayet edenler görülür ve gizli bir yoldan kasaya tekrar girmeye çalışırlar. Ama kötü haber şu ki, eğer şifre yöneticinizde bir arka kapı varsa, kötü niyetli kişiler de bunu bilir.
+Sonuç olarak, şifre yöneticinize koymaktan rahat hissetmeyeceğiniz şeyler olduğuna karar verebilirsiniz. Bunlar için argümanlar vardır (mutlaka ikna edici değil). Ancak yine, bu öznel karar olacaktır.
 
-Bu yüzden kimlik bilgilerinizi saklarken tehditleri analiz edip bunları nasıl yöneteceğinize karar vermelisiniz. Bu öznel bir değerlendirmedir. En olası tehditler neler? Risk altındaki şeyler neler? Riskleri azaltmak için neler yapmaya hazırsınız? Bir tehdit gerçekleşirse bunun bedeli nedir?
+# Şifre yöneticinizde saklamaMANız gereken şeyler
 
-Örneğin, kasaya erişimi kaybederseniz, her web sitesinde kurtarma işlemini yapmaya razı olabilirsiniz. Ancak bu pek çok sorun yaratır: Web sitelerinin listesini nereden alacaksınız? "Kurtarma soruları" aynı cevaplar birden çok site için paylaşılıyorsa tehlike yaratabilir. Ayrıca spor salonundaki kilit şifreniz gibi gizli bilgileriniz, çilingir ve hizmet bedeli gerektirebilir. Tüm bunlarla gerçekten uğraşmaya değer misiniz?
+Bu bölüm açıkça kişisel görüşüme göredir. İtiraz etmekte özgürsünüz.
 
-Sonuç olarak, bazı şeyleri şifre yöneticinizde saklamaya rahat hissetmeyebilirsiniz. Bunun için geçerli (ama tam ikna edici olmayan) sebepler vardır. Ama yine de bu tamamen öznel bir karardır.
+# Bitwarden Kurtarma Bilgileriniz
 
----
+Kasanıza erişimi kaybedebilirsiniz. Ana şifreyi unutabilirsiniz. TOTP'niz ("Kimlik Doğrulayıcı Uygulamanız") başarısız olup sizi çıkmaza sokabilir. Keşke kullanıcı adına, ana şifreye ve 2FA kurtarma koduna sahip olsaydınız!
 
-## Şifre yöneticinize SAKLAMAMANIZ GEREKENLER
+Sorun dairesellikdir. Kasadan kilitli kaldığınızda bu şeyleri bulmak için kasanızın içine bakamazsınız. Bunun yerine istediğiniz bir [acil durum sayfasıdır](https://www.reddit.com/r/Bitwarden/comments/1fknnbo/emergency_kit_20/).
 
-Bu bölüm tamamen benim kişisel görüşümdür. Katılmayabilirsiniz.
+# Diğer web siteleri için 2FA kurtarma kodları
 
-### Bitwarden Kurtarma Bilgileriniz
+Çoğu web sitesinin kurtarma iş akışı vardır. Kontrol ettiğiniz e-posta adresi kadar basit veya tek kullanımlık şifreler listesi kadar karmaşık olabilir. Bu iş akışlarının farkında olmanızı ve kayıt tutmanızı şiddetle tavsiye ederim. Felaket kurtarma söz konusu olduğunda, artıklık çok iyi bir şeydir.
 
-Kasaya erişiminizi kaybedebilirsiniz. Ana şifrenizi unutabilirsiniz. TOTP (Authenticator Uygulaması) başarısız olabilir. O an kullanışlı olabilecek kullanıcı adı, ana şifre ve 2FA kurtarma koduna ihtiyacınız olabilir!
+Ancak şifre yöneticinizi açabilir ve 2FA'nıza erişiminiz varsa, herhangi bir 2FA kurtarma koduna ihtiyacınız yoktur. Şifre yöneticinize erişimi kaybettiyseniz, acil durum sayfanıza ihtiyacınız vardır. 2FA'nıza erişimi kaybettiyseniz (Yubikey'iniz veya TOTP uygulamanız gibi), [tam yedeğe](https://www.reddit.com/r/Bitwarden/comments/1f995wl/making_bitwarden_backups_version_20/) ihtiyacınız vardır. Ne mevcut kasa ne de acil durum sayfası sorununuzu çözer.
 
-Problem şu ki, kasaya kilitlenmişseniz içine bakamazsınız. Bunun yerine bir [acil durum sayfası (emergency sheet)](https://www.reddit.com/r/Bitwarden/comments/1fknnbo/emergency_kit_20/) kullanmalısınız.
+Eğer herhangi bir nedenle biri kasanıza erişim sağlarsa, bu kurtarma kodları tartışmalı olarak risk olabilir. Yubikey veya TOTP uygulaması kullansanız bile, bu kurtarma kodlarını kimlik bilgisi depolamanızda bulundurmak artık birinin erişim sağlamak için Yubikey'inize ihtiyacı olmadığı anlamına gelir.
 
-### Diğer Web Siteleri için 2FA Kurtarma Kodları
+Her iki durumda da, kurtarma kodlarını kimlik bilgisi depolamanızda saklamak anlamsız ile gereksiz tehdit yüzeyi arasında bir yerdedir.
 
-Çoğu web sitesi kurtarma sürecine sahiptir. Bu bazen kontrolünüzdeki bir e-posta adresi, bazen de bir dizi tek kullanımlık parola olabilir. Bu kurtarma süreçlerini bilin ve kayıt altına alın. Felaket kurtarma için yedeklilik önemlidir.
+# Güvenlik soruları ve cevapları
 
-Ancak şifre yöneticinize erişiminiz varsa 2FA kurtarma kodlarına gerek yoktur. Şifre yöneticinize erişimi kaybettiyseniz acil durum sayfanız gerekir. 2FA erişiminizi kaybettiyseniz (Yubikey veya TOTP uygulaması gibi) [tam yedeğe](https://www.reddit.com/r/Bitwarden/comments/1f995wl/making_bitwarden_backups_version_20/) ihtiyacınız olur. Kasadaki ya da acil durum sayfasındaki kodlar sorununuzu çözmez.
+Bazı web siteleri hâlâ kurtarma iş akışı olarak "güvenlik soruları" listesi kullanır. Bunlar "ilk erkek arkadaşınızın adı" ve "katıldığınız ilk okulun adı" gibi cevaplardır. Bir düzeyde, bu 2FA kurtarma kodları gibidir. Bu soruları ve verdiğiniz cevapları kesinlikle kaydetmek istiyorsunuz. Kasanıza erişiminiz varsa, bu cevaplara ihtiyacınız yoktur. Ve bu cevapları bilen herkes muhtemelen web sitesine yetkisiz erişim sağlayabilir.
 
-Eğer biri kasanıza erişirse, bu kodlar risk yaratabilir. Yubikey veya TOTP kullanıyor olsanız bile, kurtarma kodlarını saklamak Yubikey olmadan erişim sağlanmasına yol açabilir.
+Yan not: bu sorulara doğru tutarlı cevaplar vermek *istemezsiniz*. Sizi hedef alan biri (metamfetamin çılgını eski kayınbirader gibi) kişisel bilgilerini size karşı kullanabilir. Veya cevaplarınızı saklayan bir web sitesi ihlal edilirse, saldırganlar cevaplarınızı diğer web sitelerinde kullanabilir. Sonuç olarak, bu soruların kaydına ve her web sitesine verdiğiniz benzersiz yalanların kaydına ihtiyacınız vardır.
 
-Bu yüzden kurtarma kodlarını şifre yöneticinizde saklamak ya gereksiz ya da bir tehdit yüzeyidir.
+# Kripto Tohum
 
-### Güvenlik Soruları ve Cevapları
+Kripto para hesapları normal finansal hesaplar değildir. Kredi kartları, banka kartları ve banka kredilerinin hepsinin özel kontrol ve dengeleri vardır. Birinin sahte çek yapıp sizden çalması oldukça mümkündür. Ancak resmin geri kalanı, bankaların parayı GERİ almada ÇOK İYİ olmasıdır. Hesap verebilirlik zinciri hırsıza yol açacak, paranız iade edilecek ve hırsızın Çok Kötü Günü olacaktır.
 
-Bazı siteler hala kurtarma yöntemi olarak "güvenlik soruları" kullanır. Örneğin "ilk erkek arkadaşınızın adı" veya "gittiğiniz ilk okulun adı" gibi. Bunlar da 2FA kurtarma kodları gibi düşünülmeli. Soruları ve cevaplarınızı kayıt edin. Kasanıza erişiminiz varsa bunlara gerek yoktur. Ama bu cevapları bilen biri siteye izinsiz erişebilir.
+Kripto para farklıdır. Bu kilitler mevcut değildir. Hesabın kontrolüne sahipseniz, fonlar üzerinde tam, engelsiz ve kontrol edilmemiş kontrolünüz vardır.
 
-Not: Bu sorulara gerçek ve tutarlı cevaplar vermek istemezsiniz. Size karşı hedeflenen biri (örneğin eski ve sinirli bir akraba) kişisel bilgilerinizi kullanabilir. Ya da bir sitenin güvenliği ihlal edilirse saldırganlar cevapları diğer sitelerde kullanabilir. En iyisi her siteye farklı ve yalan cevaplar vermektir.
+Bu nedenle, en iyi uygulama kripto tohumları çevrimdışı tutmaktır. Güvenli bir yerde kağıt üzerinde yazılı olabilir. Yangın durumunda iki yerde kopyası bile olabilir. Ancak çoğu uzman onu hiçbir zaman çevrimiçi bırakmamanızı tavsiye edecektir. Soyulmanızın çok fazla yolu vardır ve hiçbir başvuru hakkınız olmayacaktır.
 
-### Kripto Tohumları (Crypto Seeds)
+# Şifre yöneticinizde UYGUN olabilecek şeyler?
 
-Kripto para hesapları normal finansal hesaplar değildir. Kredi kartları, banka hesapları belirli kontrol mekanizmalarına sahiptir ve çalınan para genellikle geri alınabilir. Ancak kripto parada böyle bir denetim zinciri yoktur. Hesabı kontrol eden, parayı da kontrol eder.
+Bu bölüm açıkça kişisel görüşüme göredir. İtiraz etmekte özgürsünüz.
 
-Bu nedenle en iyi uygulama kripto tohumlarını (seed) çevrimdışı tutmaktır. Kağıda yazılı ve güvenli bir yerde saklanabilir, hatta yangına karşı iki yerde tutulabilir. Ama çevrimiçi bırakmak uzmanlarca önerilmez. Çünkü çok fazla soygun yöntemi var ve kurtarma şansınız yok.
+# TOTP Anahtarları
 
----
+[TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password) oldukça iyi 2FA mekanizmasıdır. Sizinle web sitesi arasında paylaşılan sır (TOTP anahtarı) ile mevcut tarihsaati birleştirerek zamanla değişen "jeton" üretmek için çalışır. Bu genellikle her 30 saniyede değişen altı haneli sayıdır.
 
-## Şifre yöneticinizde BULUNDURABİLECEĞİNİZ ŞEYLER? (Kişisel görüşüm)
+Bu şekilde 2FA kimlik doğrulama protokolü sırasında hiçbir sır maruz kalmaz. "Ortadaki saldırgan"dan küçük risk vardır, burada yanıltılıp "Truva Atı" web sitesine götürülür ve yanlışlıkla şifrenizi ve mevcut TOTP jetonunu girersiniz. Saldırgan bu bilgiyi hemen web sitenize giriş yapmak ve tarayıcı oturum çerezlerinizi diğer sırlar arasında toplamak için kullanabilir. Ancak sadece FIDO2 donanım jetonu veya geçiş anahtarı daha güçlüdür. Genel olarak, makul 2FA biçimidir.
 
-### TOTP Anahtarları
+Endişe, bir saldırganın "bir şekilde" kimlik bilgisi depolamanıza erişim sağlaması durumunda, hem şifrenizi hem de TOTP anahtarınızı elde etmesidir. Endişe ayrımı bakış açısından, TOTP anahtarlarınızı...başka yerde; şifre kasanızda değil yerleştirmek tartışmalı olarak daha güçlüdür.
 
-[TOTP](https://tr.wikipedia.org/wiki/Zaman_tabanlı_tek_kullanımlık_parola) iyi bir 2FA yöntemidir. Sizin ve sitenin paylaştığı gizli anahtar ve güncel zamanla birlikte 30 saniyede bir değişen 6 haneli kod üretir.
+*Neden uygun olabilir*
 
-Bu protokolde 2FA sırasında gizli bilgi açığa çıkmaz. Bir “ortadaki adam saldırısı” risk vardır: sizi sahte siteye yönlendirirler, şifrenizi ve o anki TOTP kodunu girersiniz, saldırgan bunları kullanır. Ancak FIDO2 donanım anahtarı veya passkey daha güçlüdür. Genel olarak iyidir.
+Şifre kasanızın doğrudan ihlali olasılık dışı olduğunu; web sitelerinize diğer saldırıların daha muhtemel olduğunu düşünebilirsiniz. Benzetme olarak, yatağınızın altında dolu av tüfeği tutmakla evinizin kilit ve hırsız alarmını geliştirmek arasında hangisi sizi daha iyi korur?
 
-Endişe şu: saldırgan şifre kasanıza erişirse hem şifrenizi hem de TOTP anahtarınızı elde eder. Ayrım için TOTP anahtarlarını başka bir yerde tutmak daha güvenlidir.
+Bazıları risk hafifletmenizin diğer yollarla daha iyi hizmet edildiğini düşünür. Harici TOTP uygulamanızdaki veri tabanının bütünlüğü ve güvenliğinin başka bir endişe haline geldiğini unutmayın. Ve her durumda, Bitwarden'ın kendisini güvence altına almak için TOTP kullanıyorsanız, bu harici uygulamaya zaten ihtiyacınız olduğu sonucuna varabilirsiniz--tüm TOTP anahtarlarınızı orada tutabileceğiniz gibi.
 
-*Niye olabilir?*
+(Bu, bu subreddit'te sık tartışma konusudur: Bitwarden'daki dahili TOTP işlevini kullanmanın uygun olup olmadığı. Bu konuda fikir birliği yoktur. Güvenlikte önemli gelişme olup olmadığına veya yerleşik işlevin kolaylığının güvenlikte olası azalmayı aşıp aşmadığına karar vermeniz gerekecektir.)
 
-Kasaya doğrudan saldırı az olasıdır; diğer web saldırıları daha yaygındır. Mesela, yatak altına yüklü bir pompalı tüfek koymak mı, kapı kilitlerinizi ve alarm sisteminizi iyileştirmek mi daha iyidir?
-
-Bazıları risk azaltmayı başka yollardan sağlar. Unutmayın ki TOTP uygulamanızdaki veri bütünlüğü ve güvenliği de önemlidir. Ayrıca Bitwarden’da TOTP kullanıyorsanız, zaten o dış uygulamaya ihtiyacınız var demektir ve TOTP anahtarlarınızı orada tutabilirsiniz.
-
-(Bitwarden içindeki TOTP fonksiyonunu kullanmak sık tartışılır. Karar size kalmıştır: güvenlik artışı mı, yoksa kullanım kolaylığı mı daha önemli?)
-
-### Bitwarden Ana Şifreniz
+# Bitwarden Ana Şifreniz
 
 Belki?
 
-Düşünce şu: operasyonel güvenlikte bir zafiyetiniz varsa, biri kilitsiz cihazınıza ve kasanıza erişirse ana şifrenizi öğrenebilir. Bu ileride saldırgan için avantajdır.
+Buradaki düşünce, operasyonel güvenlikte eksiklik yaşarsanız, biri kilidi açılmış cihazınıza ulaşır ve sonra kilidi açılmış kasanıza ulaşırsa, *o zaman* ana şifrenizi öğreneceklerdir. Bu, saldırganın şifrelerinizi daha sonraki tarihte edinmesi için önemli bir adım olabilir.
 
-*Niye olabilir?*
+*Neden uygun olabilir*
 
-Eğer kasadaki giriş kaydınıza bakıyorsanız, ana şifreyi zaten kullandınız demektir. Ve kasanız açıksa ana şifre amacına hizmet etmiyor.
+Açıkça kasanız için kasa girişine bakıyorsanız, ana şifreyi kullandınız. En azından, yakın zamanda. Ve biri kasanızın içeriğini inceliyorsa, ana şifre artık amacına hizmet etmiyor.
 
-Ayrıca bu giriş ana şifreyi kurtarmaya yardımcı olmaz; acil durum sayfanız veya tam yedeğiniz bunu yapar. Yani ek bir kolaylık olabilir, ciddi güvenlik kaybı olmadan.
+Ve bu kasa girişi kasanıza yeniden erişim kazanmanıza yardımcı olmasa da, acil durum sayfanız veya tam yedeğiniz bunu yapardı. Bu yüzden belki burada önemli güvenlik kaybı olmadan ek kolaylık vardır.
 
-### Yubikey FIDO2 PIN’iniz (ve benzerleri)
+# Yubikey FIDO2 PIN'iniz (vb.)
 
-Kasadaki TOTP anahtarları gibi, Yubikey’iniz çalındı ama PIN bilinmiyorsa 2FA geçemez.
+Kasanızdaki TOTP anahtarlarına benzer şekilde, biri Yubikey'inizi çalmışsa ancak PIN'inizi bilmiyorsa, web sitelerinizdeki 2FA kontrolünü geçmek için Yubikey'i kullanamazlar.
 
-*Niye olabilir?*
+*Neden uygun olabilir*
 
-Çoğumuz için fiziksel saldırı düşük risklidir. Ana Yubikey anahtarlığımda, yedeklerim kilitli yerde. Yanımda sadece eşim ve yetkili kişi bilir.
+Çoğumuz için, fiziksel saldırı yüksek olasılık riski değildir. Ana Yubikey'im anahtarlığımda ve saldırganlara müsait değil. Yedek Yubikey'lerim kilitli ve sadece eşim ve alternatif icracımız konumlarını biliyor.
 
-Yubikey yanlış PIN girilirse tüm verileri siler. PIN yedeği olması rahatlatıcıdır.
+Yanlış PIN'i çok fazla kez girerseniz Yubikey tüm sırlarını temizler. Unutursam kullanabileceğim o PIN'lerin yedeği olduğunu bilmenin verdiği biraz huzur var.
 
-### "Önemli" Girişler
+# "Önemli" Girişler
 
-Bazıları web girişlerini ikiye ayırır: banka gibi yüksek riskli ve daha az kritik olanlar (örneğin sosyal medya). Şifre yöneticisine sadece az kritik olanları koyar, diğerleri için farklı yöntemler kullanır.
+Bazı insanlar web girişlerini iki kategoriye ayırır: saldırganlardan daha yüksek risk hissettikleri--banka hesapları gibi--düşük savunmasız olanlar, ButtBook ve SickSuck gibi. Şifre yöneticilerinde sadece daha az kritik sırları saklar ve geri kalanı için alternatif yöntem kullanırlar.
 
-*Niye olabilir?*
+*Neden uygun olabilir*
 
-Asıl sorun o “farklı yöntem”. İkinci bir şifre yöneticisi kullanıyorsanız neden hepsini ona koymuyorsunuz? Ya da kritik hesaplar için zayıf ya da tekrar eden şifreler mi kullanıyorsunuz? Bu kabul edilemez.
+Büyük sorun o "alternatif yöntem"dir. İkinci şifre yöneticisi kullanıyorlarsa, bu nasıl daha az savunmasız ve neden her şey için onu kullanmıyorsunuz? Yoksa o "önemli" hesaplar için zayıf veya yeniden kullanılan şifreler mi kullanıyorsunuz? Bu açıkça başlangıç noktası değil. Ve her durumda, acil durum sayfanızın veya tam yedeğinizin karmaşıklığını iki katına çıkardınız.
 
-Ayrıca acil durum sayfanız ve yedeğiniz karmaşıklaşır.
+Ayrıca, "önemli" giriş dediğiniz şeyden bahsedelim. Instagram yorumları Dark Web'de çocuk pornografisi bağlantıları yayınlamak için kullanıldı. IG hesabınızın ikiliği çifti kasvetli FBI ajanı kapınızı çaldığında ihlal edildiğini öğrenmek istemezsiniz. Sonuç olarak, belki TÜM girişleriniz önemlidir.
 
-Son olarak, önemli hesabınızın ne olduğuna dikkat edin. Örneğin Instagram hesabınız ele geçirilip karanlık web’e yasadışı içerik yüklenmiş olabilir. FBI kapınızı çalabilir. Belki de TÜM hesaplarınız önemlidir.
+# Şifre yöneticinizde gerçekten saklaMANIZ gereken şeyler
 
----
+Bu bölüm düşünmemiş olabileceğiniz şeylerin bir koleksiyonudur.
 
-## Şifre yöneticinizde MUTLAKA SAKLAMANIZ GEREKENLER
+* *Web Sitesi Girişleri* -- Bu herkesin ilk düşündüğü şeydir. Önemli kullanım durumudur. Her girişinizin benzersiz, karmaşık ve rastgele oluşturulmuş şifreleri olmalıdır. Burada düşünülecek başka şeyler de vardır. Bunu daha sonra konuşacağız.
+* *Garanti ve seri numaralarını saklayın* -- Önemli cihazlarınız için seri numaraları (Dell dizüstü bilgisayarınızın hizmet numarası gibi) yararlı olabilir.
+* *Yazılım lisans anahtarları* -- O sinir bozucu yazılım lisans anahtarları...on yıl öncesine göre artık o kadar yaygın görünmüyor, ama hâlâ birkaç tane var. Bunlar için ne tür güvenli stabil depolama kullanabilirim? Ah bekle! Şifre yöneticim bunun için iyi bir yer.
+* *Diğer insanlar için şifreler* -- Karım gerçekten harika bir insan: zeki, komik, ama özellikle bilgisayar okuryazarı değil. Yedeklemelere bakarım ve etkili olarak sistem yöneticisi olarak çalışırım. Bu nedenle, acil durumlarda kullanmak üzere ana şifresi, banka kartının PIN'i ve birkaç başka öğe dahil kendi kasamda birkaç temel sır tutarım.
 
-Bu bölümde aklınıza gelmemiş olabilecek çeşitli gizli bilgiler vardır.
+Kayınbiraderim benzer. Çok daha teknik düşünceli, ama tıbbi profesyonel; bilgisayarlar sadece bilgi kapsamının geçici parçası. Tüm yedeklemelerini ve güvenliğini yönetirim.
 
-- **Web sitesi girişleri** — Herkesin aklına gelen ilk şey budur. Her giriş için benzersiz, karmaşık ve rastgele oluşturulmuş şifreler olmalı. Başka konular da var, sonra konuşuruz.
-- **Garanti ve seri numaraları** — Önemli cihazlarınızın seri numaraları (ör. Dell dizüstü servis numarası) faydalı olabilir.
-- **Yazılım lisans anahtarları** — Lisans anahtarları azaldı ama hala var. Nerede güvenli saklayabilirsiniz? Şifre yöneticisi iyi bir yer.
-- **Başka kişiler için şifreler** — Eşim bilgisayar kullanımı az bildiği için yedeklerini ve önemli şifrelerini yönetiyorum. Kardeşim teknik olsa da doktor, bilgisayar onun işinin küçük bir parçası. Onun yedeklerini de ben tutuyorum. Yeğenim ise teknolojiyle arası iyi değil, onun da güvenliğini sağlıyorum.
-- **Site giriş şifreleri** — Örneğin kapı şifresi, spor salonu kilit şifresi gibi.
-- **Ehliyet bilgileri** — Ehliyet numarası, son kullanma tarihi, varsa resmi fotoğraf. Yenileme hatırlatıcı takın.
-- **Araç bilgileri** — Araç VIN, plaka, ruhsat, sigorta bilgileri, detaylı araç açıklaması gibi.
-- **Sağlık sigortası bilgileri** — Kart görüntüleri ve detayları.
-- **Pasaportlar** — Pasaport numarası, son kullanma ve sayfa kopyaları.
-- **Sosyal güvenlik numaraları** — Sık ihtiyaç duyulur.
-- **İlaç ve aşı listesi** — Kişisel sağlık geçmişiniz için önemli.
-- **Evcil hayvan bilgileri** — Mikroçip ID ve aşı kayıtları.
+Ailenin başka tarafında, zorlanan sevgili yeğenim var. Telefonunu kaybettikten sonra (ve lanet Google Authenticator veri tabanı), devreye girdim ve güvenliğini yükseltmesine yardım etti. Ben onun yedekleri ve yedeklemelerini yönetiyorum.
 
----
+* *Kapı Şifreleri* -- Kayınbiraderim kapılı toplulukta yaşıyor; kapı şifresini orada saklarım. Sevgili arkadaşın ev kapısının alarm koduna sahibim, böylece tatile çıktığında evine girebilir, postasını toplayabilir ve benzeri.
+* Spor Salonu Dolabı -- Spor salonunda kullandığım o ucuz MasterLock: çalışıyorsam elbiselerimi geri almama yardımcı olmasa da, kasa girişi cüzdanımı ve telefonumu geri almak için birini kilidi imha etmek için ödeme yapmaktan kurtaracaktır.
 
-## Hesap Dışı Şifreler
+Envanter alırsanız, sizin de bu tür birçok sırrınız olduğuna bahse girerim.
 
-- Telefon PIN’leri
-- Bilgisayar giriş şifreleri
-- NAS giriş bilgileri (TOTP anahtarı dahil)
-- Bitwarden yedekleme şifreleme anahtarı
-- Kredi kartı bilgileri ve müşteri hizmetleri numaraları
-- Banka hesap bilgileri (kart numarası, PIN, hesap numarası, yönlendirme kodu)
-- Sesli mesaj şifresi
-- Bitlocker şifreleri
+* *Sürücü Belgesi(leri)* -- Sürücü belge bilgilerimi, belge numarası ve son kullanma tarihi ile birlikte kasa girişinde bulundururum. (Pro ipucu: belgenizi yenilemek için son kullanma tarihinden yaklaşık altmış gün önce takvim uygulamanızda hatırlatıcı oluşturun.) Şifre yöneticiniz dosya eklerini destekliyorsa, bir görüntüsünü de kaydedin. Görüntü araba kullanmak için yasal olmayabilir, ancak ne kadar sık yararlı olabileceğine şaşıracaksınız. Uygunsa, eşiniz ve çocuklar için kopyalar kaydedin.
 
----
+*Motorlu araç bilgileri*
 
-## WiFi Şifreleri
+Her araç için,
 
-Birçok kişi iPhone KeyChain’e güvenir ama Android cihaz kullanıyorsanız veya Apple hesabınız kapandıysa bu yetersiz kalabilir. En azından önemli WiFi şifrelerini kaydedin.
+* VIN
+* plaka numarası
+* plaka son kullanma tarihi
 
----
+Ayrıca araç için notlarda Kelly Blue Book'taki gibi öğenin tam açıklamasını eklemeyi seviyorum, örneğin,
 
-## Router Giriş Bilgileri
-
-Router’ı değiştirmek zorunda kalabilirsiniz ve eski çalışmayabilir. Yeni router’a şu bilgiler gereklidir:
-
-- Yönetici kullanıcı adı ve şifresi
-- IP adresi (genelde 192.168.0.1)
-- PPPoE kullanıcı adı ve şifresi
-- DHCP ayarları
-- WiFi ayarları (kanallar vs)
-- Varsayılan ağ geçitleri
-
-Evde statik IP atadığınız cihazların listesini not olarak saklayın.
-
----
-
-## Personel Numarası
-
-Büyük şirketlerde sık ihtiyaç duyabilirsiniz.
-
----
-
-## Bitwarden Kasası Girişi Doldurma Düşünceleri
-
-- **Bu girişi neden oluşturdunuz?**  
-  Belirli bir amaç olabilir, örneğin McDonald’s promosyonu. Girişin geçerliliğini hatırlamak ve gerekirse silmek için not alın.
-
-- **Neden web sitesini kullanmıyorsunuz?**  
-  Kötü müşteri deneyimi veya daha iyi alternatif olabilir.
-
-- **Hesabı ne zaman oluşturdunuz?**  
-  Şifre yöneticisine ekleme tarihi değil, hesap açılış tarihidir.
-
-- **Notlar**  
-  Hangi e-posta ve kullanıcı adı kullanıldı?
-
-- **2FA türü**  
-  SMS, FIDO2/WebAuthn donanım anahtarı, güvenlik soruları vb.
-
-- **İpuçları**  
-  2FA için isim sonuna emoji ekleyin:  
-  - 🗝 basit şifre  
-  - ⏰ TOTP  
-  - 📞 SMS  
-  - 🔒 FIDO2/WebAuthn  
-  - ❓ Güvenlik soruları  
-  - ✉ E-posta 2FA  
-
->Passkey kullanmadım ama kullanmaya başlayınca 🩻 ekleyeceğim.
-
-Yaratıcı olun! Bu sistemle emoji veya isimle arama yapabilirsiniz.
-"""
+>2021 Toyota Venza LE, 4D Sport Utility, 2.5L 4-Silindirli DOHC 16V, Sürekli Değişken (ECVT), AWD, Ruby Flare Pearl, Boulder w/Kumaş Koltuk Döşemesi, 6 Hoparlör, ABS frenler, Aktif Cruise Control, Klima, AM/FM radyo: SiriusXM, Apple CarPlay/Android Auto, Otomatik Uzun Far, Otomatik sıcaklık kontrolü, Elektronik Stabilite Kontrolü, Dış Park Kamerası Arka, Kumaş Koltuk Döşemesi, Dört tekerlek bağımsız süspansiyon, Ön Kova Koltuklar, Ön çift bölge A/C, Tam otomatik farlar, Aydınlatmalı giriş, Deri Vites Topuzu, Deri direksiyon, Düşük lastik basıncı uyarısı, Güçlü kapı aynaları, Güçlü sürücü koltuğu, Güçlü Bagaj Kapağı, Güçlü pencereler, Arka cam buğu giderici, Arka cam silecek, Uzaktan anahtarsız giriş, Hız algılama direksiyonu, Bölünebilir katlanır arka koltuk, Direksiyon üstü ses kontrolleri, Çekiş kontrolü, Sinyal gösterge aynaları, Değişken aralıklı
